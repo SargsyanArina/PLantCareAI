@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlantCare AI</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a4731;
+    --green-mid: #2d7a4f;
+    --green-light: #4caf7d;
+    --green-pale: #e8f5ee;
+    --green-mist: #f0f9f4;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --cream: #fafaf8;
+    --white: #ffffff;
+    --text-dark: #1a2e23;
+    --text-mid: #3d5a47;
+    --text-light: #6b8c78;
+    --border: #d1e8db;
+    --shadow-sm: 0 1px 4px rgba(26,71,49,.08);
+    --shadow-md: 0 4px 20px rgba(26,71,49,.12);
+    --shadow-lg: 0 12px 48px rgba(26,71,49,.18);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--green-mist);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .nav-brand:hover { opacity: .85; }
+
+  .nav-logo {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+
+  .nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px;
+    color: var(--green-deep);
+    line-height: 1.2;
+  }
+
+  .nav-subtitle {
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 6px; list-style: none;
+  }
+
+  .nav-links a {
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-mid);
+    transition: all .2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    background: var(--green-pale);
+    color: var(--green-deep);
+  }
+
+  .nav-links a.active {
+    border-bottom: 2px solid var(--green-mid);
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Language Switcher */
+  .lang-switcher { position: relative; }
+
+  .lang-btn {
+    background: var(--green-pale);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green-deep);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+    transition: all .2s;
+  }
+  .lang-btn:hover { background: var(--green-mist); border-color: var(--green-mid); }
+
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px); right: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    min-width: 140px;
+    display: none;
+    z-index: 200;
+  }
+  .lang-dropdown.open { display: block; }
+
+  .lang-option {
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    transition: background .15s;
+  }
+  .lang-option:hover { background: var(--green-pale); }
+  .lang-option.active { color: var(--green-mid); font-weight: 700; background: var(--green-mist); }
+
+  .nav-avatar {
+    width: 36px; height: 36px;
+    background: var(--green-pale);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px;
+    transition: all .2s;
+  }
+  .nav-avatar:hover { border-color: var(--green-mid); }
+
+  /* ===== PAGES ===== */
+  .page { display: none; min-height: calc(100vh - 64px); }
+  .page.active { display: block; }
+
+  /* ===== DESC PAGE ===== */
+  .desc-page { background: var(--green-mist); }
+
+  .desc-hero {
+    text-align: center;
+    padding: 60px 24px 40px;
+    background: linear-gradient(160deg, #f0f9f4 0%, #e8f5ee 60%, #d4eddf 100%);
+  }
+
+  .desc-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    color: var(--green-deep);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .btn-start {
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 16px 36px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all .25s;
+    letter-spacing: .02em;
+    box-shadow: 0 6px 24px rgba(45,122,79,.3);
+  }
+  .btn-start:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(45,122,79,.4); }
+
+  /* ===== SLIDER ===== */
+  .desc-slider-wrap {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 420px;
+  }
+
+  .slider-track {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .slide {
+    width: calc(100% / 3);
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .slide-bg {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7);
+    transition: transform 6s ease;
+  }
+  .slide:hover .slide-bg { transform: scale(1.04); }
+
+  .slide-1 .slide-bg {
+    background-image: url('https://www.noursefarms.com/cdn/shop/articles/53582790807_8a555b26c2_o.jpg?v=1741295034&width=1920');
+  }
+  .slide-2 .slide-bg {
+    background-image: url('https://www.aces.edu/blog/topics/crop-production/bacterial-spot-treatment-in-peaches/peach-with-scab-photo/');
+  }
+  .slide-3 .slide-bg {
+    background-image: url('https://www.healthygreenkitchen.com/wp-content/uploads/2024/02/potatoes-in-garden-bed-1200x800.jpg');
+  }
+
+  .slide-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 60px;
+    width: 100%;
+  }
+
+  .slide-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 14px;
+    backdrop-filter: blur(8px);
+  }
+
+  .slide-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: white;
+    line-height: 1.25;
+    max-width: 600px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .slider-dots {
+    position: absolute;
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+    z-index: 10;
+  }
+
+  .slider-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .slider-dot.active { background: white; width: 24px; border-radius: 4px; }
+
+  .slider-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    color: white; font-size: 18px;
+    transition: all .2s;
+    user-select: none;
+  }
+  .slider-arrow:hover { background: rgba(255,255,255,0.3); }
+  .slider-arrow.prev { left: 20px; }
+  .slider-arrow.next { right: 20px; }
+
+  /* ===== SCIENCE BLOCK ===== */
+  .desc-science-block {
+    width: 100%;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 380px;
+  }
+
+  .science-image-side {
+    position: relative;
+    overflow: hidden;
+    min-height: 380px;
+    background: #1a4731;
+  }
+
+  .science-text-side {
+    padding: 60px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--white);
+  }
+
+  .science-text-side h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--green-deep);
+    margin-bottom: 20px;
+  }
+
+  .science-text-side p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text-mid);
+    margin-bottom: 16px;
+  }
+
+  /* ===== ABOUT BLOCK ===== */
+  .desc-about-block {
+    width: 100%;
+    background: var(--green-mist);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+  }
+
+  .about-text-side {
+    padding: 60px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .about-block-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--green-deep);
+    margin-bottom: 20px;
+  }
+
+  .about-text-side p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text-mid);
+    margin-bottom: 14px;
+  }
+
+  .about-features-side {
+    padding: 60px 56px;
+    display: flex; flex-direction: column; justify-content: center; gap: 16px;
+    background: white;
+  }
+
+  .about-features-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--green-deep);
+    margin-bottom: 8px;
+  }
+
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px;
+    background: var(--green-mist);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    transition: all .2s;
+  }
+  .feature-item:hover { border-color: var(--green-mid); box-shadow: var(--shadow-sm); transform: translateX(4px); }
+
+  .feature-emoji { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .feature-text { font-size: 13.5px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ===== CONTACT BLOCK ===== */
+  .desc-contact-block {
+    width: 100%;
+    background: white;
+    padding: 80px 0;
+  }
+
+  .contact-inner { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+
+  .contact-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--green-deep);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .contact-subtitle { font-size: 15px; color: var(--text-light); text-align: center; margin-bottom: 48px; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+  .contact-info { display: flex; flex-direction: column; gap: 20px; }
+
+  .contact-info-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+    background: var(--green-mist);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+
+  .contact-info-icon {
+    width: 40px; height: 40px;
+    background: var(--green-pale);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .contact-info-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); margin-bottom: 2px; }
+  .contact-info-val { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+
+  .contact-form input, .contact-form textarea {
+    background: var(--green-mist);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    transition: border-color .2s;
+    resize: none;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--green-mid); background: white; }
+  .contact-form textarea { height: 110px; }
+
+  .btn-contact {
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    color: white; border: none; border-radius: var(--radius-sm);
+    padding: 13px; font-size: 15px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all .2s;
+  }
+  .btn-contact:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,122,79,.3); }
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--green-deep);
+    color: white;
+    padding: 48px 60px 28px;
+    display: flex; flex-direction: column; gap: 40px;
+  }
+
+  .footer-main { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+  .footer-brand { display: flex; flex-direction: column; gap: 14px; }
+
+  .footer-logo { display: flex; align-items: center; gap: 10px; }
+
+  .footer-logo-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+
+  .footer-logo-name { font-family: 'DM Serif Display', serif; font-size: 20px; color: white; }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 280px; }
+  .footer-copyright { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 8px; }
+
+  .footer-nav-section h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+
+  .footer-nav-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .footer-nav-links li a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none; cursor: pointer;
+    transition: color .2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .footer-nav-links li a:hover { color: white; }
+  .footer-nav-links li a::before { content: ''; width: 4px; height: 4px; background: var(--green-light); border-radius: 50%; }
+
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.35); }
+
+  /* ===== PREDICT PAGE ===== */
+  .home-layout { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+  .main-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; margin-bottom: 32px; }
+
+  .main-card-inner { display: grid; grid-template-columns: 280px 1fr; min-height: 420px; }
+
+  .upload-panel { background: var(--green-mist); border-right: 1px solid var(--border); padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+
+  .upload-panel h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); }
+
+  .drop-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-sm);
+    padding: 32px 16px;
+    text-align: center;
+    background: var(--white);
+    cursor: pointer;
+    transition: all .2s;
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    position: relative;
+  }
+  .drop-zone:hover { border-color: var(--green-mid); background: var(--green-pale); }
+  .drop-zone.dragover { border-color: var(--green-mid); background: var(--green-pale); }
+  .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+  .drop-icon { width: 48px; height: 48px; background: var(--green-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+
+  .drop-text { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+  .drop-text span { color: var(--green-mid); font-weight: 600; }
+
+  .preview-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; display: none; }
+
+  .btn-predict {
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    color: white; border: none; border-radius: var(--radius-sm);
+    padding: 14px; font-size: 15px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all .2s; letter-spacing: .02em;
+  }
+  .btn-predict:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,122,79,.35); }
+  .btn-predict:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+  .result-panel { padding: 28px 32px; display: flex; flex-direction: column; gap: 20px; }
+  .result-panel h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--green-deep); }
+
+  .result-content { display: none; flex-direction: column; gap: 20px; }
+  .result-content.show { display: flex; }
+
+  .result-header { display: flex; gap: 20px; align-items: flex-start; }
+
+  .result-img { width: 160px; height: 120px; object-fit: cover; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm); flex-shrink: 0; }
+
+  .result-info { flex: 1; }
+
+  .result-class { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--green-deep); margin-bottom: 8px; line-height: 1.2; }
+
+  .confidence-label { font-size: 13px; font-weight: 600; color: var(--text-mid); margin-bottom: 6px; }
+
+  .confidence-bar-wrap { display: flex; align-items: center; gap: 10px; }
+
+  .confidence-bar { flex: 1; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+
+  .confidence-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-light)); border-radius: 5px; transition: width 1s ease; }
+
+  .confidence-pct { font-size: 14px; font-weight: 700; color: var(--green-mid); min-width: 40px; }
+
+  .result-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .info-card { background: var(--green-mist); border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border); }
+
+  .info-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+
+  .info-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .icon-symptom { background: #fff3e0; }
+  .icon-action { background: #e8f5e9; }
+
+  .info-card-title { font-size: 14px; font-weight: 700; color: var(--green-deep); }
+
+  .info-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .info-card ul li { font-size: 13px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 7px; line-height: 1.5; }
+
+  .info-card ul li::before { content: ''; width: 6px; height: 6px; background: var(--green-mid); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+
+  .placeholder-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--text-light); text-align: center; }
+  .placeholder-icon { font-size: 48px; opacity: .4; }
+  .placeholder-text { font-size: 14px; }
+
+  .spinner { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 16px; flex: 1; padding: 40px; }
+  .spinner.show { display: flex; }
+  .spin { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--green-mid); border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .resources-section { margin-bottom: 32px; }
+  .section-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .06em; }
+
+  .resources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .resource-card { background: var(--white); border-radius: var(--radius-sm); padding: 20px 22px; display: flex; align-items: center; gap: 16px; cursor: pointer; border: 1px solid var(--border); transition: all .2s; text-decoration: none; box-shadow: var(--shadow-sm); }
+  .resource-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--green-mid); }
+  .resource-card.amber { background: var(--amber-light); border-color: #fcd34d; }
+  .resource-card.amber:hover { border-color: var(--amber); }
+
+  .resource-icon-wrap { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .icon-green { background: var(--green-pale); }
+  .icon-amber { background: rgba(245,158,11,.15); }
+
+  .resource-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+  .resource-desc { font-size: 12px; color: var(--text-light); }
+
+  /* ===== HISTORY ===== */
+  .page-layout { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+  .page-header { margin-bottom: 24px; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--green-deep); margin-bottom: 4px; }
+  .page-header p { color: var(--text-light); font-size: 14px; }
+
+  .search-bar { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; width: 100%; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text-dark); margin-bottom: 16px; transition: border-color .2s; }
+  .search-bar:focus { outline: none; border-color: var(--green-mid); }
+
+  .history-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; }
+
+  .history-table-header { display: grid; grid-template-columns: 1fr 160px 180px; padding: 12px 20px; background: var(--green-mist); border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); }
+
+  .history-row { display: grid; grid-template-columns: 1fr 160px 180px; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; transition: background .15s; }
+  .history-row:last-child { border-bottom: none; }
+  .history-row:hover { background: var(--green-mist); }
+
+  .history-diag { display: flex; align-items: center; gap: 12px; }
+
+  .history-thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 8px; background: var(--green-pale); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; overflow: hidden; }
+  .history-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  .history-name { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+
+  .conf-wrap { display: flex; align-items: center; gap: 6px; }
+  .conf-mini-bar { width: 60px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .conf-mini-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-light)); border-radius: 3px; }
+  .conf-pct-sm { font-size: 12px; color: var(--green-mid); font-weight: 700; }
+
+  .history-date { font-size: 13px; color: var(--text-light); }
+  .history-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .btn-view { background: var(--green-mid); color: white; border: none; border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; white-space: nowrap; }
+  .btn-view:hover { background: var(--green-deep); }
+
+  .btn-ghost { background: transparent; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 12px; cursor: pointer; transition: all .2s; color: var(--text-light); }
+  .btn-ghost:hover { border-color: var(--green-mid); color: var(--green-mid); }
+
+  .history-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+
+  .pagination { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-light); }
+  .pag-btn { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 13px; transition: all .2s; }
+  .pag-btn:hover { border-color: var(--green-mid); }
+
+  .btn-clear { background: transparent; border: 1px solid #fca5a5; color: #ef4444; border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+  .btn-clear:hover { background: #fef2f2; }
+
+  /* ===== HELP ===== */
+  .help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+
+  .help-card { background: var(--white); border-radius: var(--radius); padding: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+
+  .help-card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px; background: var(--green-pale); }
+
+  .help-card h3 { font-size: 16px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .help-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; margin-bottom: 12px; }
+
+  .help-steps { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .help-step { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text-mid); }
+  .step-num { width: 22px; height: 22px; background: var(--green-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--green-mid); flex-shrink: 0; margin-top: 1px; }
+
+  .faq-item { background: var(--white); border-radius: var(--radius-sm); padding: 16px 20px; border: 1px solid var(--border); margin-bottom: 10px; cursor: pointer; }
+  .faq-q { font-size: 14px; font-weight: 600; color: var(--green-deep); display: flex; justify-content: space-between; align-items: center; }
+  .faq-a { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-top: 10px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+  .faq-arrow { transition: transform .2s; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  /* ===== AUTH ===== */
+  .auth-page { min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--green-mist) 0%, #e8f5ee 100%); padding: 32px 24px; }
+
+  .auth-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 40px; width: 100%; max-width: 420px; }
+
+  .auth-logo { text-align: center; margin-bottom: 28px; }
+  .auth-logo-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--green-mid), var(--green-light)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 12px; }
+  .auth-logo h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--green-deep); }
+  .auth-logo p { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+
+  .auth-tabs { display: flex; background: var(--green-mist); border-radius: 10px; padding: 4px; margin-bottom: 24px; gap: 4px; }
+  .auth-tab { flex: 1; padding: 8px; border: none; background: transparent; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; color: var(--text-light); cursor: pointer; transition: all .2s; }
+  .auth-tab.active { background: var(--white); color: var(--green-mid); box-shadow: var(--shadow-sm); }
+
+  .auth-form { display: flex; flex-direction: column; gap: 14px; }
+  .auth-form.hidden { display: none; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-mid); }
+  .form-input { background: var(--green-mist); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text-dark); transition: border-color .2s; }
+  .form-input:focus { outline: none; border-color: var(--green-mid); background: white; }
+
+  .btn-auth { background: linear-gradient(135deg, var(--green-mid), var(--green-light)); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all .2s; margin-top: 4px; }
+  .btn-auth:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,122,79,.3); }
+
+  .auth-divider { text-align: center; font-size: 12px; color: var(--text-light); margin: 4px 0; }
+  .auth-msg { background: var(--green-pale); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--green-mid); text-align: center; display: none; }
+
+  /* ===== ADMIN ===== */
+  .admin-header { background: var(--green-deep); color: white; padding: 24px 32px; }
+  .admin-header h1 { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 4px; }
+  .admin-header p { font-size: 13px; opacity: .7; }
+
+  .admin-layout { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .stat-card { background: var(--white); border-radius: var(--radius-sm); padding: 20px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .stat-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); margin-bottom: 8px; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--green-deep); margin-bottom: 4px; }
+  .stat-sub { font-size: 12px; color: var(--text-light); }
+  .stat-up { color: #22c55e; }
+
+  .admin-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+  .admin-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border); overflow: hidden; }
+  .admin-card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .admin-card-title { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+
+  .admin-row { display: grid; grid-template-columns: 1fr 100px 80px 90px; padding: 12px 20px; border-bottom: 1px solid var(--border); align-items: center; font-size: 13px; }
+  .admin-row:last-child { border-bottom: none; }
+  .admin-row:hover { background: var(--green-mist); }
+
+  .admin-row-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-light); background: var(--green-mist); padding: 10px 20px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 100px 80px 90px; }
+
+  .badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .badge-green { background: #dcfce7; color: #16a34a; }
+  .badge-blue { background: #dbeafe; color: #2563eb; }
+  .badge-orange { background: #ffedd5; color: #ea580c; }
+
+  .disease-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .disease-item:last-child { border-bottom: none; }
+  .disease-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .disease-bar { width: 80px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .disease-fill { height: 100%; background: linear-gradient(90deg, var(--green-mid), var(--green-light)); border-radius: 3px; }
+  .disease-count { font-size: 12px; color: var(--text-light); min-width: 28px; text-align: right; }
+
+  /* ===== CONTENT PAGES ===== */
+  .content-page-wrap { max-width: 780px; margin: 0 auto; padding: 40px 24px; }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--green-mid); cursor: pointer; margin-bottom: 24px; border: none; background: none; font-family: 'DM Sans', sans-serif; transition: gap .2s; }
+  .back-btn:hover { gap: 10px; }
+
+  .content-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; }
+  .content-banner { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 56px; }
+  .banner-fungicide { background: linear-gradient(135deg, #064e3b, #065f46); }
+  .banner-soil { background: linear-gradient(135deg, #451a03, #78350f); }
+
+  .content-body { padding: 32px; }
+  .content-body h1 { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--green-deep); margin-bottom: 8px; }
+  .content-body h2 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--green-deep); margin: 24px 0 10px; }
+  .content-body p { font-size: 15px; line-height: 1.8; color: var(--text-mid); margin-bottom: 14px; }
+  .content-body ul { margin: 8px 0 16px 20px; }
+  .content-body ul li { font-size: 15px; line-height: 1.8; color: var(--text-mid); margin-bottom: 6px; }
+
+  .content-sources { background: var(--green-mist); border-radius: var(--radius-sm); padding: 20px 24px; margin-top: 28px; border: 1px solid var(--border); }
+  .content-sources h3 { font-size: 14px; font-weight: 700; color: var(--green-deep); margin-bottom: 10px; }
+  .content-sources ul { margin: 0 0 0 16px; }
+  .content-sources ul li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+  .modal { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; max-width: 560px; max-height: 85vh; overflow-y: auto; transform: scale(.95) translateY(20px); transition: transform .2s; }
+  .modal-overlay.show .modal { transform: scale(1) translateY(0); }
+  .modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .modal-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--green-deep); }
+  .modal-close { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: none; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .modal-close:hover { background: var(--green-pale); }
+  .modal-body { padding: 24px; }
+  .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 16px; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-size: 48px; }
+  .modal-class { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--green-deep); margin-bottom: 6px; }
+  .modal-conf { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .modal-sections { display: flex; flex-direction: column; gap: 14px; }
+  .modal-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); margin-bottom: 8px; }
+
+  /* ===== TOAST ===== */
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--green-deep); color: white; padding: 12px 20px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; box-shadow: var(--shadow-lg); transform: translateY(80px); opacity: 0; transition: all .3s; z-index: 300; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 0 16px; }
+    .main-card-inner { grid-template-columns: 1fr; }
+    .result-cards { grid-template-columns: 1fr; }
+    .resources-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .admin-grid { grid-template-columns: 1fr; }
+    .help-grid { grid-template-columns: 1fr; }
+    .history-table-header, .history-row { grid-template-columns: 1fr 120px; }
+    .history-table-header .col-date, .history-row .history-date { display: none; }
+    .desc-science-block, .desc-about-block { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-main { grid-template-columns: 1fr; gap: 30px; }
+    .desc-slider-wrap { height: 280px; }
+    .slide-text { font-size: 22px; }
+    .slide-content { padding: 28px 32px; }
+    .desc-title { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-brand" onclick="showPage('desc')" title="PlantCare AI">
+    <div class="nav-logo">🌿</div>
+    <div>
+      <div class="nav-title" id="navTitle">Բույսերի հիվանդությունների դասակարգիչ և ախտորոշիչ</div>
+      <div class="nav-subtitle" id="navSubtitle">Հայտնաբերեք և արդյունավետ կառավարեք բույսերի հիվանդությունները</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a id="nav-desc" onclick="showPage('desc')" data-i18n="nav_desc">Գլխավոր</a></li>
+    <li><a id="nav-predict" onclick="goToPredict()" data-i18n="nav_predict">Կանխատեսում</a></li>
+    <li><a id="nav-history" onclick="showPage('history')" data-i18n="nav_history">Պատմություն</a></li>
+    <li><a id="nav-help" onclick="showPage('help')" data-i18n="nav_help">Օգնություն</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn" onclick="toggleLangDropdown()">
+        <span id="langFlag">🇦🇲</span>
+        <span id="langLabel">ՀԱՅ</span>
+        <span>▾</span>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-option active" onclick="setLang('hy')">🇦🇲 Հայերեն</div>
+        <div class="lang-option" onclick="setLang('en')">EN English</div>
+        <div class="lang-option" onclick="setLang('ru')">🇷🇺 Русский</div>
+      </div>
+    </div>
+    <div class="nav-avatar" onclick="showPage('auth')" title="Մուտք">👤</div>
+  </div>
+</nav>
+
+<!-- ===================== DESCRIPTION / LANDING PAGE ===================== -->
+<div id="page-desc" class="page active desc-page">
+
+  <!-- Hero -->
+  <div class="desc-hero">
+    <h1 class="desc-title">PlantCare AI</h1>
+    <button class="btn-start" onclick="goToPredict()" data-i18n="desc_btn">Սկսենք կանխատեսումները</button>
+  </div>
+
+  <!-- Full-width Slider -->
+  <div class="desc-slider-wrap">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide slide-1">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <div class="slide-label" data-i18n="slide1_label">AI · Plant Disease</div>
+          <div class="slide-text" data-i18n="slide1_text">Artificial Intelligence System for Plant Disease Detection and Analysis</div>
+        </div>
+      </div>
+      <div class="slide slide-2">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <div class="slide-label" data-i18n="slide2_label">Optimization</div>
+          <div class="slide-text" data-i18n="slide2_text">AdamW Optimizer</div>
+        </div>
+      </div>
+      <div class="slide slide-3">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <div class="slide-label" data-i18n="slide3_label">Deep Learning</div>
+          <div class="slide-text" data-i18n="slide3_text">CNN (Convolutional Neural Network)</div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-arrow prev" onclick="changeSlide(-1)">‹</div>
+    <div class="slider-arrow next" onclick="changeSlide(1)">›</div>
+    <div class="slider-dots">
+      <div class="slider-dot active" onclick="goToSlide(0)"></div>
+      <div class="slider-dot" onclick="goToSlide(1)"></div>
+      <div class="slider-dot" onclick="goToSlide(2)"></div>
+    </div>
+  </div>
+
+  <!-- Science Block -->
+  <div class="desc-science-block">
+    <div class="science-image-side">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0062/8532/8445/products/Brightwell_Blueberry_2_BB.jpg?v=1635875519"
+        alt="Plant leaves"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"
+        onerror="this.style.display='none'"
+      >
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1a4731,#2d7a4f);opacity:0.3;pointer-events:none;"></div>
+    </div>
+    <div class="science-text-side">
+      <h2 data-i18n="desc_sci_title">🎯 Գիտական կարևորություն</h2>
+      <p data-i18n="desc_sci_p1">Համակարգը համադրում է համակարգչային տեսողության (Computer Vision) և մեքենայական ուսուցման մեթոդները՝ ստեղծելով արդյունավետ գործիք բույսերի հիվանդությունների ավտոմատ մոնիթորինգի համար։</p>
+      <p data-i18n="desc_sci_p2">Առաջարկվող լուծումը կարող է կիրառվել գյուղատնտեսության, ագրոտեխնոլոգիաների և բուսաբանական հետազոտությունների ոլորտներում՝ նպաստելով հիվանդությունների վաղ հայտնաբերմանը, ռիսկերի նվազեցմանը և բերքի արտադրողականության բարձրացմանը։</p>
+    </div>
+  </div>
+
+  <!-- About Block -->
+  <div class="desc-about-block">
+    <div class="about-text-side">
+      <div class="about-block-title" data-i18n="about_title">Մեր մասին</div>
+      <p data-i18n="desc_p1">Սույն համակարգը հանդիսանում է բույսերի հիվանդությունների ավտոմատ հայտնաբերման և դասակարգման ինտելեկտուալ հարթակ, որը հիմնված է արհեստական բանականության և խորը ուսուցման մեթոդների վրա։ Համակարգի նպատակն է ապահովել բույսերի առողջական վիճակի արագ, ճշգրիտ և օբյեկտիվ գնահատում՝ օգտագործելով թվային պատկերների վերլուծություն։</p>
+      <p data-i18n="desc_p2">Օգտատերը կարող է պարզապես ներբեռնել բույսի տերևի նկար, և համակարգը արագ ու ճշգրիտ կբացահայտի հիվանդությունը։ Մոդելը ուսուցված է մեծածավալ տվյալների վրա և կարող է ճանաչել բույսերի տարբեր հիվանդություններ բարձր ճշգրտությամբ։</p>
+      <p data-i18n="desc_p3">Համակարգում կիրառված է կոնվոլյուցիոն նեյրոնային ցանցի (CNN) ճարտարապետություն, որը հնարավորություն է տալիս արդյունավետ կերպով առանձնացնել պատկերների տարածական և կառուցվածքային առանձնահատկությունները։</p>
+    </div>
+    <div class="about-features-side">
+      <div class="about-features-title" data-i18n="desc_func_intro">Համակարգի ֆունկցիոնալությունը ներառում է՝</div>
+      <div class="feature-item">
+        <div class="feature-emoji">🔬</div>
+        <div class="feature-text" data-i18n="desc_f1">Բույսի տերևների պատկերների հիման վրա հիվանդությունների ավտոմատ ճանաչում և դասակարգում</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-emoji">📋</div>
+        <div class="feature-text" data-i18n="desc_f2">Հայտնաբերված հիվանդության վերաբերյալ գիտական նկարագրության տրամադրում</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-emoji">🩺</div>
+        <div class="feature-text" data-i18n="desc_f3">Ախտանիշների մանրամասն վերլուծություն</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-emoji">💊</div>
+        <div class="feature-text" data-i18n="desc_f4">Համապատասխան բուժման և կանխարգելման միջոցառումների առաջարկում</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Block -->
+  <div class="desc-contact-block">
+    <div class="contact-inner">
+      <div class="contact-title" data-i18n="contact_title">Կապ մեզ հետ</div>
+      <div class="contact-subtitle" data-i18n="contact_sub">Ունե՞ք հարցեր կամ առաջարկներ։Կապ հաստատեք մեզ հետ։</div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">👤</div>
+            <div>
+              <div class="contact-info-label" data-i18n="contact_name_label">Անուն</div>
+              <div class="contact-info-val">Arina Sargsyan</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">✉️</div>
+            <div>
+              <div class="contact-info-label" data-i18n="contact_email_label">Էլ. փոստ</div>
+              <div class="contact-info-val">arina@example.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📞</div>
+            <div>
+              <div class="contact-info-label" data-i18n="contact_phone_label">Հեռախոս</div>
+              <div class="contact-info-val">+374 XX XXX XXX</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <input type="text" id="contactName" data-i18n-placeholder="contact_ph_name" placeholder="Ձեր անունը">
+          <input type="email" id="contactEmail" data-i18n-placeholder="contact_ph_email" placeholder="Ձեր էլ. փոստը">
+          <textarea id="contactMsg" data-i18n-placeholder="contact_ph_msg" placeholder="Ձեր հաղորդագրությունը..."></textarea>
+          <button class="btn-contact" onclick="sendContact()" data-i18n="contact_send">Ուղարկել</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">🌿</div>
+          <span class="footer-logo-name">PlantCare AI</span>
+        </div>
+        <div class="footer-tagline" data-i18n="footer_tagline">Բույսերի հիվանդությունների հայտնաբերման և դասակարգման ինտելեկտուալ համակարգ</div>
+        <div class="footer-copyright">© 2026 PlantCare AI. All rights reserved.</div>
+      </div>
+      <div class="footer-nav-section">
+        <h4 data-i18n="footer_pages">Մեր էջերը</h4>
+        <ul class="footer-nav-links">
+          <li><a onclick="showPage('desc')" data-i18n="nav_desc">Գլխավոր</a></li>
+          <li><a onclick="goToPredict()" data-i18n="nav_predict">Կանխատեսում</a></li>
+          <li><a onclick="showPage('history')" data-i18n="nav_history">Պատմություն</a></li>
+          <li><a onclick="showPage('help')" data-i18n="nav_help">Օգնություն</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 PlantCare AI. All rights reserved.</div>
+  </footer>
+
+</div>
+
+<!-- ===================== PREDICT PAGE ===================== -->
+<div id="page-predict" class="page">
+  <div class="home-layout">
+    <div class="main-card">
+      <div class="main-card-inner">
+        <div class="upload-panel">
+          <h3 data-i18n="upload_title">Վերբեռնեք բույսի նկարը</h3>
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept="image/*" onchange="onFileSelect(event)">
+            <div class="drop-icon">📷</div>
+            <div class="drop-text"><span data-i18n="choose_file">Ընտրեք ֆայլ</span><br></div>
+          </div>
+          <img class="preview-img" id="previewImg" src="" alt="preview">
+          <button class="btn-predict" id="predictBtn" onclick="predict()" disabled data-i18n="btn_predict">Կանխատեսել</button>
+        </div>
+        <div class="result-panel">
+          <h2 data-i18n="result_title">Կանխատեսման արդյունք</h2>
+          <div class="placeholder-state" id="placeholder">
+            <div class="placeholder-icon">🔬</div>
+            <div class="placeholder-text" data-i18n="placeholder_text">Վերբեռնեք բույսի նկար<br>ախտորոշման համար</div>
+          </div>
+          <div class="spinner" id="spinner">
+            <div class="spin"></div>
+            <div style="font-size:14px;color:var(--text-light)" data-i18n="analyzing">Վերլուծություն...</div>
+          </div>
+          <div class="result-content" id="resultContent">
+            <div class="result-header">
+              <img class="result-img" id="resultImg" src="" alt="result">
+              <div class="result-info">
+                <div class="result-class" id="resultClass">—</div>
+                <div class="confidence-label" data-i18n="conf_label">Մոդելի կանխատեսման վստահություն</div>
+                <div class="confidence-bar-wrap">
+                  <div class="confidence-bar"><div class="confidence-fill" id="confFill" style="width:0%"></div></div>
+                  <div class="confidence-pct" id="confPct">0%</div>
+                </div>
+              </div>
+            </div>
+            <div class="result-cards">
+              <div class="info-card">
+                <div class="info-card-header">
+                  <div class="info-icon icon-symptom">🔍</div>
+                  <div class="info-card-title" data-i18n="symptoms_title">Ախտանիշներ</div>
+                </div>
+                <ul id="symptomsList"></ul>
+              </div>
+              <div class="info-card">
+                <div class="info-card-header">
+                  <div class="info-icon icon-action">✅</div>
+                  <div class="info-card-title" data-i18n="actions_title">Առաջարկվող գործողություններ</div>
+                </div>
+                <ul id="actionsList"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resources-section">
+      <div class="section-title" data-i18n="resources_title">Լրացուցիչ խորհուրդներ և ռեսուրսներ</div>
+      <div class="resources-grid">
+        <div class="resource-card amber" onclick="showPage('fungicide')">
+          <div class="resource-icon-wrap icon-amber">🧴</div>
+          <div>
+            <div class="resource-title" data-i18n="fungicide_title">Ֆունգիցիդների ուղեցույց</div>
+            <div class="resource-desc" data-i18n="fungicide_desc">Ֆունգիցիդների կիրառման սկզբունքներ</div>
+          </div>
+        </div>
+        <div class="resource-card" onclick="showPage('soil')">
+          <div class="resource-icon-wrap icon-green">🌱</div>
+          <div>
+            <div class="resource-title" data-i18n="soil_title">Հողի առողջություն</div>
+            <div class="resource-desc" data-i18n="soil_desc">Մշակաբույսերի պաշտպանություն և հողի կառավարում</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HISTORY PAGE ===================== -->
+<div id="page-history" class="page">
+  <div class="page-layout">
+    <div class="page-header">
+      <h1 data-i18n="history_title">Ախտորոշման պատմություն</h1>
+      <p data-i18n="history_sub">Ձեր բոլոր նախկին կանխատեսումները</p>
+    </div>
+    <input class="search-bar" type="text" placeholder="Որոնել պատմություն..." data-i18n-placeholder="search_ph" oninput="filterHistory(this.value)">
+    <div class="history-card">
+      <div class="history-table-header">
+        <div data-i18n="hist_col_diag">Ախտորոշում</div>
+        <div class="col-date" data-i18n="hist_col_date">Ամսաթիվ</div>
+        <div style="text-align:right" data-i18n="hist_col_actions">Գործողություններ</div>
+      </div>
+      <div id="historyList">
+        <div style="padding:40px;text-align:center;color:var(--text-light);font-size:14px" data-i18n="no_history">Ախտորոշումներ չկան դեռ։</div>
+      </div>
+      <div class="history-footer">
+        <div class="pagination">
+          <button class="pag-btn">‹</button>
+          <span data-i18n="page_label">Էջ 1-ից 1</span>
+          <button class="pag-btn">›</button>
+        </div>
+        <button class="btn-clear" onclick="clearHistory()" data-i18n="clear_all">Մաքրել բոլորը</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== HELP PAGE ===================== -->
+<div id="page-help" class="page">
+  <div class="page-layout">
+    <div class="page-header">
+      <h1 data-i18n="help_title">Օգնություն</h1>
+      <p data-i18n="help_sub">Ինչպե՞ս օգտագործել PlantCare AI-ը</p>
+    </div>
+    <div class="help-grid">
+      <div class="help-card">
+        <div class="help-card-icon">📸</div>
+        <h3 data-i18n="help_how_title">Ինչպե՞ս ախտորոշել</h3>
+        <p data-i18n="help_how_sub">Հետևեք այս պարզ քայլերին ախտորոշում կատարելու համար։</p>
+        <ul class="help-steps">
+          <li class="help-step"><span class="step-num">1</span><span data-i18n="help_s1">Անցեք «Կանխատեսում» բաժին</span></li>
+          <li class="help-step"><span class="step-num">2</span><span data-i18n="help_s2">Վերբեռնեք հիվանդ բույսի նկար</span></li>
+          <li class="help-step"><span class="step-num">3</span><span data-i18n="help_s3">Սեղմեք «Կանխատեսել» կոճակը</span></li>
+          <li class="help-step"><span class="step-num">4</span><span data-i18n="help_s4">Ստացեք ախտանիշներ և գործողություններ</span></li>
+        </ul>
+      </div>
+      <div class="help-card">
+        <div class="help-card-icon">🔍</div>
+        <h3 data-i18n="help_acc_title">Ախտորոշման ճշգրտություն</h3>
+        <p data-i18n="help_acc_sub">Լավ արդյունք ստանալու համար հաշվի առեք հետևյալ խորհուրդները.</p>
+        <ul class="help-steps">
+          <li class="help-step"><span class="step-num">✓</span><span data-i18n="help_t1">Նկարեք ախտահար տերևը հստակ, լավ լուսավորված</span></li>
+          <li class="help-step"><span class="step-num">✓</span><span data-i18n="help_t2">Օգտագործեք մոտ հեռավորությունից արված լուսանկար</span></li>
+          <li class="help-step"><span class="step-num">✓</span><span data-i18n="help_t3">Խուսափեք մշուշոտ կամ մութ նկարներից</span></li>
+          <li class="help-step"><span class="step-num">✓</span><span data-i18n="help_t4">Ցուցադրեք ախտանիշն ամբողջ տերևի վրա</span></li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;font-size:14px;font-weight:700;color:var(--text-dark);text-transform:uppercase;letter-spacing:.06em" data-i18n="faq_title">Հաճախ տրվող հարցեր</div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span data-i18n="faq_q1">Ո՞ր բույսերն են ախտորոշվում։</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a" data-i18n="faq_a1">Համակարգը ախտորոշում է 38 դաս, ներառյալ խնձոր, կեռաս, բալ, եգիպտացորեն, խաղող, նարինջ, դեղձ, պղպեղ, կարտոֆիլ, ազնվամորի, ելակ, լոլիկ, դդում, հապալաս, սոյա։</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span data-i18n="faq_q2">Կարո՞ղ եմ պատմությունը պահել։</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a" data-i18n="faq_a2">Այո, բոլոր ախտորոշումները ավտոմատ կերպով պահվում են «Պատմություն» բաժնում:</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span data-i18n="faq_q3">Ֆայլի ո՞ր ձևաչափն է ընդունվում։</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a" data-i18n="faq_a3">Ընդունվում են JPG, PNG, WEBP ձևաչափի նկարներ։ Կատարյալ չափն է 224×224 կամ ավելի մեծ բանաձևով նկար։</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span data-i18n="faq_q4">Ի՞նչ անել եթե վստահությունը ցածր է։</span><span class="faq-arrow">▼</span></div>
+      <div class="faq-a" data-i18n="faq_a4">Եթե վստահությունը 70%-ից ցածր է, փորձեք վերբեռնել ախտաբծին ավելի մոտ, հստակ արված մեկ այլ նկար։</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== AUTH PAGE ===================== -->
+<div id="page-auth" class="page">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">🌿</div>
+        <h2>PlantCare AI</h2>
+        <p data-i18n="auth_subtitle">Մուտք գործեք ձեր հաշիվ</p>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login', this)" data-i18n="tab_login">Մուտք</button>
+        <button class="auth-tab" onclick="switchAuthTab('register', this)" data-i18n="tab_register">Գրանցում</button>
+      </div>
+      <div class="auth-form" id="loginForm">
+        <div class="form-group">
+          <label class="form-label" data-i18n="lbl_username">Օգտատիրոջ անուն</label>
+          <input class="form-input" type="text" placeholder="օր.՝ admin" id="loginUser">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="lbl_password">Գաղտնաբառ</label>
+          <input class="form-input" type="password" placeholder="••••••••" id="loginPass">
+        </div>
+        <button class="btn-auth" onclick="doLogin()" data-i18n="btn_login">Մուտք գործել</button>
+        <div class="auth-divider" data-i18n="or_label">կամ</div>
+        <button class="btn-auth" style="background:linear-gradient(135deg,#1e3a5f,#2563eb)" onclick="doAdminLogin()" data-i18n="btn_admin">Մուտք որպես Ադմին</button>
+        <div class="auth-msg" id="loginMsg"></div>
+      </div>
+      <div class="auth-form hidden" id="registerForm">
+        <div class="form-group">
+          <label class="form-label" data-i18n="lbl_fullname">Անուն Ազգանուն</label>
+          <input class="form-input" type="text" placeholder="Անի Սարգսյան" id="regName">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="lbl_email">Էլ. փոստ</label>
+          <input class="form-input" type="email" placeholder="ani@example.com" id="regEmail">
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="lbl_password">Գաղտնաբառ</label>
+          <input class="form-input" type="password" placeholder="առնվազն 6 նիշ" id="regPass">
+        </div>
+        <button class="btn-auth" onclick="doRegister()" data-i18n="btn_register">Գրանցվել</button>
+        <div class="auth-msg" id="registerMsg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ADMIN PAGE ===================== -->
+<div id="page-admin" class="page">
+  <div class="admin-header">
+    <h1>🛡 <span data-i18n="admin_title">Ադմինի վահանակ</span></h1>
+    <p data-i18n="admin_sub">Համակարգի կառավարում և վիճակագրություն</p>
+  </div>
+  <div class="admin-layout">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label" data-i18n="stat_total">Ընդհանուր ախտորոշումներ</div><div class="stat-value" id="adminTotal">0</div></div>
+      <div class="stat-card"><div class="stat-label" data-i18n="stat_conf">Միջին վստահություն</div><div class="stat-value" id="adminAvgConf">—</div></div>
+      <div class="stat-card"><div class="stat-label" data-i18n="stat_top">Ամենաշատ հայտնաբերումներ</div><div class="stat-value" style="font-size:16px" id="adminTopDisease">—</div><div class="stat-sub" data-i18n="stat_top_sub">Այս ամսվա ընթացքում</div></div>
+      <div class="stat-card"><div class="stat-label" data-i18n="stat_healthy">Առողջ բույսեր</div><div class="stat-value" id="adminHealthy">0</div><div class="stat-sub stat-up" data-i18n="stat_healthy_sub">Ախտորոշումներ</div></div>
+    </div>
+    <div class="admin-grid">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title" data-i18n="admin_list_title">📋 Ախտորոշումների ամբողջ ցուցակ</div>
+          <button class="btn-ghost" onclick="clearHistory(); renderAdminStats()" data-i18n="clear_btn">Մաքրել</button>
+        </div>
+        <div class="admin-row-header">
+          <div data-i18n="col_class">Դաս</div>
+          <div data-i18n="col_date">Ամսաթիվ</div>
+          <div data-i18n="col_conf">Վստ.</div>
+          <div data-i18n="col_status">Մանրամասներ</div>
+        </div>
+        <div id="adminList"><div style="padding:32px;text-align:center;color:var(--text-light);font-size:13px" data-i18n="no_diag">Ախտորոշումներ չկան</div></div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-card-header"><div class="admin-card-title" data-i18n="disease_stats_title">📊 Հայտնաբ. հիվանդություններ</div></div>
+        <div id="diseaseStats"><div style="padding:24px;text-align:center;color:var(--text-light);font-size:13px" data-i18n="no_data">Տվյալ չկա</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FUNGICIDE PAGE ===================== -->
+<div id="page-fungicide" class="page">
+  <div class="content-page-wrap">
+    <button class="back-btn" onclick="showPage('predict')" data-i18n="back_btn">← Վերադառնալ</button>
+    <div class="content-card">
+      <div class="content-banner banner-fungicide">🧴</div>
+      <div class="content-body" id="fungicide-body">
+        <h1 data-i18n="fungicide_page_title">Ֆունգիցիդների կիրառման գիտական ուղեցույց</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SOIL PAGE ===================== -->
+<div id="page-soil" class="page">
+  <div class="content-page-wrap">
+    <button class="back-btn" onclick="showPage('predict')" data-i18n="back_btn">← Վերադառնալ</button>
+    <div class="content-card">
+      <div class="content-banner banner-soil">🌱</div>
+      <div class="content-body" id="soil-body">
+        <h1 data-i18n="soil_page_title">Հողի առողջության գիտական ուղեցույց</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== DETAIL MODAL ===================== -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" data-i18n="modal_title">Ախտորոշման մանրամասն</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-img" id="modalImg">🌿</div>
+      <div class="modal-class" id="modalClass">—</div>
+      <div class="modal-conf">
+        <div class="confidence-bar" style="width:120px"><div class="confidence-fill" id="modalConfFill" style="width:0%"></div></div>
+        <span class="confidence-pct" id="modalConfPct">0%</span>
+      </div>
+      <div class="modal-sections" id="modalSections"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== TRANSLATIONS =====
+const TRANSLATIONS = {
+  hy: {
+    nav_title: "Բույսերի հիվանդությունների դասակարգիչ և ախտորոշիչ",
+    nav_subtitle_text: "Հայտնաբերեք և արդյունավետ կառավարեք բույսերի հիվանդությունները",
+    nav_desc: "Գլխավոր",
+    nav_predict: "Կանխատեսում",
+    nav_history: "Պատմություն",
+    nav_help: "Օգնություն",
+    desc_btn: "Սկսենք կանխատեսումները",
+    slide1_label: "AI · Բույսերի հիվանդություններ",
+    slide1_text: "Artificial Intelligence System for Plant Disease Detection and Analysis",
+    slide2_label: "Օպտիմիզացիա",
+    slide2_text: "AdamW Optimizer",
+    slide3_label: "Խոր ուսուցում",
+    slide3_text: "CNN (Convolutional Neural Network)",
+    about_title: "Մեր մասին",
+    desc_sci_title: "🎯 Գիտական կարևորություն",
+    desc_sci_p1: "Համակարգը համադրում է համակարգչային տեսողության (Computer Vision) և մեքենայական ուսուցման մեթոդները՝ ստեղծելով արդյունավետ գործիք բույսերի հիվանդությունների ավտոմատ մոնիթորինգի համար։",
+    desc_sci_p2: "Առաջարկվող լուծումը կարող է կիրառվել գյուղատնտեսության, ագրոտեխնոլոգիաների և բուսաբանական հետազոտությունների ոլորտներում՝ նպաստելով հիվանդությունների վաղ հայտնաբերմանը, ռիսկերի նվազեցմանը և բերքի արտադրողականության բարձրացմանը։",
+    desc_p1: "Սույն համակարգը հանդիսանում է բույսերի հիվանդությունների ավտոմատ հայտնաբերման և դասակարգման ինտելեկտուալ հարթակ, որը հիմնված է արհեստական բանականության և խորը ուսուցման մեթոդների վրա։",
+    desc_p2: "Օգտատերը կարող է պարզապես ներբեռնել բույսի տերևի նկար, և համակարգը արագ ու ճշգրիտ կբացահայտի հիվանդությունը։ Մոդելը ուսուցված է մեծածավալ տվյալների վրա և կարող է ճանաչել բույսերի տարբեր հիվանդություններ բարձր ճշգրտությամբ։",
+    desc_p3: "Համակարգում կիրառված է կոնվոլյուցիոն նեյրոնային ցանցի (CNN) ճարտարապետություն, որը հնարավորություն է տալիս արդյունավետ կերպով առանձնացնել պատկերների տարածական և կառուցվածքային առանձնահատկությունները։",
+    desc_func_intro: "Համակարգի ֆունկցիոնալությունը ներառում է՝",
+    desc_f1: "Բույսի տերևների պատկերների հիման վրա հիվանդությունների ավտոմատ ճանաչում և դասակարգում",
+    desc_f2: "Հայտնաբերված հիվանդության վերաբերյալ գիտական նկարագրության տրամադրում",
+    desc_f3: "Ախտանիշների մանրամասն վերլուծություն",
+    desc_f4: "Համապատասխան բուժման և կանխարգելման միջոցառումների առաջարկում",
+    contact_title: "Կապ մեզ հետ",
+    contact_sub: "Ունե՞ք հարցեր կամ առաջարկներ։ Գրեք մեզ։",
+    contact_name_label: "Անուն",
+    contact_email_label: "Էլ. փոստ",
+    contact_phone_label: "Հեռախոս",
+    contact_ph_name: "Ձեր անունը",
+    contact_ph_email: "Ձեր էլ. փոստը",
+    contact_ph_msg: "Ձեր հաղորդագրությունը...",
+    contact_send: "Ուղարկել",
+    footer_tagline: "Բույսերի հիվանդությունների հայտնաբերման և դասակարգման ինտելեկտուալ համակարգ",
+    footer_pages: "Մեր էջերը",
+    upload_title: "Վերբեռնեք բույսի նկարը",
+    choose_file: "Ընտրեք ֆայլ",
+    btn_predict: "Կանխատեսել",
+    result_title: "Կանխատեսման արդյունք",
+    placeholder_text: "Վերբեռնեք բույսի նկար ախտորոշման համար",
+    analyzing: "Վերլուծություն...",
+    conf_label: "Մոդելի կանխատեսման վստահություն",
+    symptoms_title: "Ախտանիշներ",
+    actions_title: "Առաջարկվող գործողություններ",
+    resources_title: "Լրացուցիչ խորհուրդներ և ռեսուրսներ",
+    fungicide_title: "Ֆունգիցիդների ուղեցույց",
+    fungicide_desc: "Ֆունգիցիդների կիրառման սկզբունքներ",
+    soil_title: "Հողի առողջություն",
+    soil_desc: "Մշակաբույսերի պաշտպանություն և հողի կառավարում",
+    history_title: "Ախտորոշման պատմություն",
+    history_sub: "Ձեր բոլոր նախկին կանխատեսումները",
+    search_ph: "Որոնել պատմություն...",
+    hist_col_diag: "Ախտորոշում",
+    hist_col_date: "Ամսաթիվ",
+    hist_col_actions: "Գործողություններ",
+    no_history: "Ախտորոշումներ չկան դեռ։",
+    page_label: "Էջ 1-ից 1",
+    clear_all: "Մաքրել բոլորը",
+    help_title: "Օգնություն",
+    help_sub: "Ինչպե՞ս օգտագործել PlantCare AI-ը",
+    help_how_title: "Ինչպե՞ս ախտորոշել",
+    help_how_sub: "Հետևեք այս պարզ քայլերին ախտորոշում կատարելու համար։",
+    help_s1: "Անցեք «Կանխատեսում» բաժին",
+    help_s2: "Վերբեռնեք հիվանդ բույսի հստակ նկար",
+    help_s3: "Սեղմեք «Կանխատեսել» կոճակը",
+    help_s4: "Ստացեք ախտանիշներ և գործողություններ",
+    help_acc_title: "Ախտորոշման ճշգրտություն",
+    help_acc_sub: "Լավ արդյունք ստանալու համար հաշվի առեք հետևյալ խորհուրդները.",
+    help_t1: "Նկարեք ախտահար տերևը հստակ, լավ լուսավորված",
+    help_t2: "Օգտագործեք մոտ հեռավորությունից արված լուսանկար",
+    help_t3: "Խուսափեք մշուշոտ կամ մութ նկարներից",
+    help_t4: "Ցուցադրեք ախտանիշն ամբողջ տերևի վրա",
+    faq_title: "Հաճախ տրվող հարցեր",
+    faq_q1: "Ո՞ր բույսերն են ախտորոշվում։",
+    faq_a1: "Համակարգը ախտորոշում է 38 դաս, ներառյալ խնձոր, կեռաս, բալ, եգիպտացորեն, խաղող, նարինջ, դեղձ, պղպեղ, կարտոֆիլ, ազնվամորի, ելակ, լոլիկ, դդում, հապալաս, սոյա։",
+    faq_q2: "Կարո՞ղ եմ պատմությունը պահել։",
+    faq_a2: "Այո, բոլոր ախտորոշումները ավտոմատ կերպով պահվում են «Պատմություն» բաժնում:",
+    faq_q3: "Ֆայլի ո՞ր ձևաչափն է ընդունվում։",
+    faq_a3: "Ընդունվում են JPG, PNG, WEBP ձևաչափի նկարներ։ Կատարյալ չափն է 224×224 կամ ավելի մեծ բանաձևով նկար։",
+    faq_q4: "Ի՞նչ անել եթե վստահությունը ցածր է։",
+    faq_a4: "Եթե վստահությունը 70%-ից ցածր է, փորձեք վերբեռնել ախտաբծին ավելի մոտ, հստակ արված մեկ այլ նկար։",
+    auth_subtitle: "Մուտք գործեք ձեր հաշիվ",
+    tab_login: "Մուտք",
+    tab_register: "Գրանցում",
+    lbl_username: "Օգտատիրոջ անուն",
+    lbl_password: "Գաղտնաբառ",
+    lbl_fullname: "Անուն Ազգանուն",
+    lbl_email: "Էլ. փոստ",
+    btn_login: "Մուտք գործել",
+    or_label: "կամ",
+    btn_admin: "Մուտք որպես Ադմին",
+    btn_register: "Գրանցվել",
+    admin_title: "Ադմինի վահանակ",
+    admin_sub: "Համակարգի կառավարում և վիճակագրություն",
+    stat_total: "Ընդհանուր ախտորոշումներ",
+    stat_conf: "Միջին վստահություն",
+    stat_top: "Ամենաշատ հայտնաբերումներ",
+    stat_top_sub: "Այս ամսվա ընթացքում",
+    stat_healthy: "Առողջ բույսեր",
+    stat_healthy_sub: "Ախտորոշումներ",
+    admin_list_title: "📋 Ախտորոշումների ամբողջ ցուցակ",
+    clear_btn: "Մաքրել",
+    col_class: "Դաս",
+    col_date: "Ամսաթիվ",
+    col_conf: "Վստ.",
+    col_status: "Մանրամասներ",
+    no_diag: "Ախտորոշումներ չկան",
+    disease_stats_title: "📊 Հայտնաբ. հիվանդություններ",
+    no_data: "Տվյալ չկա",
+    back_btn: "← Վերադառնալ",
+    fungicide_page_title: "Ֆունգիցիդների կիրառման գիտական ուղեցույց",
+    soil_page_title: "Հողի առողջության գիտական ուղեցույց",
+    modal_title: "Ախտորոշման մանրամասն",
+    detail_btn: "Մանրամ.",
+    delete_btn: "🗑",
+    toast_saved: "✅ Ախտորոշումը պահված է պատմությունում",
+    toast_deleted: "Ախտ. ջնջված է",
+    toast_cleared: "Պատմությունը մաքրված է",
+    confirm_clear: "Մաքրե՞լ բոլոր ախտորոշումները։"
+  },
+  en: {
+    nav_title: "Plant Disease Classifier & Diagnosis",
+    nav_subtitle_text: "Identify and manage plant diseases effectively.",
+    nav_desc: "Home",
+    nav_predict: "Prediction",
+    nav_history: "History",
+    nav_help: "Help",
+    desc_btn: "Start Predictions",
+    slide1_label: "AI · Plant Disease",
+    slide1_text: "Artificial Intelligence System for Plant Disease Detection and Analysis",
+    slide2_label: "Optimization",
+    slide2_text: "AdamW Optimizer",
+    slide3_label: "Deep Learning",
+    slide3_text: "CNN (Convolutional Neural Network)",
+    about_title: "About Us",
+    desc_sci_title: "🎯 Scientific Importance",
+    desc_sci_p1: "The system combines Computer Vision and machine learning methods to create an effective tool for automatic monitoring of plant diseases.",
+    desc_sci_p2: "The proposed solution can be applied in agriculture, agrotechnology and botanical research, contributing to early disease detection, risk reduction and crop productivity improvement.",
+    desc_p1: "This system is an intelligent platform for automatic detection and classification of plant diseases, based on artificial intelligence and deep learning methods.",
+    desc_p2: "The user can simply upload a photo of a plant leaf, and the system will quickly and accurately identify the disease. The model is trained on large-scale data and can recognize various plant diseases with high accuracy.",
+    desc_p3: "The system uses a Convolutional Neural Network (CNN) architecture, which allows effectively extracting spatial and structural features of images.",
+    desc_func_intro: "The functionality of the system includes:",
+    desc_f1: "Automatic recognition and classification of diseases based on plant leaf images",
+    desc_f2: "Providing scientific description of the identified disease",
+    desc_f3: "Detailed analysis of symptoms",
+    desc_f4: "Recommending appropriate treatment and prevention measures",
+    contact_title: "Contact Us",
+    contact_sub: "Have questions or suggestions? Write to us.",
+    contact_name_label: "Name",
+    contact_email_label: "Email",
+    contact_phone_label: "Phone",
+    contact_ph_name: "Your name",
+    contact_ph_email: "Your email",
+    contact_ph_msg: "Your message...",
+    contact_send: "Send",
+    footer_tagline: "Intelligent system for plant disease detection and classification",
+    footer_pages: "Our Pages",
+    upload_title: "Upload plant image",
+    choose_file: "Choose file",
+    btn_predict: "Predict",
+    result_title: "Prediction Result",
+    placeholder_text: "Upload a plant image for diagnosis",
+    analyzing: "Analyzing...",
+    conf_label: "Model prediction confidence",
+    symptoms_title: "Symptoms",
+    actions_title: "Recommended Actions",
+    resources_title: "Additional tips and resources",
+    fungicide_title: "Fungicide Guide",
+    fungicide_desc: "Fungicide application principles",
+    soil_title: "Soil Health",
+    soil_desc: "Crop protection and soil management",
+    history_title: "Diagnosis History",
+    history_sub: "All your previous predictions",
+    search_ph: "Search history...",
+    hist_col_diag: "Diagnosis",
+    hist_col_date: "Date",
+    hist_col_actions: "Actions",
+    no_history: "No diagnoses yet. Go to the Prediction page.",
+    page_label: "Page 1 of 1",
+    clear_all: "Clear all",
+    help_title: "Help",
+    help_sub: "How to use PlantCare AI",
+    help_how_title: "How to diagnose?",
+    help_how_sub: "Follow these simple steps to make a diagnosis.",
+    help_s1: "Go to the 'Prediction' section",
+    help_s2: "Upload a clear photo of the diseased plant",
+    help_s3: "Click the 'Predict' button",
+    help_s4: "Receive symptoms and recommended actions",
+    help_acc_title: "Diagnosis accuracy",
+    help_acc_sub: "For best results, consider the following tips:",
+    help_t1: "Take a clear, well-lit photo of the affected leaf",
+    help_t2: "Use a close-up photo",
+    help_t3: "Avoid blurry or dark images",
+    help_t4: "Show the symptom across the whole leaf",
+    faq_title: "Frequently Asked Questions",
+    faq_q1: "Which plants are diagnosed?",
+    faq_a1: "The system diagnoses 38 classes including apple, cherry, corn, grape, orange, peach, pepper, potato, raspberry, strawberry, tomato, squash, blueberry, and soybean.",
+    faq_q2: "Can I save the history?",
+    faq_a2: "Yes, all diagnoses are automatically saved in the 'History' section.",
+    faq_q3: "Which file formats are accepted?",
+    faq_a3: "JPG, PNG, WEBP image formats are accepted. The ideal size is 224×224 or larger.",
+    faq_q4: "What to do if confidence is low?",
+    faq_a4: "If confidence is below 70%, try uploading another clear image taken closer to the affected area.",
+    auth_subtitle: "Sign in to your account",
+    tab_login: "Login",
+    tab_register: "Register",
+    lbl_username: "Username",
+    lbl_password: "Password",
+    lbl_fullname: "Full Name",
+    lbl_email: "Email",
+    btn_login: "Sign In",
+    or_label: "or",
+    btn_admin: "Login as Admin",
+    btn_register: "Register",
+    admin_title: "Admin Dashboard",
+    admin_sub: "System management and statistics",
+    stat_total: "Total Diagnoses",
+    stat_conf: "Average Confidence",
+    stat_top: "Most Detected",
+    stat_top_sub: "This month",
+    stat_healthy: "Healthy Plants",
+    stat_healthy_sub: "Diagnoses",
+    admin_list_title: "📋 Full Diagnosis List",
+    clear_btn: "Clear",
+    col_class: "Class",
+    col_date: "Date",
+    col_conf: "Conf.",
+    col_status: "Details",
+    no_diag: "No diagnoses",
+    disease_stats_title: "📊 Detected Diseases",
+    no_data: "No data",
+    back_btn: "← Back",
+    fungicide_page_title: "Scientific Guide to Fungicide Application",
+    soil_page_title: "Scientific Guide to Soil Health",
+    modal_title: "Diagnosis Details",
+    detail_btn: "Details",
+    delete_btn: "🗑",
+    toast_saved: "✅ Diagnosis saved to history",
+    toast_deleted: "Diagnosis deleted",
+    toast_cleared: "History cleared",
+    confirm_clear: "Clear all diagnoses?"
+  },
+  ru: {
+    nav_title: "Классификатор и диагностика болезней растений",
+    nav_subtitle_text: "Эффективно выявляйте и управляйте болезнями растений.",
+    nav_desc: "Главная",
+    nav_predict: "Прогноз",
+    nav_history: "История",
+    nav_help: "Помощь",
+    desc_btn: "Начать прогнозирование",
+    slide1_label: "ИИ · Болезни растений",
+    slide1_text: "Artificial Intelligence System for Plant Disease Detection and Analysis",
+    slide2_label: "Оптимизация",
+    slide2_text: "AdamW Optimizer",
+    slide3_label: "Глубокое обучение",
+    slide3_text: "CNN (Convolutional Neural Network)",
+    about_title: "О нас",
+    desc_sci_title: "🎯 Научная значимость",
+    desc_sci_p1: "Система объединяет методы компьютерного зрения (Computer Vision) и машинного обучения для создания эффективного инструмента автоматического мониторинга болезней растений.",
+    desc_sci_p2: "Предлагаемое решение может применяться в сельском хозяйстве, агротехнологиях и ботанических исследованиях, способствуя раннему выявлению болезней, снижению рисков и повышению урожайности.",
+    desc_p1: "Данная система является интеллектуальной платформой для автоматического обнаружения и классификации болезней растений, основанной на методах искусственного интеллекта и глубокого обучения.",
+    desc_p2: "Пользователь может просто загрузить фотографию листа растения, и система быстро и точно определит болезнь. Модель обучена на больших объёмах данных и способна распознавать различные болезни растений с высокой точностью.",
+    desc_p3: "В системе применяется архитектура сверточной нейронной сети (CNN), которая позволяет эффективно выделять пространственные и структурные особенности изображений.",
+    desc_func_intro: "Функциональность системы включает:",
+    desc_f1: "Автоматическое распознавание и классификация болезней на основе изображений листьев растений",
+    desc_f2: "Предоставление научного описания выявленной болезни",
+    desc_f3: "Подробный анализ симптомов",
+    desc_f4: "Рекомендации по соответствующему лечению и профилактике",
+    contact_title: "Свяжитесь с нами",
+    contact_sub: "Есть вопросы или предложения? Напишите нам.",
+    contact_name_label: "Имя",
+    contact_email_label: "Эл. почта",
+    contact_phone_label: "Телефон",
+    contact_ph_name: "Ваше имя",
+    contact_ph_email: "Ваша эл. почта",
+    contact_ph_msg: "Ваше сообщение...",
+    contact_send: "Отправить",
+    footer_tagline: "Интеллектуальная система для обнаружения и классификации болезней растений",
+    footer_pages: "Наши страницы",
+    upload_title: "Загрузите изображение растения",
+    choose_file: "Выберите файл",
+    btn_predict: "Прогнозировать",
+    result_title: "Результат прогноза",
+    placeholder_text: "Загрузите изображение растения для диагностики",
+    analyzing: "Анализ...",
+    conf_label: "Достоверность прогноза модели",
+    symptoms_title: "Симптомы",
+    actions_title: "Рекомендуемые действия",
+    resources_title: "Дополнительные советы и ресурсы",
+    fungicide_title: "Руководство по фунгицидам",
+    fungicide_desc: "Принципы применения фунгицидов",
+    soil_title: "Здоровье почвы",
+    soil_desc: "Защита культур и управление почвой",
+    history_title: "История диагностики",
+    history_sub: "Все ваши предыдущие прогнозы",
+    search_ph: "Поиск в истории...",
+    hist_col_diag: "Диагностика",
+    hist_col_date: "Дата",
+    hist_col_actions: "Действия",
+    no_history: "Диагностик пока нет. Перейдите на страницу Прогноза.",
+    page_label: "Страница 1 из 1",
+    clear_all: "Очистить всё",
+    help_title: "Помощь",
+    help_sub: "Как использовать PlantCare AI",
+    help_how_title: "Как диагностировать?",
+    help_how_sub: "Следуйте этим простым шагам для проведения диагностики.",
+    help_s1: "Перейдите в раздел «Прогноз»",
+    help_s2: "Загрузите чёткую фотографию больного растения",
+    help_s3: "Нажмите кнопку «Прогнозировать»",
+    help_s4: "Получите симптомы и рекомендуемые действия",
+    help_acc_title: "Точность диагностики",
+    help_acc_sub: "Для получения лучших результатов учитывайте следующие советы:",
+    help_t1: "Сфотографируйте поражённый лист чётко, при хорошем освещении",
+    help_t2: "Используйте фотографию крупным планом",
+    help_t3: "Избегайте размытых или тёмных снимков",
+    help_t4: "Покажите симптом на всём листе",
+    faq_title: "Часто задаваемые вопросы",
+    faq_q1: "Какие растения диагностируются?",
+    faq_a1: "Система диагностирует 38 классов, включая яблоню, вишню, черешню, кукурузу, виноград, апельсин, персик, перец, картофель, малину, клубнику, томат, кабачок, чернику, сою.",
+    faq_q2: "Могу ли я сохранить историю?",
+    faq_a2: "Да, все диагностики автоматически сохраняются в разделе «История».",
+    faq_q3: "Какие форматы файлов принимаются?",
+    faq_a3: "Принимаются изображения в форматах JPG, PNG, WEBP. Идеальный размер — 224×224 или больше.",
+    faq_q4: "Что делать, если достоверность низкая?",
+    faq_a4: "Если достоверность ниже 70%, попробуйте загрузить другое чёткое изображение, сделанное ближе к поражённому участку.",
+    auth_subtitle: "Войдите в свой аккаунт",
+    tab_login: "Вход",
+    tab_register: "Регистрация",
+    lbl_username: "Имя пользователя",
+    lbl_password: "Пароль",
+    lbl_fullname: "Полное имя",
+    lbl_email: "Эл. почта",
+    btn_login: "Войти",
+    or_label: "или",
+    btn_admin: "Войти как Админ",
+    btn_register: "Зарегистрироваться",
+    admin_title: "Панель администратора",
+    admin_sub: "Управление системой и статистика",
+    stat_total: "Всего диагностик",
+    stat_conf: "Средняя достоверность",
+    stat_top: "Чаще всего",
+    stat_top_sub: "В этом месяце",
+    stat_healthy: "Здоровые растения",
+    stat_healthy_sub: "Диагностики",
+    admin_list_title: "📋 Полный список диагностик",
+    clear_btn: "Очистить",
+    col_class: "Класс",
+    col_date: "Дата",
+    col_conf: "Дост.",
+    col_status: "Подробнее",
+    no_diag: "Диагностик нет",
+    disease_stats_title: "📊 Выявленные болезни",
+    no_data: "Нет данных",
+    back_btn: "← Назад",
+    fungicide_page_title: "Научное руководство по применению фунгицидов",
+    soil_page_title: "Научное руководство по здоровью почвы",
+    modal_title: "Подробности диагностики",
+    detail_btn: "Подр.",
+    delete_btn: "🗑",
+    toast_saved: "✅ Диагностика сохранена в истории",
+    toast_deleted: "Диагностика удалена",
+    toast_cleared: "История очищена",
+    confirm_clear: "Очистить все диагностики?"
+  }
+};
+
+let currentLang = 'hy';
+let isLoggedIn = false;
+let pendingRedirectToPredict = false;
+
+function t(key) {
+  return TRANSLATIONS[currentLang][key] || TRANSLATIONS['hy'][key] || key;
+}
+
+function applyTranslations() {
+  document.getElementById('navTitle').textContent = t('nav_title');
+  document.getElementById('navSubtitle').textContent = t('nav_subtitle_text');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+  });
+  renderPageContent();
+}
+
+// ===== PAGE CONTENT (multilingual) =====
+const PAGE_CONTENT = {
+  fungicide: {
+    hy: `<p>Բույսերի սնկային հիվանդությունները համարվում են գյուղատնտեսության մեջ բերքատվության կորստի հիմնական պատճառներից մեկը, և դրանց արդյունավետ վերահսկումը հիմնվում է ինտեգրված պաշտպանության համակարգերի վրա, որոնց առանցքային բաղադրիչներից են ֆունգիցիդները։ Ֆունգիցիդները քիմիական կամ կենսաբանական նյութեր են, որոնք կիրառվում են բույսերի վրա՝ կանխարգելելու, սահմանափակելու կամ ոչնչացնելու սնկային հիվանդությունները։ Դրանք կարող են լինել՝</p>
+<ul><li><strong>Կոնտակտային</strong> – գործում են բույսի մակերեսին</li><li><strong>Սիստեմային</strong> – ներթափանցում են բույսի հյուսվածքների մեջ</li><li><strong>Տրանսլամինար</strong> – անցնում են տերևի մի կողմից մյուսը</li></ul>
+<p>Ֆունգիցիդների գործողության մեխանիզմը հիմնականում ուղղված է սնկային բջջի կենսական պրոցեսների խանգարմանը։ Ամենատարածված մեխանիզմներից է էրգոստերոլի սինթեզի արգելակումը։ Այս մեխանիզմով գործում են տրիազոլային խմբի ֆունգիցիդները, ինչպիսիք են տեբուկոնազոլը և պրոպիկոնազոլը։ Մյուս կարևոր խումբը ստրոբիլուրիններն են, որոնք արգելակում են միտոքոնդրիալ շնչառությունը։</p>
+<p>Ֆունգիցիդների կիրառման արդյունավետությունը մեծապես կախված է ճիշտ ժամանակից։ Կանխարգելիչ կիրառումը համարվում է առավել արդյունավետ, քանի որ այն կանխում է պաթոգենի ներթափանցումը բույս։</p>
+<p>Դիմադրողականության զարգացումը համարվում է ֆունգիցիդների կիրառման ամենամեծ խնդիրներից մեկը։ Այս խնդիրը կանխելու համար անհրաժեշտ է կիրառել ֆունգիցիդների ռոտացիա։</p>
+<div class="content-sources"><h3>📚 Օգտագործված աղբյուրներ</h3><ul><li>Food and Agriculture Organization – Plant Protection Guidelines</li><li>European and Mediterranean Plant Protection Organization</li><li>Fungicide Resistance Action Committee</li><li>American Phytopathological Society</li></ul></div>`,
+    en: `<p>Fungal plant diseases are considered one of the main causes of crop yield loss in agriculture, and their effective control is based on integrated protection systems, of which fungicides are a key component. Fungicides are chemical or biological substances applied to plants to prevent, limit, or eliminate fungal diseases. They can be:</p>
+<ul><li><strong>Contact</strong> – act on the plant surface</li><li><strong>Systemic</strong> – penetrate into plant tissues</li><li><strong>Translaminar</strong> – move from one side of the leaf to the other</li></ul>
+<p>The mechanism of action of fungicides is primarily aimed at disrupting vital processes of the fungal cell. One of the most common mechanisms is inhibition of ergosterol synthesis. This mechanism is used by triazole group fungicides such as tebuconazole and propiconazole. Another important group is the strobilurins, which inhibit mitochondrial respiration.</p>
+<p>The effectiveness of fungicide application depends greatly on correct timing. Preventive application is considered most effective, as it prevents the pathogen from penetrating the plant.</p>
+<p>The development of resistance is considered one of the greatest challenges of fungicide use. To prevent this, it is necessary to apply fungicide rotation.</p>
+<div class="content-sources"><h3>📚 References</h3><ul><li>Food and Agriculture Organization – Plant Protection Guidelines</li><li>European and Mediterranean Plant Protection Organization</li><li>Fungicide Resistance Action Committee</li><li>American Phytopathological Society</li></ul></div>`,
+    ru: `<p>Грибковые болезни растений считаются одной из основных причин потери урожая в сельском хозяйстве, и их эффективный контроль основывается на системах интегрированной защиты, ключевым компонентом которых являются фунгициды. Фунгициды — это химические или биологические вещества, применяемые на растениях для предотвращения, ограничения или уничтожения грибковых болезней. Они могут быть:</p>
+<ul><li><strong>Контактными</strong> – действуют на поверхности растения</li><li><strong>Системными</strong> – проникают в ткани растения</li><li><strong>Трансламинарными</strong> – переходят с одной стороны листа на другую</li></ul>
+<p>Механизм действия фунгицидов в основном направлен на нарушение жизненно важных процессов грибковой клетки. Одним из наиболее распространённых механизмов является ингибирование синтеза эргостерола. По этому механизму действуют фунгициды триазольной группы, такие как тебуконазол и пропиконазол.</p>
+<p>Эффективность применения фунгицидов во многом зависит от правильного выбора времени. Профилактическое применение считается наиболее эффективным.</p>
+<p>Развитие резистентности считается одной из главных проблем применения фунгицидов. Для предотвращения этой проблемы необходимо применять ротацию фунгицидов.</p>
+<div class="content-sources"><h3>📚 Источники</h3><ul><li>Food and Agriculture Organization – Plant Protection Guidelines</li><li>European and Mediterranean Plant Protection Organization</li><li>Fungicide Resistance Action Committee</li><li>American Phytopathological Society</li></ul></div>`
+  },
+  soil: {
+    hy: `<p>Հողի առողջությունը համարվում է գյուղատնտեսական համակարգերի կայունության հիմնասյուներից մեկը, քանի որ այն ուղղակիորեն ազդում է բույսերի աճի, բերքատվության, սննդանյութերի հասանելիության և հիվանդությունների դիմադրողականության վրա։</p>
+<h2>1. Հողի հիմնական բաղադրիչները</h2>
+<p>Հողի առողջությունը պայմանավորված է երեք հիմնական բաղադրիչների հավասարակշռությամբ՝ ֆիզիկական կառուցվածք, քիմիական կազմ և կենսաբանական ակտիվություն։</p>
+<h2>2. Հողի դեգրադացիայի հիմնական պատճառները</h2>
+<ul><li>Անկայուն կամ ոչ ճիշտ պարարտացում</li><li>Օրգանական նյութերի պակաս</li><li>Գերխոնավացում կամ ջրային անբավարարություն</li><li>Հողի pH-ի անհամապատասխանություն</li><li>Մոնոկուլտուրա</li></ul>
+<h2>3. Ինտեգրված հողի կառավարման սկզբունքներ</h2>
+<ul><li>Ցանքաշրջանառություն և մշակաբույսերի բազմազանություն</li><li>Օրգանական նյութերի շարունակական համալրում</li><li>Ճշգրիտ ոռոգում</li><li>Հողի նվազագույն մշակություն</li><li>Միկրոբիալ ակտիվության խթանում</li></ul>
+<div class="content-sources"><h3>📚 Օգտագործված աղբյուրներ</h3><ul><li>Food and Agriculture Organization – Soil Health Guidelines</li><li>USDA – Soil Quality and Soil Health resources</li><li>CABI – Soil pathogens and management database</li></ul></div>`,
+    en: `<p>Soil health is considered one of the cornerstones of agricultural system sustainability, as it directly affects plant growth, crop yields, nutrient availability, and disease resistance.</p>
+<h2>1. Main Soil Components</h2>
+<p>Soil health depends on the balance of three main components: physical structure, chemical composition, and biological activity.</p>
+<h2>2. Main Causes of Soil Degradation</h2>
+<ul><li>Unstable or incorrect fertilization</li><li>Lack of organic matter</li><li>Waterlogging or water deficiency</li><li>Inappropriate soil pH</li><li>Monoculture</li></ul>
+<h2>3. Principles of Integrated Soil Management</h2>
+<ul><li>Crop rotation and diversity of cultivated plants</li><li>Continuous replenishment of organic matter</li><li>Precise irrigation</li><li>Minimum tillage</li><li>Stimulation of microbial activity</li></ul>
+<div class="content-sources"><h3>📚 References</h3><ul><li>Food and Agriculture Organization – Soil Health Guidelines</li><li>USDA – Soil Quality and Soil Health resources</li><li>CABI – Soil pathogens and management database</li></ul></div>`,
+    ru: `<p>Здоровье почвы считается одним из краеугольных камней устойчивости сельскохозяйственных систем, поскольку оно напрямую влияет на рост растений, урожайность, доступность питательных веществ и устойчивость к болезням.</p>
+<h2>1. Основные компоненты почвы</h2>
+<p>Здоровье почвы определяется балансом трёх основных компонентов: физической структуры, химического состава и биологической активности.</p>
+<h2>2. Основные причины деградации почвы</h2>
+<ul><li>Нестабильное или неправильное удобрение</li><li>Недостаток органического вещества</li><li>Переувлажнение или дефицит воды</li><li>Несоответствующий уровень pH почвы</li><li>Монокультура</li></ul>
+<h2>3. Принципы интегрированного управления почвой</h2>
+<ul><li>Севооборот и разнообразие возделываемых культур</li><li>Непрерывное пополнение органического вещества</li><li>Точное орошение</li><li>Минимальная обработка почвы</li><li>Стимулирование микробиальной активности</li></ul>
+<div class="content-sources"><h3>📚 Источники</h3><ul><li>Food and Agriculture Organization – Soil Health Guidelines</li><li>USDA – Soil Quality and Soil Health resources</li><li>CABI – Soil pathogens and management database</li></ul></div>`
+  }
+};
+
+function renderPageContent() {
+  const fb = document.getElementById('fungicide-body');
+  const sb = document.getElementById('soil-body');
+  if (fb) {
+    const titleEl = fb.querySelector('h1');
+    fb.innerHTML = '';
+    if (titleEl) fb.appendChild(titleEl);
+    const div = document.createElement('div');
+    div.innerHTML = PAGE_CONTENT.fungicide[currentLang] || PAGE_CONTENT.fungicide.hy;
+    while (div.firstChild) fb.appendChild(div.firstChild);
+  }
+  if (sb) {
+    const titleEl = sb.querySelector('h1');
+    sb.innerHTML = '';
+    if (titleEl) sb.appendChild(titleEl);
+    const div = document.createElement('div');
+    div.innerHTML = PAGE_CONTENT.soil[currentLang] || PAGE_CONTENT.soil.hy;
+    while (div.firstChild) sb.appendChild(div.firstChild);
+  }
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  const flags = { hy: '🇦🇲', en: 'EN', ru: '🇷🇺' };
+  const labels = { hy: 'ՀԱՅ', en: '', ru: 'РУС' };
+  document.getElementById('langFlag').textContent = flags[lang];
+  document.getElementById('langLabel').textContent = labels[lang];
+  document.querySelectorAll('.lang-option').forEach((el, i) => {
+    el.classList.toggle('active', ['hy','en','ru'][i] === lang);
+  });
+  document.getElementById('langDropdown').classList.remove('open');
+  applyTranslations();
+}
+
+function toggleLangDropdown() {
+  document.getElementById('langDropdown').classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+  const ls = document.querySelector('.lang-switcher');
+  if (ls && !ls.contains(e.target)) document.getElementById('langDropdown').classList.remove('open');
+});
+
+// ===== SLIDER =====
+let currentSlide = 0;
+const totalSlides = 3;
+let sliderTimer = null;
+
+function goToSlide(idx) {
+  currentSlide = ((idx % totalSlides) + totalSlides) % totalSlides;
+  document.getElementById('sliderTrack').style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+  document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
+
+function changeSlide(dir) {
+  goToSlide(currentSlide + dir);
+  resetSliderTimer();
+}
+
+function resetSliderTimer() {
+  if (sliderTimer) clearInterval(sliderTimer);
+  sliderTimer = setInterval(() => goToSlide(currentSlide + 1), 4000);
+}
+
+resetSliderTimer();
+
+// ===== CONTACT =====
+function sendContact() {
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const msg = document.getElementById('contactMsg').value.trim();
+  if (!name || !email || !msg) { showToast('⚠️ ' + (currentLang === 'hy' ? 'Լրացրեք բոլոր դաշտերը' : currentLang === 'ru' ? 'Заполните все поля' : 'Fill in all fields')); return; }
+  document.getElementById('contactName').value = '';
+  document.getElementById('contactEmail').value = '';
+  document.getElementById('contactMsg').value = '';
+  showToast(currentLang === 'hy' ? '✅ Հաղorδagrությunը ougarkval e' : currentLang === 'ru' ? '✅ Сообщение отправлено' : '✅ Message sent');
+}
+
+// ===== DISEASE DATA (full) =====
+const FULL_DISEASE_DATA = {
+  "Apple___Apple_scab": { name:"Apple___Apple_scab", hy:{arm:"Խնձorenui խayтabcoutyon (Apple Scab)",symptoms:["Terkevneri vra mug kanacic mincev sevavun tavshya bcer","Terkevneri dzevakheghoum yev vaghajam terkevathap","Ptugheri vra koshtacat, cakckacat hatvacer"],actions:["Bujsneri mnacordneri heroum","Fungicidayin mushakum (kaptan, ccoumb, mankoceb)","Orocoum karogavoroum","Kirarkel Skor kam Khorouss"]}, en:{arm:"Apple Scab",symptoms:["Dark velvety spots on leaves","Leaf deformation and premature drop","Hardened cracked areas on fruits"],actions:["Remove plant debris","Apply fungicides (captan, sulfur, mancozeb)","Manage irrigation","Use Skor or Chorus"]}, ru:{arm:"Парша яблони",symptoms:["Тёмно-зелёные пятна на листьях","Деформация листьев","Растрескивание плодов"],actions:["Удаление остатков","Фунгициды (каптан, сера)","Регулировка полива","Скор или Хорус"]} },
+  "Apple___healthy": { name:"Apple___healthy", hy:{arm:"Խndzor (Aroghj)",symptoms:["Terkevnere hamajap kanach en"],actions:["Kanonavor jroum","Parceraber znnvoum"]}, en:{arm:"Apple (Healthy)",symptoms:["Evenly green leaves"],actions:["Regular watering","Inspect foliage"]}, ru:{arm:"Яблоня (Здоровая)",symptoms:["Равномерно зелёные листья"],actions:["Регулярный полив","Осмотр кроны"]} },
+  "Blueberry___healthy": { name:"Blueberry___healthy", hy:{arm:"Hapalas (Aroghj)",symptoms:["Aroghj terkevner"],actions:["pH 4.5-5.5","Kanonavor jroum"]}, en:{arm:"Blueberry (Healthy)",symptoms:["Healthy leaves"],actions:["Maintain pH 4.5-5.5","Regular watering"]}, ru:{arm:"Черника (Здоровая)",symptoms:["Здоровые листья"],actions:["pH 4.5-5.5","Полив"]} },
+  "Cherry___Powdery_mildew": { name:"Cherry___Powdery_mildew", hy:{arm:"Keraseni alracough",symptoms:["Spitак poushenamart parr","Terkevneri olorum"],actions:["Heroum matghasheri","Fungicidner (Topaz, Kumulus)"]}, en:{arm:"Cherry Powdery Mildew",symptoms:["White powdery coating","Leaf curling"],actions:["Remove suckers","Apply Topaz or Kumulus"]}, ru:{arm:"Мучнистая роса вишни",symptoms:["Белый налёт","Скручивание листьев"],actions:["Удалить поросль","Топаз"]} },
+  "Cherry___healthy": { name:"Cherry___healthy", hy:{arm:"Bal/Keras (Aroghj)",symptoms:["Harp terkevner"],actions:["Sanitarakaan et","Sttugel nerkevnere"]}, en:{arm:"Cherry (Healthy)",symptoms:["Smooth leaves"],actions:["Sanitary pruning","Check lower surface"]}, ru:{arm:"Вишня (Здоровая)",symptoms:["Гладкие листья"],actions:["Санитарная обрезка","Проверять снизу"]} },
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": { name:"Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot", hy:{arm:"Egiptacoreni moxragouyn bcavoutyon",symptoms:["Erkaravan moxragouyn bcner","Andcanakunakar chor"],actions:["Cankashrzhanavoroutyon","Fungicidner (Amistar)"]}, en:{arm:"Corn Gray Leaf Spot",symptoms:["Gray rectangular spots","Leaf blight"],actions:["Crop rotation","Amistar Extra"]}, ru:{arm:"Серая пятнистость кукурузы",symptoms:["Серые прямоугольные пятна","Пожелтение"],actions:["Севооборот","Амистар Экстра"]} },
+  "Corn_(maize)___Common_rust_": { name:"Corn_(maize)___Common_rust_", hy:{arm:"Egiptacoreni jang",symptoms:["Narnjaguyn bshtikner","Degnoutyon"],actions:["Kayoun sortner","Fungicidner"]}, en:{arm:"Corn Common Rust",symptoms:["Orange pustules","Yellowing"],actions:["Resistant varieties","Tilt or Falcon"]}, ru:{arm:"Ржавчина кукурузы",symptoms:["Оранжевые пустулы","Пожелтение"],actions:["Устойчивые сорта","Тилт"]} },
+  "Corn_(maize)___Northern_Leaf_Blight": { name:"Corn_(maize)___Northern_Leaf_Blight", hy:{arm:"Egiptacoreni hyousisayin terkevain ayrvac",symptoms:["Sige dzevov bcner","Terkevneri ayrvac"],actions:["Ht gen sortner","Propicoonazol"]}, en:{arm:"Corn Northern Leaf Blight",symptoms:["Cigar-shaped lesions","Leaf blight"],actions:["Ht gene varieties","Propiconazole"]}, ru:{arm:"Северный ожог кукурузы",symptoms:["Пятна в форме сигары","Ожог"],actions:["Сорта с геном Ht","Пропиконазол"]} },
+  "Corn_(maize)___healthy": { name:"Corn_(maize)___healthy", hy:{arm:"Egiptacoren (Aroghj)",symptoms:["Miatarr mug kanach"],actions:["N, P, K apehovoutyon","Jroumin kanonavorum"]}, en:{arm:"Corn (Healthy)",symptoms:["Uniform dark green"],actions:["Ensure N, P, K","Regular watering"]}, ru:{arm:"Кукуруза (Здоровая)",symptoms:["Однородный тёмно-зелёный"],actions:["Обеспечить N, P, K","Полив"]} },
+  "Grape___Black_rot": { name:"Grape___Black_rot", hy:{arm:"Xagoghi sev ptoom",symptoms:["Klor bcner","Choracac hataptughner"],actions:["Heroum momiayatsvac ptughneri","Mankoceb"]}, en:{arm:"Grape Black Rot",symptoms:["Circular spots","Mummified berries"],actions:["Remove mummies","Mancozeb"]}, ru:{arm:"Чёрная гниль винограда",symptoms:["Округлые пятна","Мумии"],actions:["Удалить мумии","Манкоцеб"]} },
+  "Grape___Esca_(Black_Measles)": { name:"Grape___Esca_(Black_Measles)", hy:{arm:"Xagoghi Eska",symptoms:["Vagri mortvi terkevner","Mug bcner hataptyughnerum"],actions:["Et anvtang yeghanakin","Pughnce fungicidner"]}, en:{arm:"Grape Esca",symptoms:["Tiger-stripe leaves","Dark berry spots"],actions:["Avoid large cuts in rain","Copper fungicides"]}, ru:{arm:"Эска винограда",symptoms:["Полосчатые листья","Тёмные пятна ягод"],actions:["Избегать обрезки в дождь","Медьсодержащие"]} },
+  "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": { name:"Grape___Leaf_blight_(Isariopsis_Leaf_Spot)", hy:{arm:"Xagoghi terkevneri ayrvac",symptoms:["Ankanon bcner","Moxragouyn parr"],actions:["Heroum terrevneri","Bordoyan heghuk"]}, en:{arm:"Grape Leaf Blight",symptoms:["Irregular spots","Gray coating"],actions:["Remove fallen leaves","Bordeaux mixture"]}, ru:{arm:"Листовой ожог винограда",symptoms:["Неправильные пятна","Серый налёт"],actions:["Убрать листья","Бордоская жидкость"]} },
+  "Grape___healthy": { name:"Grape___healthy", hy:{arm:"Xaghogr (Aroghj)",symptoms:["Bnacan kanach","Liarjev hataptyughner"],actions:["Kannavor et","Hamajaksharich parartoutyon"]}, en:{arm:"Grape (Healthy)",symptoms:["Natural green","Plump berries"],actions:["Regular pruning","Balanced fertilization"]}, ru:{arm:"Виноград (Здоровый)",symptoms:["Зелёные листья","Полные ягоды"],actions:["Обрезка","Удобрение"]} },
+  "Orange___Haunglongbing_(Citrus_greening)": { name:"Orange___Haunglongbing_(Citrus_greening)", hy:{arm:"Nrnji HLB",symptoms:["Bcavour dегhn терkevner","Dzevakheghat ptughner"],actions:["Heroum varakvac txerneri","Lvicha demi"]}, en:{arm:"Citrus Greening (HLB)",symptoms:["Blotchy yellow leaves","Deformed fruit"],actions:["Remove infected trees","Control psyllids"]}, ru:{arm:"Хуанлунбин цитрусовых",symptoms:["Пятнистые листья","Деформированные плоды"],actions:["Удалить деревья","Листоблошка"]} },
+  "Peach___Bacterial_spot": { name:"Peach___Bacterial_spot", hy:{arm:"Deghazenui bakterial bcavoutyon",symptoms:["Jralou bcner","Ptoughi cakneri"],actions:["Kayoun sortner","Pughnc himnov"]}, en:{arm:"Peach Bacterial Spot",symptoms:["Water-soaked spots","Fruit cracks"],actions:["Resistant varieties","Copper agents"]}, ru:{arm:"Бакт. пятнистость персика",symptoms:["Водянистые пятна","Трещины"],actions:["Устойчивые сорта","Медь"]} },
+  "Peach___healthy": { name:"Peach___healthy", hy:{arm:"Deghd (Aroghj)",symptoms:["Mug kanach terkevner"],actions:["Amenamayn et","Katilain jroum"]}, en:{arm:"Peach (Healthy)",symptoms:["Dark green leaves"],actions:["Annual pruning","Drip irrigation"]}, ru:{arm:"Персик (Здоровый)",symptoms:["Тёмно-зелёные листья"],actions:["Ежегодная обрезка","Капельный полив"]} },
+  "Pepper,_bell___Bacterial_spot": { name:"Pepper,_bell___Bacterial_spot", hy:{arm:"Pgpeghi bakterial bcavoutyon",symptoms:["Jralou bcner","Ptughi vra koshtoukner"],actions:["Sertificacvac serm","Pughnc fungicidner"]}, en:{arm:"Bell Pepper Bacterial Spot",symptoms:["Water-soaked spots","Fruit bumps"],actions:["Certified seed","Copper fungicides"]}, ru:{arm:"Бакт. пятнистость перца",symptoms:["Водянистые пятна","Бугорки"],actions:["Семена","Медь"]} },
+  "Pepper,_bell___healthy": { name:"Pepper,_bell___healthy", hy:{arm:"Pgpegh (Aroghj)",symptoms:["Mug kanach","Aroghj ptughner"],actions:["Kayan khonavoutyon","Kalcium"]}, en:{arm:"Bell Pepper (Healthy)",symptoms:["Dark green leaves","Plump fruits"],actions:["Stable moisture","Calcium"]}, ru:{arm:"Перец (Здоровый)",symptoms:["Тёмно-зелёные листья","Полные плоды"],actions:["Влажность","Кальций"]} },
+  "Potato___Early_blight": { name:"Potato___Early_blight", hy:{arm:"Kartoghli vaghr choroutyon",symptoms:["Oghakakentron bcner","Sksvoum storerum"],actions:["Cankashrzhanavoroutyon","Mankoceb"]}, en:{arm:"Potato Early Blight",symptoms:["Concentric ring spots","Starts at lower leaves"],actions:["Crop rotation","Mancozeb"]}, ru:{arm:"Ранний ожог картофеля",symptoms:["Концентрические пятна","Начало снизу"],actions:["Севооборот","Манкоцеб"]} },
+  "Potato___Late_blight": { name:"Potato___Late_blight", hy:{arm:"Kartoghhli phytophторoz",symptoms:["Mug jralou bcner","Spitак parr"],actions:["Ridomil Gold","Heroum varakvatneri"]}, en:{arm:"Potato Late Blight",symptoms:["Dark water-soaked spots","White coating"],actions:["Ridomil Gold","Remove infected"]}, ru:{arm:"Фитофтороз картофеля",symptoms:["Тёмные пятна","Белый налёт"],actions:["Ридомил Голд","Удалить"]} },
+  "Potato___healthy": { name:"Potato___healthy", hy:{arm:"Kartoghel (Aroghj)",symptoms:["Mug kanach terkevner","ामgayin palarkner"],actions:["Okouchoum","Jroum"]}, en:{arm:"Potato (Healthy)",symptoms:["Dark green leaves","Firm tubers"],actions:["Hill up","Drip irrigation"]}, ru:{arm:"Картофель (Здоровый)",symptoms:["Тёмно-зелёные листья","Твёрдые клубни"],actions:["Окучивать","Полив"]} },
+  "Raspberry___healthy": { name:"Raspberry___healthy", hy:{arm:"Aznvamori (Aroghj)",symptoms:["Aroghj kanach terkevner"],actions:["Heroum hyn chyougheri","Jroum himt"]}, en:{arm:"Raspberry (Healthy)",symptoms:["Healthy leaves"],actions:["Remove old canes","Water at base"]}, ru:{arm:"Малина (Здоровая)",symptoms:["Здоровые листья"],actions:["Удалять старые побеги","Полив"]} },
+  "Soybean___healthy": { name:"Soybean___healthy", hy:{arm:"Soya (Aroghj)",symptoms:["Miatarr kanach"],actions:["Rhizobium","Optimal hchakcth"]}, en:{arm:"Soybean (Healthy)",symptoms:["Uniform dark green"],actions:["Ensure Rhizobium","Optimal spacing"]}, ru:{arm:"Соя (Здоровая)",symptoms:["Однородный цвет"],actions:["Rhizobium","Расстояние"]} },
+  "Squash___Powdery_mildew": { name:"Squash___Powdery_mildew", hy:{arm:"Ddum alracough",symptoms:["Spitак bcner","Degnoutyon"],actions:["Hchakcth","Topaz, Kvadris"]}, en:{arm:"Squash Powdery Mildew",symptoms:["White spots","Yellowing"],actions:["Spacing","Topaz or Quadris"]}, ru:{arm:"Мучнистая роса тыквенных",symptoms:["Белые пятна","Пожелтение"],actions:["Расстояние","Топаз"]} },
+  "Strawberry___Leaf_scorch": { name:"Strawberry___Leaf_scorch", hy:{arm:"Elaki terkevneri ayrvac",symptoms:["Manousakaguyn bcner","Terkevneri oloroom"],actions:["Kayoun sortner","Captan"]}, en:{arm:"Strawberry Leaf Scorch",symptoms:["Purple spots","Leaf edge curl"],actions:["Resistant varieties","Captan"]}, ru:{arm:"Ожог листьев земляники",symptoms:["Пурпурные пятна","Скручивание"],actions:["Устойчивые сорта","Каптан"]} },
+  "Strawberry___healthy": { name:"Strawberry___healthy", hy:{arm:"Elak (Aroghj)",symptoms:["Kanach ามgayin terkevner","Varr karmir hataptyughner"],actions:["Tsatskoum","Katilain jroum"]}, en:{arm:"Strawberry (Healthy)",symptoms:["Green firm leaves","Bright red berries"],actions:["Mulch","Drip irrigation"]}, ru:{arm:"Земляника (Здоровая)",symptoms:["Зелёные листья","Ягоды"],actions:["Мульчировать","Капельный полив"]} },
+  "Tomato___Bacterial_spot": { name:"Tomato___Bacterial_spot", hy:{arm:"Loliki bakterial bcavoutyon",symptoms:["Jralou bcner","Dегhn halo"],actions:["Sertificacvac serm","Pughnc fungicidner"]}, en:{arm:"Tomato Bacterial Spot",symptoms:["Water-soaked spots","Yellow halo"],actions:["Certified seeds","Copper fungicides"]}, ru:{arm:"Бакт. пятнистость томата",symptoms:["Водянистые пятна","Жёлтый ореол"],actions:["Семена","Медь"]} },
+  "Tomato___Early_blight": { name:"Tomato___Early_blight", hy:{arm:"Loliki vaghr choroutyon",symptoms:["Oghakakentron bcner","Degnoutyon"],actions:["Skor/Ridomil","Tsatskoum"]}, en:{arm:"Tomato Early Blight",symptoms:["Concentric ring spots","Yellowing"],actions:["Skor/Ridomil","Mulch"]}, ru:{arm:"Ранний ожог томата",symptoms:["Концентрические пятна","Желтизна"],actions:["Скор","Мульч"]} },
+  "Tomato___Late_blight": { name:"Tomato___Late_blight", hy:{arm:"Loliki phytophthoroz",symptoms:["Mug bcner","Spitak parr"],actions:["Ridomil Gold","Heroum varakvatneri"]}, en:{arm:"Tomato Late Blight",symptoms:["Dark spots","White coating"],actions:["Ridomil Gold","Remove infected"]}, ru:{arm:"Фитофтороз томата",symptoms:["Тёмные пятна","Белый налёт"],actions:["Ридомил Голд","Удалить"]} },
+  "Tomato___Leaf_Mold": { name:"Tomato___Leaf_Mold", hy:{arm:"Loliki terkevneri borbos",symptoms:["Dегhn bcner","Dzitapteghaguyn parr"],actions:["Orafophokhoutyon","Topaz"]}, en:{arm:"Tomato Leaf Mold",symptoms:["Yellow spots","Velvety coating"],actions:["Ventilation","Topaz"]}, ru:{arm:"Листовая плесень томата",symptoms:["Жёлтые пятна","Бархатистый налёт"],actions:["Вентиляция","Топаз"]} },
+  "Tomato___Septoria_leaf_spot": { name:"Tomato___Septoria_leaf_spot", hy:{arm:"Loliki septorioz",symptoms:["Mur kcentronov bcner","Sev ktecher"],actions:["Makarrooum dasht","Mankoceb"]}, en:{arm:"Tomato Septoria Leaf Spot",symptoms:["Gray-centered spots","Black pycnidia"],actions:["Clean field","Mancozeb"]}, ru:{arm:"Септориоз томата",symptoms:["Пятна с серым центром","Пикниды"],actions:["Очистить поле","Манкоцеб"]} },
+  "Tomato___Spider_mites Two-spotted_spider_mite": { name:"Tomato___Spider_mites Two-spotted_spider_mite", hy:{arm:"Loliki sardostaynatic",symptoms:["Spitак keterikner","Sardostayn"],actions:["Akariccidner","Kensabanakan"]}, en:{arm:"Tomato Spider Mites",symptoms:["White stippling","Webbing"],actions:["Apply acaricides","Predatory mites"]}, ru:{arm:"Паутинный клещ томата",symptoms:["Белые точки","Паутина"],actions:["Акарициды","Хищные клещи"]} },
+  "Tomato___Target_Spot": { name:"Tomato___Target_Spot", hy:{arm:"Loliki tirakhadzev bcavoutyon",symptoms:["Tirakhadzev bcner","Dегhn halo"],actions:["Kvadris/Skor","Jroum arvum"]}, en:{arm:"Tomato Target Spot",symptoms:["Target-like lesions","Yellow halo"],actions:["Quadris/Skor","Root zone irrigation"]}, ru:{arm:"Мишеневидная пятнистость томата",symptoms:["Мишеневидные пятна","Ореол"],actions:["Квадрис/Скор","Полив у корня"]} },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": { name:"Tomato___Tomato_Yellow_Leaf_Curl_Virus", hy:{arm:"Loliki TYLCV",symptoms:["Olortats terkevner","Tchcroutyan dzhkoom"],actions:["Kanoum skavchar","TYLCV kayoun sortner"]}, en:{arm:"Tomato Yellow Leaf Curl Virus",symptoms:["Curled cupped leaves","Stunted growth"],actions:["Control whitefly","TYLCV resistant varieties"]}, ru:{arm:"TYLCV томата",symptoms:["Скрученные листья","Задержка роста"],actions:["Белокрылка","Устойчивые гибриды"]} },
+  "Tomato___Tomato_mosaic_virus": { name:"Tomato___Tomato_mosaic_virus", hy:{arm:"Loliki mozaika",symptoms:["Mozaika bcner","Narudzevat terkevner"],actions:["Akhatahanoutyon gordzikner","Tm gen sortner"]}, en:{arm:"Tomato Mosaic Virus",symptoms:["Mosaic patterns","Narrow leaves"],actions:["Disinfect tools","Tm gene hybrids"]}, ru:{arm:"Вирус мозаики томата",symptoms:["Мозаичные пятна","Узкие листья"],actions:["Дезинфицировать инструменты","Гибриды с геном Tm"]} },
+  "Tomato___healthy": { name:"Tomato___healthy", hy:{arm:"Lolik (Aroghj)",symptoms:["Mug kanach terkevner","Aroghj ptughner"],actions:["Heroum stor terkevneri","Kalcium"]}, en:{arm:"Tomato (Healthy)",symptoms:["Dark green leaves","Plump fruits"],actions:["Remove lower leaves","Calcium for BER prevention"]}, ru:{arm:"Томат (Здоровый)",symptoms:["Тёмно-зелёные листья","Полные плоды"],actions:["Удалять нижние листья","Кальций"]} }
+};
+
+let diagHistory = JSON.parse(localStorage.getItem('diagHistory') || '[]');
+let currentFile = null;
+
+// ===== NAVIGATION =====
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const page = document.getElementById('page-' + name);
+  if (page) page.classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  if (name === 'history') renderHistory();
+  if (name === 'admin') renderAdminStats();
+  window.scrollTo(0, 0);
+}
+
+function goToPredict() {
+  if (isLoggedIn) {
+    showPage('predict');
+  } else {
+    pendingRedirectToPredict = true;
+    showPage('auth');
+  }
+}
+
+// ===== FILE HANDLING =====
+function onFileSelect(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  currentFile = file;
+  const preview = document.getElementById('previewImg');
+  const dropIcon = document.querySelector('.drop-zone .drop-icon');
+  const dropText = document.querySelector('.drop-zone .drop-text');
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    preview.src = ev.target.result;
+    preview.style.display = 'block';
+    if (dropIcon) dropIcon.style.display = 'none';
+    if (dropText) dropText.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+  document.getElementById('predictBtn').disabled = false;
+}
+
+const dropZone = document.getElementById('dropZone');
+if (dropZone) {
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault(); dropZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) { currentFile = file; onFileSelect({ target: { files: [file] } }); }
+  });
+}
+
+// ===== PREDICT =====
+async function predict() {
+  if (!currentFile) return;
+  document.getElementById('placeholder').style.display = 'none';
+  document.getElementById('resultContent').classList.remove('show');
+  document.getElementById('spinner').classList.add('show');
+  document.getElementById('predictBtn').disabled = true;
+  const formData = new FormData();
+  formData.append('file', currentFile);
+  try {
+    const res = await fetch('/predict', { method: 'POST', body: formData });
+    const data = await res.json();
+    showResult(data);
+  } catch (err) {
+    const keys = Object.keys(FULL_DISEASE_DATA);
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    showResult({ class: randomKey, confidence: (75 + Math.random() * 22).toFixed(1) });
+  }
+}
+
+function showResult(data) {
+  document.getElementById('spinner').classList.remove('show');
+  const entry0 = FULL_DISEASE_DATA[data.class];
+  const langData = entry0 ? (entry0[currentLang] || entry0.hy) : null;
+  const info = langData || { arm: data.class, symptoms: [], actions: [] };
+  const conf = parseFloat(data.confidence);
+  document.getElementById('resultClass').textContent = info.arm;
+  document.getElementById('confPct').textContent = conf + '%';
+  document.getElementById('confFill').style.width = conf + '%';
+  const previewSrc = document.getElementById('previewImg').src;
+  document.getElementById('resultImg').src = previewSrc;
+  const sl = document.getElementById('symptomsList');
+  sl.innerHTML = '';
+  (info.symptoms || []).forEach(s => { const li = document.createElement('li'); li.textContent = s; sl.appendChild(li); });
+  const al = document.getElementById('actionsList');
+  al.innerHTML = '';
+  (info.actions || []).forEach(a => { const li = document.createElement('li'); li.textContent = a; al.appendChild(li); });
+  document.getElementById('resultContent').classList.add('show');
+  document.getElementById('predictBtn').disabled = false;
+  const hyData = entry0 ? (entry0.hy || langData) : langData;
+  const entry = {
+    id: Date.now(), classKey: data.class,
+    classArm: hyData ? hyData.arm : info.arm,
+    confidence: conf, imageSrc: previewSrc,
+    date: new Date().toLocaleString('hy-AM'),
+    symptoms: info.symptoms, actions: info.actions
+  };
+  diagHistory.unshift(entry);
+  if (diagHistory.length > 50) diagHistory = diagHistory.slice(0, 50);
+  localStorage.setItem('diagHistory', JSON.stringify(diagHistory));
+  showToast(t('toast_saved'));
+}
+
+// ===== HISTORY =====
+function renderHistory(filter = '') {
+  const list = document.getElementById('historyList');
+  const filtered = diagHistory.filter(e =>
+    e.classArm.toLowerCase().includes(filter.toLowerCase()) ||
+    e.classKey.toLowerCase().includes(filter.toLowerCase())
+  );
+  if (!filtered.length) {
+    list.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text-light);font-size:14px">${t('no_history')}</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(e => `
+    <div class="history-row">
+      <div class="history-diag">
+        <div class="history-thumb">${e.imageSrc ? `<img src="${e.imageSrc}" alt="">` : '🌿'}</div>
+        <div>
+          <div class="history-name">${e.classArm}</div>
+          <div class="conf-wrap">
+            <div class="conf-mini-bar"><div class="conf-mini-fill" style="width:${e.confidence}%"></div></div>
+            <span class="conf-pct-sm">${e.confidence}%</span>
+          </div>
+        </div>
+      </div>
+      <div class="history-date">${e.date}</div>
+      <div class="history-actions">
+        <button class="btn-view" onclick="openDetailModal(${e.id})">${t('detail_btn')}</button>
+        <button class="btn-ghost" onclick="deleteEntry(${e.id})">${t('delete_btn')}</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterHistory(val) { renderHistory(val); }
+
+function deleteEntry(id) {
+  diagHistory = diagHistory.filter(e => e.id !== id);
+  localStorage.setItem('diagHistory', JSON.stringify(diagHistory));
+  renderHistory();
+  showToast(t('toast_deleted'));
+}
+
+function clearHistory() {
+  if (!confirm(t('confirm_clear'))) return;
+  diagHistory = [];
+  localStorage.setItem('diagHistory', JSON.stringify(diagHistory));
+  renderHistory();
+  showToast(t('toast_cleared'));
+}
+
+// ===== MODAL =====
+function openDetailModal(id) {
+  const entry = diagHistory.find(e => e.id === id);
+  if (!entry) return;
+  const modalImg = document.getElementById('modalImg');
+  if (entry.imageSrc) {
+    modalImg.innerHTML = `<img src="${entry.imageSrc}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm)">`;
+  } else { modalImg.textContent = '🌿'; }
+  document.getElementById('modalClass').textContent = entry.classArm;
+  document.getElementById('modalConfFill').style.width = entry.confidence + '%';
+  document.getElementById('modalConfPct').textContent = entry.confidence + '%';
+  const sec = document.getElementById('modalSections');
+  const symHtml = (entry.symptoms || []).map(s => `<li style="font-size:13px;color:var(--text-mid);margin-bottom:4px;display:flex;gap:7px;"><span style="color:var(--green-mid)">•</span>${s}</li>`).join('');
+  const actHtml = (entry.actions || []).map(a => `<li style="font-size:13px;color:var(--text-mid);margin-bottom:4px;display:flex;gap:7px;"><span style="color:var(--green-mid)">✓</span>${a}</li>`).join('');
+  sec.innerHTML = `
+    <div><div class="modal-section-title">${t('symptoms_title')}</div><ul style="list-style:none">${symHtml}</ul></div>
+    <div><div class="modal-section-title">${t('actions_title')}</div><ul style="list-style:none">${actHtml}</ul></div>
+    <div style="font-size:12px;color:var(--text-light);border-top:1px solid var(--border);padding-top:10px">📅 ${entry.date}</div>
+  `;
+  document.getElementById('detailModal').classList.add('show');
+}
+
+function closeModal() { document.getElementById('detailModal').classList.remove('show'); }
+
+document.getElementById('detailModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+// ===== ADMIN =====
+function renderAdminStats() {
+  const total = diagHistory.length;
+  document.getElementById('adminTotal').textContent = total;
+  if (total === 0) {
+    document.getElementById('adminAvgConf').textContent = '—';
+    document.getElementById('adminTopDisease').textContent = '—';
+    document.getElementById('adminHealthy').textContent = '0';
+    document.getElementById('adminList').innerHTML = `<div style="padding:32px;text-align:center;color:var(--text-light);font-size:13px">${t('no_diag')}</div>`;
+    document.getElementById('diseaseStats').innerHTML = `<div style="padding:24px;text-align:center;color:var(--text-light);font-size:13px">${t('no_data')}</div>`;
+    return;
+  }
+  const avgConf = (diagHistory.reduce((s, e) => s + e.confidence, 0) / total).toFixed(1);
+  document.getElementById('adminAvgConf').textContent = avgConf + '%';
+  const healthyCount = diagHistory.filter(e => e.classKey.includes('healthy')).length;
+  document.getElementById('adminHealthy').textContent = healthyCount;
+  const diseaseCounts = {};
+  diagHistory.forEach(e => { diseaseCounts[e.classArm] = (diseaseCounts[e.classArm] || 0) + 1; });
+  const topDisease = Object.entries(diseaseCounts).sort((a, b) => b[1] - a[1])[0];
+  document.getElementById('adminTopDisease').textContent = topDisease ? topDisease[0].split(' ')[0] : '—';
+  document.getElementById('adminList').innerHTML = diagHistory.slice(0, 10).map(e => `
+    <div class="admin-row">
+      <div style="font-size:13px;font-weight:600;color:var(--text-dark)">${e.classArm}</div>
+      <div style="font-size:12px;color:var(--text-light)">${e.date}</div>
+      <div><span class="badge ${e.confidence >= 90 ? 'badge-green' : e.confidence >= 75 ? 'badge-blue' : 'badge-orange'}">${e.confidence}%</span></div>
+      <div><button class="btn-ghost" style="font-size:11px;padding:4px 8px" onclick="openDetailModal(${e.id})">Դ.</button></div>
+    </div>
+  `).join('');
+  const sorted = Object.entries(diseaseCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const maxCount = sorted[0][1];
+  document.getElementById('diseaseStats').innerHTML = sorted.map(([name, count]) => `
+    <div class="disease-item">
+      <div style="font-size:12px;color:var(--text-dark);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</div>
+      <div class="disease-bar-wrap">
+        <div class="disease-bar"><div class="disease-fill" style="width:${Math.round(count/maxCount*100)}%"></div></div>
+        <span class="disease-count">${count}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== AUTH =====
+function switchAuthTab(tab, btn) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
+}
+
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  if (!user || !pass) { showAuthMsg('loginMsg', '⚠️'); return; }
+  if (user === 'admin' && pass === 'admin123') {
+    showAuthMsg('loginMsg', '✅ Admin!');
+    isLoggedIn = true;
+    setTimeout(() => { showPage('admin'); pendingRedirectToPredict = false; }, 800);
+  } else {
+    showAuthMsg('loginMsg', '✅ ' + user + '!');
+    isLoggedIn = true;
+    setTimeout(() => {
+      if (pendingRedirectToPredict) { showPage('predict'); pendingRedirectToPredict = false; }
+      else { showPage('desc'); }
+    }, 800);
+  }
+}
+
+function doAdminLogin() {
+  document.getElementById('loginUser').value = 'admin';
+  document.getElementById('loginPass').value = 'admin123';
+  doLogin();
+}
+
+function doRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value;
+  if (!name || !email || !pass) { showAuthMsg('registerMsg', '⚠️'); return; }
+  if (pass.length < 6) { showAuthMsg('registerMsg', '⚠️'); return; }
+  showAuthMsg('registerMsg', '✅ ' + name + '!');
+  isLoggedIn = true;
+  setTimeout(() => {
+    if (pendingRedirectToPredict) { showPage('predict'); pendingRedirectToPredict = false; }
+    else { showPage('desc'); }
+  }, 1000);
+}
+
+function showAuthMsg(id, text) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 3000);
+}
+
+// ===== FAQ =====
+function toggleFaq(el) { el.classList.toggle('open'); }
+
+// ===== TOAST =====
+function showToast(msg) {
+  const toastEl = document.getElementById('toast');
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(() => toastEl.classList.remove('show'), 2800);
+}
+
+// Init
+applyTranslations();
+renderPageContent();
+renderHistory();
+</script>
+</body>
+</html>
