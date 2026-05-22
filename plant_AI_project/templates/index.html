@@ -230,19 +230,19 @@
     position: absolute; inset: 0;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.7);
+    filter: brightness(0.9);
     transition: transform 6s ease;
   }
   .slide:hover .slide-bg { transform: scale(1.04); }
 
   .slide-1 .slide-bg {
-    background-image: url('https://www.noursefarms.com/cdn/shop/articles/53582790807_8a555b26c2_o.jpg?v=1741295034&width=1920');
+    background-image: url('https://images.nationalgeographic.org/image/upload/v1638892233/EducationHub/photos/crops-growing-in-thailand.jpg');
   }
   .slide-2 .slide-bg {
-    background-image: url('https://www.aces.edu/blog/topics/crop-production/bacterial-spot-treatment-in-peaches/peach-with-scab-photo/');
+    background-image: url('https://www.saferbrand.com/media/Articles/Safer-Brand/What-Nutrients-Do-Hydroponic-Strawberries-Need.jpg');
   }
   .slide-3 .slide-bg {
-    background-image: url('https://www.healthygreenkitchen.com/wp-content/uploads/2024/02/potatoes-in-garden-bed-1200x800.jpg');
+    background-image: url('https://hips.hearstapps.com/hmg-prod/images/close-up-of-tomatoes-growing-on-plant-ukraine-royalty-free-image-1747409380.pjpeg');
   }
 
   .slide-content {
@@ -250,6 +250,9 @@
     z-index: 2;
     padding: 40px 60px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 
   .slide-label {
@@ -274,6 +277,30 @@
     line-height: 1.25;
     max-width: 600px;
     text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .btn-slide-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all .25s;
+    letter-spacing: .02em;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    width: fit-content;
+  }
+  .btn-slide-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    background: linear-gradient(135deg, #256842, #3d9e6b);
   }
 
   .slider-dots {
@@ -526,7 +553,9 @@
   .drop-zone {
     border: 2px dashed var(--border);
     border-radius: var(--radius-sm);
-    padding: 32px 16px;
+    padding: 16px 16px;
+    min-height: 120px;
+    max-height: 140px;
     text-align: center;
     background: var(--white);
     cursor: pointer;
@@ -825,8 +854,8 @@
   <div class="nav-brand" onclick="showPage('desc')" title="PlantCare AI">
     <div class="nav-logo">🌿</div>
     <div>
-      <div class="nav-title" id="navTitle">Բույսերի հիվանդությունների դասակարգիչ և ախտորոշիչ</div>
-      <div class="nav-subtitle" id="navSubtitle">Հայտնաբերեք և արդյունավետ կառավարեք բույսերի հիվանդությունները</div>
+      <div class="nav-title" id="navTitle">PlantCare AI</div>
+      <div class="nav-subtitle" id="navSubtitle">Հայտնաբերեք և արդյունավետ կառավարեք մշակաբույսերի հիվանդությունները</div>
     </div>
   </div>
   <ul class="nav-links">
@@ -855,34 +884,32 @@
 <!-- ===================== DESCRIPTION / LANDING PAGE ===================== -->
 <div id="page-desc" class="page active desc-page">
 
-  <!-- Hero -->
-  <div class="desc-hero">
-    <h1 class="desc-title">PlantCare AI</h1>
-    <button class="btn-start" onclick="goToPredict()" data-i18n="desc_btn">Սկսենք կանխատեսումները</button>
-  </div>
 
-  <!-- Full-width Slider -->
+  <!-- Full-width Slider (no hero section above - removed PlantCare AI title and button) -->
   <div class="desc-slider-wrap">
     <div class="slider-track" id="sliderTrack">
+      <!-- Slide 1: multilingual main text, CTA button, NO label badge -->
       <div class="slide slide-1">
         <div class="slide-bg"></div>
         <div class="slide-content">
-          <div class="slide-label" data-i18n="slide1_label">AI · Plant Disease</div>
-          <div class="slide-text" data-i18n="slide1_text">Artificial Intelligence System for Plant Disease Detection and Analysis</div>
+          <div class="slide-text" data-i18n="slide1_text">Արհեստական բանականության համակարգ բույսերի հիվանդությունների հայտնաբերման և վերլուծության համար</div>
+          <button class="btn-slide-cta" onclick="goToPredict()" data-i18n="desc_btn">Սկսենք կանխատեսումները</button>
         </div>
       </div>
+      <!-- Slide 2: AdamW Optimizer, multilingual, NO label badge -->
       <div class="slide slide-2">
         <div class="slide-bg"></div>
         <div class="slide-content">
-          <div class="slide-label" data-i18n="slide2_label">Optimization</div>
-          <div class="slide-text" data-i18n="slide2_text">AdamW Optimizer</div>
+          <div class="slide-text" data-i18n="slide2_text">AdamW օպտիմիզատոր</div>
+          <button class="btn-slide-cta" onclick="goToPredict()" data-i18n="desc_btn">Սկսենք կանխատեսումները</button>
         </div>
       </div>
+      <!-- Slide 3: CNN, multilingual, NO label badge -->
       <div class="slide slide-3">
         <div class="slide-bg"></div>
         <div class="slide-content">
-          <div class="slide-label" data-i18n="slide3_label">Deep Learning</div>
-          <div class="slide-text" data-i18n="slide3_text">CNN (Convolutional Neural Network)</div>
+          <div class="slide-text" data-i18n="slide3_text">CNN (կոնվոլյուցիոն նեյրոնային ցանցեր)</div>
+          <button class="btn-slide-cta" onclick="goToPredict()" data-i18n="desc_btn">Սկսենք կանխատեսումները</button>
         </div>
       </div>
     </div>
@@ -989,8 +1016,7 @@
           <div class="footer-logo-icon">🌿</div>
           <span class="footer-logo-name">PlantCare AI</span>
         </div>
-        <div class="footer-tagline" data-i18n="footer_tagline">Բույսերի հիվանդությունների հայտնաբերման և դասակարգման ինտելեկտուալ համակարգ</div>
-        <div class="footer-copyright">© 2026 PlantCare AI. All rights reserved.</div>
+        <div class="footer-tagline" data-i18n="footer_tagline">Մշակաբույսերի հիվանդությունների հայտնաբերման և դասակարգման ինտելեկտուալ համակարգ</div>
       </div>
       <div class="footer-nav-section">
         <h4 data-i18n="footer_pages">Մեր էջերը</h4>
@@ -1014,7 +1040,7 @@
       <div class="main-card-inner">
         <div class="upload-panel">
           <h3 data-i18n="upload_title">Վերբեռնեք բույսի նկարը</h3>
-          <div class="drop-zone" id="dropZone">
+          <div class="drop-zone" id="dropZone" style="padding:16px;min-height:120px;max-height:140px;">
             <input type="file" id="fileInput" accept="image/*" onchange="onFileSelect(event)">
             <div class="drop-icon">📷</div>
             <div class="drop-text"><span data-i18n="choose_file">Ընտրեք ֆայլ</span><br></div>
@@ -1022,28 +1048,39 @@
           <img class="preview-img" id="previewImg" src="" alt="preview">
           <button class="btn-predict" id="predictBtn" onclick="predict()" disabled data-i18n="btn_predict">Կանխատեսել</button>
         </div>
+
         <div class="result-panel">
           <h2 data-i18n="result_title">Կանխատեսման արդյունք</h2>
+
           <div class="placeholder-state" id="placeholder">
             <div class="placeholder-icon">🔬</div>
-            <div class="placeholder-text" data-i18n="placeholder_text">Վերբեռնեք բույսի նկար<br>ախտորոշման համար</div>
+            <div class="placeholder-text" data-i18n="placeholder_text">Վերբեռնեք բույսի նկար ախտորոշման համար</div>
           </div>
+
           <div class="spinner" id="spinner">
             <div class="spin"></div>
             <div style="font-size:14px;color:var(--text-light)" data-i18n="analyzing">Վերլուծություն...</div>
           </div>
+
           <div class="result-content" id="resultContent">
-            <div class="result-header">
-              <img class="result-img" id="resultImg" src="" alt="result">
-              <div class="result-info">
+
+            <!-- uploaded image + class name + confidence -->
+            <div class="result-header" style="align-items:flex-start;gap:20px;">
+              <img class="result-img" id="resultImg" src="" alt="result"
+                style="width:180px;height:150px;object-fit:cover;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);flex-shrink:0;">
+              <div class="result-info" style="flex:1;">
                 <div class="result-class" id="resultClass">—</div>
                 <div class="confidence-label" data-i18n="conf_label">Մոդելի կանխատեսման վստահություն</div>
                 <div class="confidence-bar-wrap">
-                  <div class="confidence-bar"><div class="confidence-fill" id="confFill" style="width:0%"></div></div>
+                  <div class="confidence-bar">
+                    <div class="confidence-fill" id="confFill" style="width:0%"></div>
+                  </div>
                   <div class="confidence-pct" id="confPct">0%</div>
                 </div>
               </div>
             </div>
+
+            <!-- symptoms + actions -->
             <div class="result-cards">
               <div class="info-card">
                 <div class="info-card-header">
@@ -1060,10 +1097,44 @@
                 <ul id="actionsList"></ul>
               </div>
             </div>
+
+            <!-- heatmap + overlay + damage -->
+            <div id="extraResults" style="display:none;margin-top:20px;">
+
+              <!-- heatmap and overlay side by side -->
+              <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;">
+                <div style="flex:1;min-width:180px;">
+                  <p style="font-size:13px;font-weight:600;color:var(--text-mid);margin-bottom:6px;"
+                    data-i18n="heatmap_label">Ջերմային քարտեզ</p>
+                  <img id="heatmapImg"
+                    style="width:100%;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);display:block;"/>
+                </div>
+                <div style="flex:1;min-width:180px;">
+                  <p style="font-size:13px;font-weight:600;color:var(--text-mid);margin-bottom:6px;"
+                    data-i18n="overlay_label">Վերադրված պատկեր</p>
+                  <img id="overlayImg"
+                    style="width:100%;border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);display:block;"/>
+                </div>
+              </div>
+
+              <!-- damage percent -->
+              <div style="background:var(--green-mist);border:1px solid var(--border);border-radius:var(--radius-sm);
+                          padding:14px 18px;display:flex;align-items:center;gap:12px;">
+                <span style="font-size:22px;">🩹</span>
+                <div>
+                  <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+                              color:var(--text-light);" data-i18n="damage_label">Վնասվածության տոկոս</div>
+                  <div style="font-size:22px;font-weight:700;color:var(--green-deep);" id="damageValue">—</div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>
     </div>
+
     <div class="resources-section">
       <div class="section-title" data-i18n="resources_title">Լրացուցիչ խորհուրդներ և ռեսուրսներ</div>
       <div class="resources-grid">
@@ -1299,19 +1370,16 @@
 // ===== TRANSLATIONS =====
 const TRANSLATIONS = {
   hy: {
-    nav_title: "Բույսերի հիվանդությունների դասակարգիչ և ախտորոշիչ",
-    nav_subtitle_text: "Հայտնաբերեք և արդյունավետ կառավարեք բույսերի հիվանդությունները",
+    nav_title: "PlantCare AI",
+    nav_subtitle_text: "Հայտնաբերեք և արդյունավետ կառավարեք մշակաբույսերի հիվանդությունները",
     nav_desc: "Գլխավոր",
     nav_predict: "Կանխատեսում",
     nav_history: "Պատմություն",
     nav_help: "Օգնություն",
     desc_btn: "Սկսենք կանխատեսումները",
-    slide1_label: "AI · Բույսերի հիվանդություններ",
-    slide1_text: "Artificial Intelligence System for Plant Disease Detection and Analysis",
-    slide2_label: "Օպտիմիզացիա",
-    slide2_text: "AdamW Optimizer",
-    slide3_label: "Խոր ուսուցում",
-    slide3_text: "CNN (Convolutional Neural Network)",
+    slide1_text: "Մշակաբույսերի հիվանդությունների ախտորոշման և խորհրդատվության արհեստական բանականության համակարգ",
+    slide2_text: "AdamW օպտիմիզատոր",
+    slide3_text: "Կոնվոլյուցիոն նեյրոնային ցանցեր",
     about_title: "Մեր մասին",
     desc_sci_title: "🎯 Գիտական կարևորություն",
     desc_sci_p1: "Համակարգը համադրում է համակարգչային տեսողության (Computer Vision) և մեքենայական ուսուցման մեթոդները՝ ստեղծելով արդյունավետ գործիք բույսերի հիվանդությունների ավտոմատ մոնիթորինգի համար։",
@@ -1418,22 +1486,22 @@ const TRANSLATIONS = {
     toast_saved: "✅ Ախտորոշումը պահված է պատմությունում",
     toast_deleted: "Ախտ. ջնջված է",
     toast_cleared: "Պատմությունը մաքրված է",
-    confirm_clear: "Մաքրե՞լ բոլոր ախտորոշումները։"
+    confirm_clear: "Մաքրե՞լ բոլոր ախտորոշումները։",
+    heatmap_label: "Ջերմային քարտեզ",
+    overlay_label: "Վերադրված պատկեր",
+    damage_label: "Վնասվածության տոկոս"
   },
   en: {
-    nav_title: "Plant Disease Classifier & Diagnosis",
+    nav_title: "PlantCare AI",
     nav_subtitle_text: "Identify and manage plant diseases effectively.",
     nav_desc: "Home",
     nav_predict: "Prediction",
     nav_history: "History",
     nav_help: "Help",
     desc_btn: "Start Predictions",
-    slide1_label: "AI · Plant Disease",
     slide1_text: "Artificial Intelligence System for Plant Disease Detection and Analysis",
-    slide2_label: "Optimization",
     slide2_text: "AdamW Optimizer",
-    slide3_label: "Deep Learning",
-    slide3_text: "CNN (Convolutional Neural Network)",
+    slide3_text: "Convolutional Neural Network (CNN)",
     about_title: "About Us",
     desc_sci_title: "🎯 Scientific Importance",
     desc_sci_p1: "The system combines Computer Vision and machine learning methods to create an effective tool for automatic monitoring of plant diseases.",
@@ -1540,22 +1608,22 @@ const TRANSLATIONS = {
     toast_saved: "✅ Diagnosis saved to history",
     toast_deleted: "Diagnosis deleted",
     toast_cleared: "History cleared",
-    confirm_clear: "Clear all diagnoses?"
+    confirm_clear: "Clear all diagnoses?",
+    heatmap_label: "Heatmap",
+    overlay_label: "Overlay Image",
+    damage_label: "Damage Percentage"
   },
   ru: {
-    nav_title: "Классификатор и диагностика болезней растений",
+    nav_title: "PlantCare AI",
     nav_subtitle_text: "Эффективно выявляйте и управляйте болезнями растений.",
     nav_desc: "Главная",
     nav_predict: "Прогноз",
     nav_history: "История",
     nav_help: "Помощь",
     desc_btn: "Начать прогнозирование",
-    slide1_label: "ИИ · Болезни растений",
-    slide1_text: "Artificial Intelligence System for Plant Disease Detection and Analysis",
-    slide2_label: "Оптимизация",
-    slide2_text: "AdamW Optimizer",
-    slide3_label: "Глубокое обучение",
-    slide3_text: "CNN (Convolutional Neural Network)",
+    slide1_text: " Система искусственного интеллекта для обнаружения и анализа заболеваний растений",
+    slide2_text: "AdamW оптимизатор",
+    slide3_text: "Сверточная нейронная сеть",
     about_title: "О нас",
     desc_sci_title: "🎯 Научная значимость",
     desc_sci_p1: "Система объединяет методы компьютерного зрения (Computer Vision) и машинного обучения для создания эффективного инструмента автоматического мониторинга болезней растений.",
@@ -1662,7 +1730,10 @@ const TRANSLATIONS = {
     toast_saved: "✅ Диагностика сохранена в истории",
     toast_deleted: "Диагностика удалена",
     toast_cleared: "История очищена",
-    confirm_clear: "Очистить все диагностики?"
+    confirm_clear: "Очистить все диагностики?",
+    heatmap_label: "Тепловая карта",
+    overlay_label: "Наложенное изображение",
+    damage_label: "Степень повреждения"
   }
 };
 
@@ -1768,6 +1839,29 @@ function setLang(lang) {
   });
   document.getElementById('langDropdown').classList.remove('open');
   applyTranslations();
+  if (lastPredictData) {
+    const entry0 = FULL_DISEASE_DATA[lastPredictData.class];
+    const langData = entry0 ? (entry0[currentLang] || entry0.hy) : null;
+    const info = langData || { arm: lastPredictData.class, symptoms: [], actions: [] };
+
+    document.getElementById('resultClass').textContent = info.arm;
+
+    const sl = document.getElementById('symptomsList');
+    sl.innerHTML = '';
+    (info.symptoms || []).forEach(s => {
+      const li = document.createElement('li');
+      li.textContent = s;
+      sl.appendChild(li);
+    });
+
+    const al = document.getElementById('actionsList');
+    al.innerHTML = '';
+    (info.actions || []).forEach(a => {
+      const li = document.createElement('li');
+      li.textContent = a;
+      al.appendChild(li);
+    });
+  }
 }
 
 function toggleLangDropdown() {
@@ -1816,46 +1910,1892 @@ function sendContact() {
 
 // ===== DISEASE DATA (full) =====
 const FULL_DISEASE_DATA = {
-  "Apple___Apple_scab": { name:"Apple___Apple_scab", hy:{arm:"Խնձorenui խayтabcoutyon (Apple Scab)",symptoms:["Terkevneri vra mug kanacic mincev sevavun tavshya bcer","Terkevneri dzevakheghoum yev vaghajam terkevathap","Ptugheri vra koshtacat, cakckacat hatvacer"],actions:["Bujsneri mnacordneri heroum","Fungicidayin mushakum (kaptan, ccoumb, mankoceb)","Orocoum karogavoroum","Kirarkel Skor kam Khorouss"]}, en:{arm:"Apple Scab",symptoms:["Dark velvety spots on leaves","Leaf deformation and premature drop","Hardened cracked areas on fruits"],actions:["Remove plant debris","Apply fungicides (captan, sulfur, mancozeb)","Manage irrigation","Use Skor or Chorus"]}, ru:{arm:"Парша яблони",symptoms:["Тёмно-зелёные пятна на листьях","Деформация листьев","Растрескивание плодов"],actions:["Удаление остатков","Фунгициды (каптан, сера)","Регулировка полива","Скор или Хорус"]} },
-  "Apple___healthy": { name:"Apple___healthy", hy:{arm:"Խndzor (Aroghj)",symptoms:["Terkevnere hamajap kanach en"],actions:["Kanonavor jroum","Parceraber znnvoum"]}, en:{arm:"Apple (Healthy)",symptoms:["Evenly green leaves"],actions:["Regular watering","Inspect foliage"]}, ru:{arm:"Яблоня (Здоровая)",symptoms:["Равномерно зелёные листья"],actions:["Регулярный полив","Осмотр кроны"]} },
-  "Blueberry___healthy": { name:"Blueberry___healthy", hy:{arm:"Hapalas (Aroghj)",symptoms:["Aroghj terkevner"],actions:["pH 4.5-5.5","Kanonavor jroum"]}, en:{arm:"Blueberry (Healthy)",symptoms:["Healthy leaves"],actions:["Maintain pH 4.5-5.5","Regular watering"]}, ru:{arm:"Черника (Здоровая)",symptoms:["Здоровые листья"],actions:["pH 4.5-5.5","Полив"]} },
-  "Cherry___Powdery_mildew": { name:"Cherry___Powdery_mildew", hy:{arm:"Keraseni alracough",symptoms:["Spitак poushenamart parr","Terkevneri olorum"],actions:["Heroum matghasheri","Fungicidner (Topaz, Kumulus)"]}, en:{arm:"Cherry Powdery Mildew",symptoms:["White powdery coating","Leaf curling"],actions:["Remove suckers","Apply Topaz or Kumulus"]}, ru:{arm:"Мучнистая роса вишни",symptoms:["Белый налёт","Скручивание листьев"],actions:["Удалить поросль","Топаз"]} },
-  "Cherry___healthy": { name:"Cherry___healthy", hy:{arm:"Bal/Keras (Aroghj)",symptoms:["Harp terkevner"],actions:["Sanitarakaan et","Sttugel nerkevnere"]}, en:{arm:"Cherry (Healthy)",symptoms:["Smooth leaves"],actions:["Sanitary pruning","Check lower surface"]}, ru:{arm:"Вишня (Здоровая)",symptoms:["Гладкие листья"],actions:["Санитарная обрезка","Проверять снизу"]} },
-  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": { name:"Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot", hy:{arm:"Egiptacoreni moxragouyn bcavoutyon",symptoms:["Erkaravan moxragouyn bcner","Andcanakunakar chor"],actions:["Cankashrzhanavoroutyon","Fungicidner (Amistar)"]}, en:{arm:"Corn Gray Leaf Spot",symptoms:["Gray rectangular spots","Leaf blight"],actions:["Crop rotation","Amistar Extra"]}, ru:{arm:"Серая пятнистость кукурузы",symptoms:["Серые прямоугольные пятна","Пожелтение"],actions:["Севооборот","Амистар Экстра"]} },
-  "Corn_(maize)___Common_rust_": { name:"Corn_(maize)___Common_rust_", hy:{arm:"Egiptacoreni jang",symptoms:["Narnjaguyn bshtikner","Degnoutyon"],actions:["Kayoun sortner","Fungicidner"]}, en:{arm:"Corn Common Rust",symptoms:["Orange pustules","Yellowing"],actions:["Resistant varieties","Tilt or Falcon"]}, ru:{arm:"Ржавчина кукурузы",symptoms:["Оранжевые пустулы","Пожелтение"],actions:["Устойчивые сорта","Тилт"]} },
-  "Corn_(maize)___Northern_Leaf_Blight": { name:"Corn_(maize)___Northern_Leaf_Blight", hy:{arm:"Egiptacoreni hyousisayin terkevain ayrvac",symptoms:["Sige dzevov bcner","Terkevneri ayrvac"],actions:["Ht gen sortner","Propicoonazol"]}, en:{arm:"Corn Northern Leaf Blight",symptoms:["Cigar-shaped lesions","Leaf blight"],actions:["Ht gene varieties","Propiconazole"]}, ru:{arm:"Северный ожог кукурузы",symptoms:["Пятна в форме сигары","Ожог"],actions:["Сорта с геном Ht","Пропиконазол"]} },
-  "Corn_(maize)___healthy": { name:"Corn_(maize)___healthy", hy:{arm:"Egiptacoren (Aroghj)",symptoms:["Miatarr mug kanach"],actions:["N, P, K apehovoutyon","Jroumin kanonavorum"]}, en:{arm:"Corn (Healthy)",symptoms:["Uniform dark green"],actions:["Ensure N, P, K","Regular watering"]}, ru:{arm:"Кукуруза (Здоровая)",symptoms:["Однородный тёмно-зелёный"],actions:["Обеспечить N, P, K","Полив"]} },
-  "Grape___Black_rot": { name:"Grape___Black_rot", hy:{arm:"Xagoghi sev ptoom",symptoms:["Klor bcner","Choracac hataptughner"],actions:["Heroum momiayatsvac ptughneri","Mankoceb"]}, en:{arm:"Grape Black Rot",symptoms:["Circular spots","Mummified berries"],actions:["Remove mummies","Mancozeb"]}, ru:{arm:"Чёрная гниль винограда",symptoms:["Округлые пятна","Мумии"],actions:["Удалить мумии","Манкоцеб"]} },
-  "Grape___Esca_(Black_Measles)": { name:"Grape___Esca_(Black_Measles)", hy:{arm:"Xagoghi Eska",symptoms:["Vagri mortvi terkevner","Mug bcner hataptyughnerum"],actions:["Et anvtang yeghanakin","Pughnce fungicidner"]}, en:{arm:"Grape Esca",symptoms:["Tiger-stripe leaves","Dark berry spots"],actions:["Avoid large cuts in rain","Copper fungicides"]}, ru:{arm:"Эска винограда",symptoms:["Полосчатые листья","Тёмные пятна ягод"],actions:["Избегать обрезки в дождь","Медьсодержащие"]} },
-  "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": { name:"Grape___Leaf_blight_(Isariopsis_Leaf_Spot)", hy:{arm:"Xagoghi terkevneri ayrvac",symptoms:["Ankanon bcner","Moxragouyn parr"],actions:["Heroum terrevneri","Bordoyan heghuk"]}, en:{arm:"Grape Leaf Blight",symptoms:["Irregular spots","Gray coating"],actions:["Remove fallen leaves","Bordeaux mixture"]}, ru:{arm:"Листовой ожог винограда",symptoms:["Неправильные пятна","Серый налёт"],actions:["Убрать листья","Бордоская жидкость"]} },
-  "Grape___healthy": { name:"Grape___healthy", hy:{arm:"Xaghogr (Aroghj)",symptoms:["Bnacan kanach","Liarjev hataptyughner"],actions:["Kannavor et","Hamajaksharich parartoutyon"]}, en:{arm:"Grape (Healthy)",symptoms:["Natural green","Plump berries"],actions:["Regular pruning","Balanced fertilization"]}, ru:{arm:"Виноград (Здоровый)",symptoms:["Зелёные листья","Полные ягоды"],actions:["Обрезка","Удобрение"]} },
-  "Orange___Haunglongbing_(Citrus_greening)": { name:"Orange___Haunglongbing_(Citrus_greening)", hy:{arm:"Nrnji HLB",symptoms:["Bcavour dегhn терkevner","Dzevakheghat ptughner"],actions:["Heroum varakvac txerneri","Lvicha demi"]}, en:{arm:"Citrus Greening (HLB)",symptoms:["Blotchy yellow leaves","Deformed fruit"],actions:["Remove infected trees","Control psyllids"]}, ru:{arm:"Хуанлунбин цитрусовых",symptoms:["Пятнистые листья","Деформированные плоды"],actions:["Удалить деревья","Листоблошка"]} },
-  "Peach___Bacterial_spot": { name:"Peach___Bacterial_spot", hy:{arm:"Deghazenui bakterial bcavoutyon",symptoms:["Jralou bcner","Ptoughi cakneri"],actions:["Kayoun sortner","Pughnc himnov"]}, en:{arm:"Peach Bacterial Spot",symptoms:["Water-soaked spots","Fruit cracks"],actions:["Resistant varieties","Copper agents"]}, ru:{arm:"Бакт. пятнистость персика",symptoms:["Водянистые пятна","Трещины"],actions:["Устойчивые сорта","Медь"]} },
-  "Peach___healthy": { name:"Peach___healthy", hy:{arm:"Deghd (Aroghj)",symptoms:["Mug kanach terkevner"],actions:["Amenamayn et","Katilain jroum"]}, en:{arm:"Peach (Healthy)",symptoms:["Dark green leaves"],actions:["Annual pruning","Drip irrigation"]}, ru:{arm:"Персик (Здоровый)",symptoms:["Тёмно-зелёные листья"],actions:["Ежегодная обрезка","Капельный полив"]} },
-  "Pepper,_bell___Bacterial_spot": { name:"Pepper,_bell___Bacterial_spot", hy:{arm:"Pgpeghi bakterial bcavoutyon",symptoms:["Jralou bcner","Ptughi vra koshtoukner"],actions:["Sertificacvac serm","Pughnc fungicidner"]}, en:{arm:"Bell Pepper Bacterial Spot",symptoms:["Water-soaked spots","Fruit bumps"],actions:["Certified seed","Copper fungicides"]}, ru:{arm:"Бакт. пятнистость перца",symptoms:["Водянистые пятна","Бугорки"],actions:["Семена","Медь"]} },
-  "Pepper,_bell___healthy": { name:"Pepper,_bell___healthy", hy:{arm:"Pgpegh (Aroghj)",symptoms:["Mug kanach","Aroghj ptughner"],actions:["Kayan khonavoutyon","Kalcium"]}, en:{arm:"Bell Pepper (Healthy)",symptoms:["Dark green leaves","Plump fruits"],actions:["Stable moisture","Calcium"]}, ru:{arm:"Перец (Здоровый)",symptoms:["Тёмно-зелёные листья","Полные плоды"],actions:["Влажность","Кальций"]} },
-  "Potato___Early_blight": { name:"Potato___Early_blight", hy:{arm:"Kartoghli vaghr choroutyon",symptoms:["Oghakakentron bcner","Sksvoum storerum"],actions:["Cankashrzhanavoroutyon","Mankoceb"]}, en:{arm:"Potato Early Blight",symptoms:["Concentric ring spots","Starts at lower leaves"],actions:["Crop rotation","Mancozeb"]}, ru:{arm:"Ранний ожог картофеля",symptoms:["Концентрические пятна","Начало снизу"],actions:["Севооборот","Манкоцеб"]} },
-  "Potato___Late_blight": { name:"Potato___Late_blight", hy:{arm:"Kartoghhli phytophторoz",symptoms:["Mug jralou bcner","Spitак parr"],actions:["Ridomil Gold","Heroum varakvatneri"]}, en:{arm:"Potato Late Blight",symptoms:["Dark water-soaked spots","White coating"],actions:["Ridomil Gold","Remove infected"]}, ru:{arm:"Фитофтороз картофеля",symptoms:["Тёмные пятна","Белый налёт"],actions:["Ридомил Голд","Удалить"]} },
-  "Potato___healthy": { name:"Potato___healthy", hy:{arm:"Kartoghel (Aroghj)",symptoms:["Mug kanach terkevner","ामgayin palarkner"],actions:["Okouchoum","Jroum"]}, en:{arm:"Potato (Healthy)",symptoms:["Dark green leaves","Firm tubers"],actions:["Hill up","Drip irrigation"]}, ru:{arm:"Картофель (Здоровый)",symptoms:["Тёмно-зелёные листья","Твёрдые клубни"],actions:["Окучивать","Полив"]} },
-  "Raspberry___healthy": { name:"Raspberry___healthy", hy:{arm:"Aznvamori (Aroghj)",symptoms:["Aroghj kanach terkevner"],actions:["Heroum hyn chyougheri","Jroum himt"]}, en:{arm:"Raspberry (Healthy)",symptoms:["Healthy leaves"],actions:["Remove old canes","Water at base"]}, ru:{arm:"Малина (Здоровая)",symptoms:["Здоровые листья"],actions:["Удалять старые побеги","Полив"]} },
-  "Soybean___healthy": { name:"Soybean___healthy", hy:{arm:"Soya (Aroghj)",symptoms:["Miatarr kanach"],actions:["Rhizobium","Optimal hchakcth"]}, en:{arm:"Soybean (Healthy)",symptoms:["Uniform dark green"],actions:["Ensure Rhizobium","Optimal spacing"]}, ru:{arm:"Соя (Здоровая)",symptoms:["Однородный цвет"],actions:["Rhizobium","Расстояние"]} },
-  "Squash___Powdery_mildew": { name:"Squash___Powdery_mildew", hy:{arm:"Ddum alracough",symptoms:["Spitак bcner","Degnoutyon"],actions:["Hchakcth","Topaz, Kvadris"]}, en:{arm:"Squash Powdery Mildew",symptoms:["White spots","Yellowing"],actions:["Spacing","Topaz or Quadris"]}, ru:{arm:"Мучнистая роса тыквенных",symptoms:["Белые пятна","Пожелтение"],actions:["Расстояние","Топаз"]} },
-  "Strawberry___Leaf_scorch": { name:"Strawberry___Leaf_scorch", hy:{arm:"Elaki terkevneri ayrvac",symptoms:["Manousakaguyn bcner","Terkevneri oloroom"],actions:["Kayoun sortner","Captan"]}, en:{arm:"Strawberry Leaf Scorch",symptoms:["Purple spots","Leaf edge curl"],actions:["Resistant varieties","Captan"]}, ru:{arm:"Ожог листьев земляники",symptoms:["Пурпурные пятна","Скручивание"],actions:["Устойчивые сорта","Каптан"]} },
-  "Strawberry___healthy": { name:"Strawberry___healthy", hy:{arm:"Elak (Aroghj)",symptoms:["Kanach ามgayin terkevner","Varr karmir hataptyughner"],actions:["Tsatskoum","Katilain jroum"]}, en:{arm:"Strawberry (Healthy)",symptoms:["Green firm leaves","Bright red berries"],actions:["Mulch","Drip irrigation"]}, ru:{arm:"Земляника (Здоровая)",symptoms:["Зелёные листья","Ягоды"],actions:["Мульчировать","Капельный полив"]} },
-  "Tomato___Bacterial_spot": { name:"Tomato___Bacterial_spot", hy:{arm:"Loliki bakterial bcavoutyon",symptoms:["Jralou bcner","Dегhn halo"],actions:["Sertificacvac serm","Pughnc fungicidner"]}, en:{arm:"Tomato Bacterial Spot",symptoms:["Water-soaked spots","Yellow halo"],actions:["Certified seeds","Copper fungicides"]}, ru:{arm:"Бакт. пятнистость томата",symptoms:["Водянистые пятна","Жёлтый ореол"],actions:["Семена","Медь"]} },
-  "Tomato___Early_blight": { name:"Tomato___Early_blight", hy:{arm:"Loliki vaghr choroutyon",symptoms:["Oghakakentron bcner","Degnoutyon"],actions:["Skor/Ridomil","Tsatskoum"]}, en:{arm:"Tomato Early Blight",symptoms:["Concentric ring spots","Yellowing"],actions:["Skor/Ridomil","Mulch"]}, ru:{arm:"Ранний ожог томата",symptoms:["Концентрические пятна","Желтизна"],actions:["Скор","Мульч"]} },
-  "Tomato___Late_blight": { name:"Tomato___Late_blight", hy:{arm:"Loliki phytophthoroz",symptoms:["Mug bcner","Spitak parr"],actions:["Ridomil Gold","Heroum varakvatneri"]}, en:{arm:"Tomato Late Blight",symptoms:["Dark spots","White coating"],actions:["Ridomil Gold","Remove infected"]}, ru:{arm:"Фитофтороз томата",symptoms:["Тёмные пятна","Белый налёт"],actions:["Ридомил Голд","Удалить"]} },
-  "Tomato___Leaf_Mold": { name:"Tomato___Leaf_Mold", hy:{arm:"Loliki terkevneri borbos",symptoms:["Dегhn bcner","Dzitapteghaguyn parr"],actions:["Orafophokhoutyon","Topaz"]}, en:{arm:"Tomato Leaf Mold",symptoms:["Yellow spots","Velvety coating"],actions:["Ventilation","Topaz"]}, ru:{arm:"Листовая плесень томата",symptoms:["Жёлтые пятна","Бархатистый налёт"],actions:["Вентиляция","Топаз"]} },
-  "Tomato___Septoria_leaf_spot": { name:"Tomato___Septoria_leaf_spot", hy:{arm:"Loliki septorioz",symptoms:["Mur kcentronov bcner","Sev ktecher"],actions:["Makarrooum dasht","Mankoceb"]}, en:{arm:"Tomato Septoria Leaf Spot",symptoms:["Gray-centered spots","Black pycnidia"],actions:["Clean field","Mancozeb"]}, ru:{arm:"Септориоз томата",symptoms:["Пятна с серым центром","Пикниды"],actions:["Очистить поле","Манкоцеб"]} },
-  "Tomato___Spider_mites Two-spotted_spider_mite": { name:"Tomato___Spider_mites Two-spotted_spider_mite", hy:{arm:"Loliki sardostaynatic",symptoms:["Spitак keterikner","Sardostayn"],actions:["Akariccidner","Kensabanakan"]}, en:{arm:"Tomato Spider Mites",symptoms:["White stippling","Webbing"],actions:["Apply acaricides","Predatory mites"]}, ru:{arm:"Паутинный клещ томата",symptoms:["Белые точки","Паутина"],actions:["Акарициды","Хищные клещи"]} },
-  "Tomato___Target_Spot": { name:"Tomato___Target_Spot", hy:{arm:"Loliki tirakhadzev bcavoutyon",symptoms:["Tirakhadzev bcner","Dегhn halo"],actions:["Kvadris/Skor","Jroum arvum"]}, en:{arm:"Tomato Target Spot",symptoms:["Target-like lesions","Yellow halo"],actions:["Quadris/Skor","Root zone irrigation"]}, ru:{arm:"Мишеневидная пятнистость томата",symptoms:["Мишеневидные пятна","Ореол"],actions:["Квадрис/Скор","Полив у корня"]} },
-  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": { name:"Tomato___Tomato_Yellow_Leaf_Curl_Virus", hy:{arm:"Loliki TYLCV",symptoms:["Olortats terkevner","Tchcroutyan dzhkoom"],actions:["Kanoum skavchar","TYLCV kayoun sortner"]}, en:{arm:"Tomato Yellow Leaf Curl Virus",symptoms:["Curled cupped leaves","Stunted growth"],actions:["Control whitefly","TYLCV resistant varieties"]}, ru:{arm:"TYLCV томата",symptoms:["Скрученные листья","Задержка роста"],actions:["Белокрылка","Устойчивые гибриды"]} },
-  "Tomato___Tomato_mosaic_virus": { name:"Tomato___Tomato_mosaic_virus", hy:{arm:"Loliki mozaika",symptoms:["Mozaika bcner","Narudzevat terkevner"],actions:["Akhatahanoutyon gordzikner","Tm gen sortner"]}, en:{arm:"Tomato Mosaic Virus",symptoms:["Mosaic patterns","Narrow leaves"],actions:["Disinfect tools","Tm gene hybrids"]}, ru:{arm:"Вирус мозаики томата",symptoms:["Мозаичные пятна","Узкие листья"],actions:["Дезинфицировать инструменты","Гибриды с геном Tm"]} },
-  "Tomato___healthy": { name:"Tomato___healthy", hy:{arm:"Lolik (Aroghj)",symptoms:["Mug kanach terkevner","Aroghj ptughner"],actions:["Heroum stor terkevneri","Kalcium"]}, en:{arm:"Tomato (Healthy)",symptoms:["Dark green leaves","Plump fruits"],actions:["Remove lower leaves","Calcium for BER prevention"]}, ru:{arm:"Томат (Здоровый)",symptoms:["Тёмно-зелёные листья","Полные плоды"],actions:["Удалять нижние листья","Кальций"]} }
+
+  "Apple___Apple_scab": {
+    name: "Apple___Apple_scab",
+    hy: {
+      arm: "Խնձորենու խայտաբծություն (քոս) (Apple Scab)",
+      symptoms: [
+        "Տերևների վրա մուգ կանաչից մինչև սևավուն թավշյա բծեր",
+        "Տերևների ձևախեղում և վաղաժամ տերևաթափ",
+        "Պտուղների վրա կոշտացած, ճաքճքված հատվածներ"
+      ],
+      actions: [
+        "Բույսերի մնացորդների հեռացում. աշնանը հավաքել և այրել կամ թաղել թափված տերևները (քանի որ հարուցիչը ձմեռում է հենց դրանց մեջ)",
+        "Ֆունգիցիդային մշակում. օգտագործել պաշտպանիչ միջոցներ (օր.՝ Captan, ծծումբ, Mancozeb)՝ հատկապես խոնավ եղանակին",
+        "Ոռոգման կարգավորում. խուսափել տերևների թրջումից և ապահովել սաղարթի օդափոխություն",
+        "Խորհուրդ է տրվում օգտագործել Skor կամ Chorus"
+      ]
+    },
+    en: {
+      arm: "Apple Scab",
+      symptoms: [
+        "Dark olive-green to velvety black spots on leaves",
+        "Leaf deformation and premature leaf drop",
+        "Hardened and cracked areas on fruits"
+      ],
+      actions: [
+        "Remove plant debris: collect and burn or bury fallen leaves in autumn, as the pathogen overwinters in them",
+        "Fungicide treatment: use protective agents (e.g. Captan, sulfur, Mancozeb), especially during wet weather",
+        "Irrigation management: avoid wetting foliage and ensure canopy ventilation",
+        "Recommended fungicides: Skor or Chorus"
+      ]
+    },
+    ru: {
+      arm: "Парша яблони (Apple Scab)",
+      symptoms: [
+        "Тёмно-оливковые до бархатисто-чёрных пятна на листьях",
+        "Деформация листьев и преждевременный листопад",
+        "Затвердевшие и растрескавшиеся участки на плодах"
+      ],
+      actions: [
+        "Удаление растительных остатков: осенью собирать и сжигать или закапывать опавшие листья, так как возбудитель зимует именно в них",
+        "Фунгицидная обработка: применять защитные средства (например, Captan, сера, Mancozeb), особенно в сырую погоду",
+        "Регулировка полива: избегать намокания листьев и обеспечивать вентиляцию кроны",
+        "Рекомендуемые фунгициды: Skor или Chorus"
+      ]
+    }
+  },
+
+  "Apple___Black_rot": {
+    name: "Apple___Black_rot",
+    hy: {
+      arm: "Խնձորի սև փտախտ (Black Rot)",
+      symptoms: [
+        "Մուգ շագանակագույն բծեր տերևների վրա",
+        "Պտղի սևացում և փտում",
+        "Չորացած պտուղներ ծառի վրա"
+      ],
+      actions: [
+        "Հեռացնել վարակված պտուղները",
+        "Էտել հիվանդ ճյուղերը",
+        "Օգտագործել ֆունգիցիդներ (օրինակ՝ Flint, Sovran, Merivon)",
+        "Պահպանել այգու մաքրությունը",
+        "Խորհուրդ է տրվում օգտագործել Captan կամ պղնձի օքսիքլորիդ"
+      ]
+    },
+    en: {
+      arm: "Apple Black Rot",
+      symptoms: [
+        "Dark brown spots on leaves",
+        "Blackening and rotting of fruit",
+        "Dried mummified fruits remaining on the tree"
+      ],
+      actions: [
+        "Remove infected fruits",
+        "Prune diseased branches",
+        "Apply fungicides (e.g. Flint, Sovran, Merivon)",
+        "Maintain orchard cleanliness",
+        "Recommended fungicides: Captan or copper oxychloride"
+      ]
+    },
+    ru: {
+      arm: "Чёрная гниль яблони (Black Rot)",
+      symptoms: [
+        "Тёмно-коричневые пятна на листьях",
+        "Почернение и гниение плодов",
+        "Засохшие мумифицированные плоды на дереве"
+      ],
+      actions: [
+        "Удалить заражённые плоды",
+        "Обрезать больные ветви",
+        "Применять фунгициды (например, Flint, Sovran, Merivon)",
+        "Поддерживать чистоту сада",
+        "Рекомендуемые фунгициды: Captan или медный оксихлорид"
+      ]
+    }
+  },
+
+  "Apple___Cedar_apple_rust": {
+    name: "Apple___Cedar_apple_rust",
+    hy: {
+      arm: "Խնձորենու ժանգ (Cedar Apple Rust)",
+      symptoms: [
+        "Դեղին-նարնջագույն կլոր բծեր տերևների վրա",
+        "Տերևների վաղ անկում",
+        "Գիհի ծառերի վրա ժելատինանման գոյացություններ"
+      ],
+      actions: [
+        "Գարնանը ուժեղ ջրի շիթով հեռացնել գիհու վրայի նարնջագույն գոյացությունները՝ սպորների տարածումը կանխելու համար",
+        "Կիրառել ֆոսֆոր-կալիումական պարարտանյութեր՝ տերևների դիմադրողականությունը բարձրացնելու և սնկի թափանցումը դժվարացնելու համար",
+        "Բացառել անձրևացումը (տերևների թրջումը) և էտի միջոցով ապահովել սաղարթի արագ չորացումը",
+        "Խորհուրդ է տրվում օգտագործել Mancozeb կամ Bayleton"
+      ]
+    },
+    en: {
+      arm: "Cedar Apple Rust",
+      symptoms: [
+        "Yellow-orange round spots on leaves",
+        "Early leaf drop",
+        "Gelatinous formations on juniper trees"
+      ],
+      actions: [
+        "In spring, remove orange gelatinous formations from juniper with a strong water jet to prevent spore spread",
+        "Apply phosphorus-potassium fertilizers to increase leaf resistance and make it harder for the fungus to penetrate",
+        "Avoid overhead irrigation (wetting leaves) and ensure rapid drying of foliage through pruning",
+        "Recommended fungicides: Mancozeb or Bayleton"
+      ]
+    },
+    ru: {
+      arm: "Ржавчина яблони (Cedar Apple Rust)",
+      symptoms: [
+        "Жёлто-оранжевые круглые пятна на листьях",
+        "Раннее опадание листьев",
+        "Желеобразные образования на можжевельнике"
+      ],
+      actions: [
+        "Весной сильной струёй воды удалить оранжевые образования с можжевельника, чтобы предотвратить распространение спор",
+        "Применять фосфорно-калийные удобрения для повышения устойчивости листьев и затруднения проникновения гриба",
+        "Исключить дождевание (намокание листьев) и обеспечить быстрое высыхание кроны с помощью обрезки",
+        "Рекомендуемые фунгициды: Mancozeb или Bayleton"
+      ]
+    }
+  },
+
+  "Apple___healthy": {
+    name: "Apple___healthy",
+    hy: {
+      arm: "Խնձոր (Առողջ)",
+      symptoms: [
+        "Տերևները համաչափ կանաչ են, առանց բծերի, դեղնածության կամ ձևախեղումների",
+        "Մակերեսը հարթ է, առանց քոսի կամ փտած օջախների"
+      ],
+      actions: [
+        "Պահպանել կանոնավոր ջրումը՝ խուսափելով արմատների գերխոնավացումից կամ տերևների թրջումից",
+        "Պարբերաբար զննել սաղարթը՝ վնասատուների կամ հիվանդությունների առաջին նշանները վաղ փուլում հայտնաբերելու համար",
+        "Կատարել հավասարակշռված պարարտացում՝ բույսի բնական իմունիտետը պահպանելու համար",
+        "Խորհուրդ է տրվում կանխարգելիչ բուժումներ պղնձի հիմքով պրեպարատներով վաղ գարնանը"
+      ]
+    },
+    en: {
+      arm: "Apple (Healthy)",
+      symptoms: [
+        "Leaves are uniformly green, without spots, yellowing or deformations",
+        "Surface is smooth, without scab lesions or rotting areas"
+      ],
+      actions: [
+        "Maintain regular watering, avoiding waterlogging of roots or wetting of leaves",
+        "Periodically inspect the foliage to detect early signs of pests or diseases",
+        "Apply balanced fertilization to maintain the plant's natural immunity",
+        "Recommended: preventive treatments with copper-based preparations in early spring"
+      ]
+    },
+    ru: {
+      arm: "Яблоня (Здоровая)",
+      symptoms: [
+        "Листья равномерно зелёные, без пятен, пожелтения или деформаций",
+        "Поверхность гладкая, без очагов парши или гнили"
+      ],
+      actions: [
+        "Поддерживать регулярный полив, избегая переувлажнения корней или намокания листьев",
+        "Периодически осматривать крону для раннего обнаружения признаков вредителей или болезней",
+        "Проводить сбалансированные подкормки для поддержания естественного иммунитета растения",
+        "Рекомендуется: профилактические обработки препаратами на основе меди ранней весной"
+      ]
+    }
+  },
+
+  "Blueberry___healthy": {
+    name: "Blueberry___healthy",
+    hy: {
+      arm: "Հապալաս (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն հարթ մակերես, հագեցած մուգ կանաչ գույն և բնական փայլ",
+        "Նկատվում է երիտասարդ ընձյուղների բնականոն զարգացում և առողջ բողբոջների առկայություն"
+      ],
+      actions: [
+        "Պարբերաբար ստուգել և պահպանել հողի ցածր թթվայնությունը (pH 4.5–5.5), որն անհրաժեշտ է սննդանյութերի ճիշտ յուրացման համար",
+        "Ապահովել կանոնավոր ջրում",
+        "Օգտագործել հատուկ հապալասի համար նախատեսված պարարտանյութեր (առանց քլորի), որոնք չեն բարձրացնում հողի pH-ը"
+      ]
+    },
+    en: {
+      arm: "Blueberry (Healthy)",
+      symptoms: [
+        "Leaves have a smooth surface, rich dark green color and natural shine",
+        "Normal development of young shoots and presence of healthy buds is observed"
+      ],
+      actions: [
+        "Regularly check and maintain low soil acidity (pH 4.5–5.5), which is necessary for proper nutrient absorption",
+        "Ensure regular watering",
+        "Use fertilizers specifically designed for blueberries (chlorine-free) that do not raise soil pH"
+      ]
+    },
+    ru: {
+      arm: "Черника (Здоровая)",
+      symptoms: [
+        "Листья имеют гладкую поверхность, насыщенный тёмно-зелёный цвет и естественный блеск",
+        "Наблюдается нормальное развитие молодых побегов и наличие здоровых почек"
+      ],
+      actions: [
+        "Регулярно проверять и поддерживать низкую кислотность почвы (pH 4.5–5.5), необходимую для правильного усвоения питательных веществ",
+        "Обеспечивать регулярный полив",
+        "Использовать удобрения, специально предназначенные для черники (без хлора), не повышающие pH почвы"
+      ]
+    }
+  },
+
+  "Cherry___Powdery_mildew": {
+    name: "Cherry___Powdery_mildew",
+    hy: {
+      arm: "Կեռասենու ալրացող (Cherry Powdery Mildew)",
+      symptoms: [
+        "Սպիտակ փոշենման փառ տերևների ստորին մակերեսին, որն աստիճանաբար տարածվում է ամբողջ տերևի և նոր ընձյուղների վրա",
+        "Տերևների ոլորում դեպի վեր և ձևախեղում",
+        "Պտուղների վնասում. հազվադեպ, բայց կարող է հայտնվել սպիտակ փառ նաև պտուղների վրա՝ նվազեցնելով դրանց ապրանքային տեսքը"
+      ],
+      actions: [
+        "Անհապաղ հեռացնել արմատային մատղաշները, որոնք վարակի հիմնական օջախներն են",
+        "Հեռացնել բոլոր վարակված տերևներն ու բողբոջները, ինչպես նաև բացառել տերևների թրջումը ջրելիս",
+        "Բույսի պաշտպանության համար կիրառել ծծումբ պարունակող կոնտակտային միջոցներ կամ ժամանակակից համակարգային ֆունգիցիդներ, ինչպիսիք են Merivon-ը կամ Luna Sensation-ը, որոնք ապահովում են երկարատև բուժիչ ազդեցություն",
+        "Խուսափել նույն դասի ֆունգիցիդը հաջորդաբար 2 անգամից ավելի օգտագործելուց",
+        "Խորհուրդ է տրվում օգտագործել Topaz կամ Kumulus (ծծումբ)"
+      ]
+    },
+    en: {
+      arm: "Cherry Powdery Mildew",
+      symptoms: [
+        "White powdery coating on the lower leaf surface, gradually spreading to the entire leaf and new shoots",
+        "Upward curling and deformation of leaves",
+        "Fruit damage: rarely, but white coating may also appear on fruits, reducing their market appearance"
+      ],
+      actions: [
+        "Immediately remove root suckers, which are the main sources of infection",
+        "Remove all infected leaves and buds, and avoid wetting leaves during irrigation",
+        "Apply sulfur-based contact agents or modern systemic fungicides such as Merivon or Luna Sensation, which provide long-lasting curative effect",
+        "Avoid using fungicides of the same class more than 2 times in a row",
+        "Recommended fungicides: Topaz or Kumulus (sulfur)"
+      ]
+    },
+    ru: {
+      arm: "Мучнистая роса вишни (Cherry Powdery Mildew)",
+      symptoms: [
+        "Белый мучнистый налёт на нижней поверхности листьев, постепенно распространяющийся на весь лист и новые побеги",
+        "Скручивание листьев вверх и их деформация",
+        "Повреждение плодов: редко, но белый налёт может появляться и на плодах, снижая их товарный вид"
+      ],
+      actions: [
+        "Немедленно удалить корневую поросль, которая является главным очагом инфекции",
+        "Удалить все заражённые листья и почки, а также исключить намокание листьев при поливе",
+        "Для защиты растения применять контактные средства на основе серы или современные системные фунгициды, такие как Merivon или Luna Sensation, обеспечивающие длительный лечебный эффект",
+        "Избегать использования фунгицидов одного класса более 2 раз подряд",
+        "Рекомендуемые фунгициды: Topaz или Kumulus (сера)"
+      ]
+    }
+  },
+
+  "Cherry___healthy": {
+    name: "Cherry___healthy",
+    hy: {
+      arm: "Բալենի / Կեռասենի (Առողջ)",
+      symptoms: [
+        "Տերևները հարթ են, փայլուն, ունեն առողջ մուգ կանաչ գույն՝ առանց սպիտակ փառի կամ բծերի",
+        "Պտուղները լիարժեք զարգացած են, հարթ մակերեսով և բնորոշ գունավորմամբ"
+      ],
+      actions: [
+        "Պարբերաբար կատարել սանիտարական էտ՝ ապահովելով լույսի թափանցումը և օդափոխությունը թփի ներսում",
+        "Պարբերաբար ստուգել տերևների ստորին մակերեսը՝ ալրացողի կամ այլ սնկային հիվանդությունների վաղ հայտնաբերման համար",
+        "Խուսափել երեկոյան ժամերին տերևների թրջումից, որպեսզի չստեղծվի նպաստավոր միջավայր սնկերի զարգացման համար"
+      ]
+    },
+    en: {
+      arm: "Cherry (Healthy)",
+      symptoms: [
+        "Leaves are smooth, shiny, with healthy dark green color — no white coating or spots",
+        "Fruits are fully developed with smooth surface and characteristic coloring"
+      ],
+      actions: [
+        "Regularly perform sanitary pruning to ensure light penetration and ventilation inside the canopy",
+        "Periodically check the underside of leaves for early detection of powdery mildew or other fungal diseases",
+        "Avoid wetting leaves in the evening hours to prevent creating favorable conditions for fungal development"
+      ]
+    },
+    ru: {
+      arm: "Вишня / Черешня (Здоровая)",
+      symptoms: [
+        "Листья гладкие, блестящие, здорового тёмно-зелёного цвета — без белого налёта или пятен",
+        "Плоды полностью развиты, с гладкой поверхностью и характерной окраской"
+      ],
+      actions: [
+        "Регулярно проводить санитарную обрезку для обеспечения проникновения света и вентиляции внутри кроны",
+        "Периодически осматривать нижнюю поверхность листьев для раннего обнаружения мучнистой росы или других грибковых болезней",
+        "Избегать намокания листьев в вечернее время, чтобы не создавать благоприятных условий для развития грибков"
+      ]
+    }
+  },
+
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+    name: "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+    hy: {
+      arm: "Եգիպտացորենի մոխրագույն բծավորություն (Cercospora Leaf Spot)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են երկարավուն, մոխրագույն կամ դարչնագույն բծեր, որոնք սահմանափակված են տերևի ջղերով (ստեղծելով ուղղանկյունաձև տեսք)",
+        "Ուժեղ վարակի դեպքում բծերը միախառնվում են՝ առաջացնելով տերևների զանգվածային չորացում և «այրված» տեսք",
+        "Տերևների վնասման պատճառով խաթարվում է ֆոտոսինթեզը, ինչը հանգեցնում է հասկերի թերզարգացման"
+      ],
+      actions: [
+        "Խուսափել նույն տեղում անընդմեջ եգիպտացորեն ցանելուց. անհրաժեշտ է առնվազն 1-2 տարի ընդմիջում տալ կամ փոխել մշակաբույսը",
+        "Բերքահավաքից հետո վերացնել կամ խորը վարել հողը, որպեսզի վարակված մնացորդները քայքայվեն, քանի որ սունկը ձմեռում է դրանց մեջ",
+        "Օգտագործել տվյալ հիվանդության նկատմամբ գենետիկորեն կայուն եգիպտացորենի սորտեր",
+        "Վարակի վաղ փուլերում կիրառել սիստեմային ֆունգիցիդներ (օր.՝ ստրոբիլուրինների կամ տրիազոլների խմբից)",
+        "Խորհուրդ է տրվում օգտագործել Amistar Extra կամ Retro"
+      ]
+    },
+    en: {
+      arm: "Corn Gray Leaf Spot (Cercospora Leaf Spot)",
+      symptoms: [
+        "Elongated gray or brown spots appear on leaves, restricted by leaf veins (creating a rectangular appearance)",
+        "In severe infection, spots merge causing widespread leaf drying and a 'burned' appearance",
+        "Damage to leaves disrupts photosynthesis, leading to underdevelopment of ears"
+      ],
+      actions: [
+        "Avoid continuous corn planting in the same location; a break of at least 1-2 years or crop rotation is necessary",
+        "After harvest, remove or deeply plow the soil so that infected residues decompose, as the fungus overwinters in them",
+        "Use corn varieties that are genetically resistant to this disease",
+        "In early stages of infection, apply systemic fungicides (e.g. from the strobilurin or triazole groups)",
+        "Recommended fungicides: Amistar Extra or Retro"
+      ]
+    },
+    ru: {
+      arm: "Серая пятнистость кукурузы (Cercospora Leaf Spot)",
+      symptoms: [
+        "На листьях появляются удлинённые серые или коричневые пятна, ограниченные жилками листа (создающие прямоугольный вид)",
+        "При сильном заражении пятна сливаются, вызывая массовое засыхание листьев и вид «обожжённых»",
+        "Повреждение листьев нарушает фотосинтез, что приводит к недоразвитию початков"
+      ],
+      actions: [
+        "Избегать непрерывного посева кукурузы на одном месте; необходим перерыв не менее 1-2 лет или смена культуры",
+        "После уборки урожая уничтожить или глубоко заделать в почву заражённые остатки, так как гриб зимует в них",
+        "Использовать сорта кукурузы, генетически устойчивые к данному заболеванию",
+        "На ранних стадиях заражения применять системные фунгициды (например, из группы стробилуринов или триазолов)",
+        "Рекомендуемые фунгициды: Amistar Extra или Retro"
+      ]
+    }
+  },
+
+  "Corn_(maize)___Common_rust_": {
+    name: "Corn_(maize)___Common_rust_",
+    hy: {
+      arm: "Եգիպտացորենի ժանգ (Common Rust)",
+      symptoms: [
+        "Տերևի երկու կողմում հայտնվում են մանր, երկարավուն, դարչնագույն կամ նարնջագույն բշտիկներ, որոնք պարունակում են փոշենման սպորներ",
+        "Վարակի զարգացման հետ բշտիկները պատռվում են՝ արձակելով սպորները (ձեռքով դիպչելիս մնում է ժանգագույն հետք)",
+        "Ուժեղ վարակվածության դեպքում տերևները դեղնում են և վաղաժամ չորանում, ինչը նվազեցնում է հատիկի լցվածությունը"
+      ],
+      actions: [
+        "Պայքարի ամենաարդյունավետ միջոցը ընտրելն է տվյալ տարածաշրջանի համար նախատեսված կայուն սորտեր",
+        "Խուսափել ուշ ցանքից, քանի որ ուշ զարգացող բույսերն ավելի խոցելի են սպորների զանգվածային տարածման շրջանում",
+        "Եթե ախտանիշները հայտնվում են նախքան փոշոտման փուլը, կիրառել ստրոբիլուրինների կամ տրիազոլների խմբի ֆունգիցիդներ",
+        "Ապահովել բույսերի միջև բավարար հեռավորություն՝ օդափոխությունը բարելավելու և տերևների մակերեսին խոնավության տևողությունը նվազեցնելու համար",
+        "Խորհուրդ է տրվում օգտագործել Tilt կամ Falcon"
+      ]
+    },
+    en: {
+      arm: "Corn Common Rust",
+      symptoms: [
+        "Small elongated brown or orange pustules appear on both sides of leaves, containing powdery spores",
+        "As infection develops, pustules rupture releasing spores (a rust-colored trace remains when touched)",
+        "In severe infection, leaves yellow and dry prematurely, reducing grain fill"
+      ],
+      actions: [
+        "The most effective control measure is selecting resistant varieties adapted to the region",
+        "Avoid late planting, as late-developing plants are more vulnerable during periods of mass spore spread",
+        "If symptoms appear before the pollination stage, apply fungicides from the strobilurin or triazole groups",
+        "Ensure adequate spacing between plants to improve airflow and reduce the duration of moisture on leaf surfaces",
+        "Recommended fungicides: Tilt or Falcon"
+      ]
+    },
+    ru: {
+      arm: "Обыкновенная ржавчина кукурузы (Common Rust)",
+      symptoms: [
+        "На обеих сторонах листьев появляются мелкие удлинённые коричневые или оранжевые пустулы, содержащие порошкообразные споры",
+        "По мере развития инфекции пустулы разрываются, высвобождая споры (при прикосновении рукой остаётся ржавый след)",
+        "При сильном заражении листья желтеют и преждевременно засыхают, что снижает наполненность зерна"
+      ],
+      actions: [
+        "Наиболее эффективная мера борьбы — выбор устойчивых сортов, адаптированных к данному региону",
+        "Избегать позднего сева, так как позднеразвивающиеся растения более уязвимы в период массового распространения спор",
+        "Если симптомы появляются до фазы опыления, применять фунгициды из группы стробилуринов или триазолов",
+        "Обеспечить достаточное расстояние между растениями для улучшения вентиляции и снижения продолжительности увлажнения поверхности листьев",
+        "Рекомендуемые фунгициды: Tilt или Falcon"
+      ]
+    }
+  },
+
+  "Corn_(maize)___Northern_Leaf_Blight": {
+    name: "Corn_(maize)___Northern_Leaf_Blight",
+    hy: {
+      arm: "Եգիպտացորենի հյուսիսային տերևային այրվածք (Northern Leaf Blight)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են երկարավուն (3-ից մինչև 15 սմ), մոխրագույն-կանաչավուն կամ դարչնագույն բծեր, որոնք ունեն սիգարի կամ իլիկի ձև",
+        "Վարակի տարածման հետ բծերը միախառնվում են՝ առաջացնելով տերևների ամբողջական այրվածք և մահ",
+        "Խոնավ պայմաններում բծերի կենտրոնական մասում կարող է հայտնվել փոշենման սնկային փառ (սպորներ)"
+      ],
+      actions: [
+        "Օգտագործել սորտեր, որոնք ունեն Ht գեներ՝ այս կոնկրետ սնկի դեմ պայքարելու համար",
+        "Բերքահավաքից հետո կատարել հողի խորը վար՝ բույսերի մնացորդները հողի տակ թաղելու և սնկի կենսաշրջանը խզելու համար",
+        "Սիստեմային ֆունգիցիդներով (օր.՝ տրիազոլներ կամ ստրոբիլուրիններ) մշակումը արդյունավետ է, եթե կատարվում է հիվանդության վաղ փուլում՝ մինչև փոշոտումը",
+        "Խուսափել խիտ ցանքից՝ բույսերի արագ չորացումն ապահովելու համար",
+        "Խորհուրդ է տրվում օգտագործել Propiconazole պարունակող ֆունգիցիդներ"
+      ]
+    },
+    en: {
+      arm: "Corn Northern Leaf Blight",
+      symptoms: [
+        "Elongated (3 to 15 cm) gray-green or brown spots appear on leaves, shaped like a cigar or spindle",
+        "As infection spreads, spots merge causing complete leaf blight and death",
+        "In humid conditions, a powdery fungal coating (spores) may appear in the central part of the spots"
+      ],
+      actions: [
+        "Use varieties that carry Ht genes to combat this specific fungus",
+        "After harvest, perform deep plowing to bury plant residues and break the fungal life cycle",
+        "Treatment with systemic fungicides (e.g. triazoles or strobilurins) is effective if carried out in the early stage of the disease, before pollination",
+        "Avoid dense planting to ensure rapid drying of plants",
+        "Recommended fungicides: Propiconazole-containing fungicides"
+      ]
+    },
+    ru: {
+      arm: "Северный ожог листьев кукурузы (Northern Leaf Blight)",
+      symptoms: [
+        "На листьях появляются удлинённые (от 3 до 15 см) серовато-зелёные или коричневые пятна в форме сигары или веретена",
+        "По мере распространения инфекции пятна сливаются, вызывая полный ожог и гибель листьев",
+        "Во влажных условиях в центральной части пятен может появляться порошкообразный грибковый налёт (споры)"
+      ],
+      actions: [
+        "Использовать сорта, несущие гены Ht, для борьбы с данным конкретным грибком",
+        "После уборки урожая провести глубокую вспашку для заделки растительных остатков и прерывания жизненного цикла гриба",
+        "Обработка системными фунгицидами (например, триазолами или стробилуринами) эффективна при проведении на ранней стадии болезни, до опыления",
+        "Избегать загущённого посева для обеспечения быстрого высыхания растений",
+        "Рекомендуемые фунгициды: фунгициды, содержащие Propiconazole"
+      ]
+    }
+  },
+
+  "Corn_(maize)___healthy": {
+    name: "Corn_(maize)___healthy",
+    hy: {
+      arm: "Եգիպտացորեն (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն միատարր մուգ կանաչ գույն՝ առանց դեղնածության կամ այրվածքների նշանների",
+        "Չկան ուղղանկյունաձև բծեր, սիգարաձև այրվածքներ կամ ժանգագույն բշտիկներ",
+        "Ցողունը ամուր է, իսկ տերևները՝ առաձգական և լիարժեք զարգացած"
+      ],
+      actions: [
+        "Ապահովել բավարար քանակությամբ ազոտ, ֆոսֆոր և կալիում, քանի որ սննդանյութերի պակասը կարող է թուլացնել բույսի իմունիտետը",
+        "Խուսափել ջրային սթրեսից (չորացումից կամ գերխոնավացումից), որը կարող է նախապայման դառնալ սնկային հիվանդությունների համար",
+        "Շարունակել մոլախոտերի դեմ պայքարը, քանի որ դրանք կարող են հանդիսանալ վնասատուների և հիվանդությունների միջանկյալ տերեր",
+        "Խորհուրդ է տրվում օգտագործել ազոտական պարարտանյութեր ճիշտ չափաբաժնով"
+      ]
+    },
+    en: {
+      arm: "Corn (Healthy)",
+      symptoms: [
+        "Leaves have uniform dark green color — no signs of yellowing or blight",
+        "No rectangular spots, cigar-shaped lesions or rust-colored pustules",
+        "Stem is firm and leaves are elastic and fully developed"
+      ],
+      actions: [
+        "Ensure adequate amounts of nitrogen, phosphorus and potassium, as nutrient deficiency can weaken the plant's immunity",
+        "Avoid water stress (drought or overwatering), which can become a precondition for fungal diseases",
+        "Continue weed control, as weeds can serve as intermediate hosts for pests and diseases",
+        "Recommended: nitrogen fertilizers applied at the correct dosage"
+      ]
+    },
+    ru: {
+      arm: "Кукуруза (Здоровая)",
+      symptoms: [
+        "Листья имеют однородный тёмно-зелёный цвет — без признаков пожелтения или ожогов",
+        "Нет прямоугольных пятен, сигарообразных ожогов или ржавых пустул",
+        "Стебель крепкий, а листья эластичные и полностью развитые"
+      ],
+      actions: [
+        "Обеспечить достаточное количество азота, фосфора и калия, так как дефицит питательных веществ может ослабить иммунитет растения",
+        "Избегать водного стресса (засухи или переувлажнения), который может стать предпосылкой для грибковых заболеваний",
+        "Продолжать борьбу с сорняками, так как они могут служить промежуточными хозяевами для вредителей и болезней",
+        "Рекомендуется: азотные удобрения в правильной дозировке"
+      ]
+    }
+  },
+
+  "Grape___Black_rot": {
+    name: "Grape___Black_rot",
+    hy: {
+      arm: "Խաղողի սև փտում (Black Rot)",
+      symptoms: [
+        "Կլորավուն, բաց դարչնագույն բծեր, որոնց կենտրոնում երևում են սև կետիկներ (սնկի սպորներ)",
+        "Վարակված հատապտուղները սկզբում դառնում են բաց գորշ, ապա արագորեն չորանում են, սևանում և վերածվում կարծրացած չորուկների",
+        "Երկարավուն սև հետքեր կամ խոցեր նորաթուխ կանաչ շիվերի վրա"
+      ],
+      actions: [
+        "Ձմռանը կամ վաղ գարնանը հավաքել և ոչնչացնել թփի վրա մնացած կամ գետնին թափված բոլոր չորացած հատապտուղները, քանի որ դրանք վարակի հիմնական աղբյուրն են",
+        "Կատարել ճիշտ էտ և կանաչ հատումներ՝ թփի ներսում օդի շրջանառությունն ապահովելու և խոնավությունը նվազեցնելու համար",
+        "Կիրառել պաշտպանիչ միջոցներ (օր.՝ Mancozeb, Myclobutanil կամ Flint)՝ սկսած այն փուլից, երբ նոր ընձյուղները հասնում են 10-20 սմ-ի",
+        "Հեռացնել մոլախոտերը թփերի տակից, որպեսզի նվազեցվի գետնից բարձրացող խոնավությունը",
+        "Խորհուրդ է տրվում օգտագործել Mancozeb կամ Quadris"
+      ]
+    },
+    en: {
+      arm: "Grape Black Rot",
+      symptoms: [
+        "Circular, light brown spots with black dots (fungal spores) visible in the center",
+        "Infected berries first turn light gray, then quickly dry out, blacken and turn into hardened mummies",
+        "Elongated black marks or lesions on newly emerged green shoots"
+      ],
+      actions: [
+        "In winter or early spring, collect and destroy all dried berries remaining on the vine or fallen on the ground, as they are the main source of infection",
+        "Perform proper pruning and green trimming to ensure air circulation inside the canopy and reduce moisture",
+        "Apply protective agents (e.g. Mancozeb, Myclobutanil or Flint) starting from the stage when new shoots reach 10-20 cm",
+        "Remove weeds from under the vines to reduce moisture rising from the ground",
+        "Recommended fungicides: Mancozeb or Quadris"
+      ]
+    },
+    ru: {
+      arm: "Чёрная гниль винограда (Black Rot)",
+      symptoms: [
+        "Округлые светло-коричневые пятна с чёрными точками (споры гриба) в центре",
+        "Заражённые ягоды сначала светлеют, затем быстро засыхают, чернеют и превращаются в затвердевшие мумии",
+        "Удлинённые чёрные следы или язвы на молодых зелёных побегах"
+      ],
+      actions: [
+        "Зимой или ранней весной собрать и уничтожить все засохшие ягоды, оставшиеся на лозе или упавшие на землю, так как они являются главным источником инфекции",
+        "Проводить правильную обрезку и зелёные операции для обеспечения циркуляции воздуха внутри куста и снижения влажности",
+        "Применять защитные средства (например, Mancozeb, Myclobutanil или Flint) начиная с фазы, когда новые побеги достигают 10-20 см",
+        "Удалять сорняки из-под кустов, чтобы снизить влажность, поднимающуюся от земли",
+        "Рекомендуемые фунгициды: Mancozeb или Quadris"
+      ]
+    }
+  },
+
+  "Grape___Esca_(Black_Measles)": {
+    name: "Grape___Esca_(Black_Measles)",
+    hy: {
+      arm: "Խաղողի Էսկա (Black Measles)",
+      symptoms: [
+        "Տերևի ջղերի միջև հայտնվում են դեղնավուն կամ կարմրաշագանակագույն շերտեր, որոնք տերևին տալիս են վագրի մորթու նմանվող տեսք. եզրերը սովորաբար մնում են կանաչ կամ դառնում են այրված",
+        "Հատապտուղների վրա հայտնվում են մանր, մուգ մանուշակագույն կամ սև բծեր (այստեղից էլ անվանումը՝ Black Measles - սև կարմրուկ). ուժեղ վարակված պտուղները կարող են ճաքճքել կամ չորանալ"
+      ],
+      actions: [
+        "Խուսափել խոշոր էտերից անձրևոտ եղանակին, քանի որ սնկի սպորները թափանցում են թփի մեջ հենց թարմ կտրվածքների միջոցով",
+        "Էտից անմիջապես հետո մեծ կտրվածքները պետք է մշակել հատուկ մածուկներով կամ ֆունգիցիդներով՝ կանխելու սնկի մուտքը բնափայտի մեջ",
+        "Չորացած կամ վնասված թփերը հեռացնել այգուց և այրել. եթե թուփը մասնակի է վնասված, էտել մինչև առողջ բնափայտի շերտը",
+        "Յուրաքանչյուր թուփն էտելուց հետո ախտահանել մկրատը կամ սղոցը սպիրտով կամ քլորի թույլ լուծույթով, որպեսզի հիվանդությունը չտարածվի առողջ բույսերի վրա",
+        "Խորհուրդ է տրվում օգտագործել պղնձի խտանյութով ֆունգիցիդներ"
+      ]
+    },
+    en: {
+      arm: "Grape Esca (Black Measles)",
+      symptoms: [
+        "Yellowish or reddish-brown stripes appear between leaf veins, giving the leaf a tiger-stripe appearance; edges usually remain green or become scorched",
+        "Small dark purple or black spots appear on berries (hence the name Black Measles); severely infected fruits may crack or dry out"
+      ],
+      actions: [
+        "Avoid large pruning cuts in rainy weather, as fungal spores enter the vine through fresh cuts",
+        "Immediately after pruning, treat large cuts with special sealants or fungicides to prevent fungal entry into the wood",
+        "Remove dried or damaged vines from the vineyard and burn them; if the vine is partially damaged, prune back to healthy wood",
+        "After pruning each vine, disinfect the scissors or saw with alcohol or dilute chlorine solution to prevent spreading the disease to healthy plants",
+        "Recommended fungicides: copper concentrate-based fungicides"
+      ]
+    },
+    ru: {
+      arm: "Эска винограда (Black Measles)",
+      symptoms: [
+        "Между жилками листьев появляются желтоватые или красновато-коричневые полосы, придающие листу вид тигровой шкуры; края обычно остаются зелёными или становятся обожжёнными",
+        "На ягодах появляются мелкие тёмно-фиолетовые или чёрные пятна (отсюда название Black Measles — чёрная корь); сильно заражённые плоды могут трескаться или засыхать"
+      ],
+      actions: [
+        "Избегать крупных срезов при обрезке в дождливую погоду, так как споры гриба проникают в лозу именно через свежие срезы",
+        "Сразу после обрезки обработать крупные срезы специальными замазками или фунгицидами, чтобы предотвратить проникновение гриба в древесину",
+        "Удалить засохшие или повреждённые кусты из виноградника и сжечь; если куст частично повреждён, обрезать до здорового слоя древесины",
+        "После обрезки каждого куста дезинфицировать ножницы или пилу спиртом или слабым раствором хлора, чтобы болезнь не распространялась на здоровые растения",
+        "Рекомендуемые фунгициды: фунгициды на основе концентрата меди"
+      ]
+    }
+  },
+
+  "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
+    name: "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+    hy: {
+      arm: "Խաղողի տերևների այրվածք (Isariopsis Leaf Spot)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են անկանոն ձևի, մուգ դարչնագույն կամ կարմրավուն բծեր, որոնք սկսվում են եզրերից և տարածվում դեպի կենտրոն",
+        "Տերևի ստորին մակերեսին, բծերի տեղում, խոնավ եղանակին առաջանում է մոխրագույն կամ սև փոշենման փառ (սնկի սպորներ)",
+        "Ուժեղ վարակված տերևները չորանում են և թափվում, ինչը խաթարում է շաքարի կուտակումը պտուղների մեջ և թփի նախապատրաստումը ձմռանը"
+      ],
+      actions: [
+        "Բերքահավաքից հետո հավաքել և հեռացնել (կամ այրել) բոլոր թափված տերևները, քանի որ սունկը ձմեռում է հենց դրանց վրա",
+        "Կանոնավոր էտի միջոցով ապահովել թփի լավ լուսավորվածությունը և օդի շրջանառությունը",
+        "Կիրառել պղինձ պարունակող պատրաստուկներ (օր.՝ Bordeaux mixture) կամ սիստեմային ֆունգիցիդներ. մշակումը հատկապես կարևոր է վեգետացիայի երկրորդ կեսին, եթե եղանակը խոնավ է",
+        "Խուսափել ազոտի ավելցուկից, որը հանգեցնում է սաղարթի գերաճի և ստեղծում է նպաստավոր միջավայր հիվանդության համար",
+        "Խորհուրդ է տրվում օգտագործել Bordeaux mixture կամ Topaz"
+      ]
+    },
+    en: {
+      arm: "Grape Leaf Blight (Isariopsis Leaf Spot)",
+      symptoms: [
+        "Irregular-shaped dark brown or reddish spots appear on leaves, starting from the edges and spreading toward the center",
+        "On the lower leaf surface, in the area of spots, a gray or black powdery coating (fungal spores) forms in humid weather",
+        "Heavily infected leaves dry out and fall, disrupting sugar accumulation in fruits and the vine's preparation for winter"
+      ],
+      actions: [
+        "After harvest, collect and remove (or burn) all fallen leaves, as the fungus overwinters on them",
+        "Ensure good illumination and air circulation of the vine through regular pruning",
+        "Apply copper-containing preparations (e.g. Bordeaux mixture) or systemic fungicides; treatment is especially important in the second half of the growing season if the weather is humid",
+        "Avoid excess nitrogen, which leads to excessive foliage growth and creates favorable conditions for the disease",
+        "Recommended fungicides: Bordeaux mixture or Topaz"
+      ]
+    },
+    ru: {
+      arm: "Листовой ожог винограда (Isariopsis Leaf Spot)",
+      symptoms: [
+        "На листьях появляются пятна неправильной формы тёмно-коричневого или красноватого цвета, начинающиеся с краёв и распространяющиеся к центру",
+        "На нижней поверхности листа в местах пятен во влажную погоду образуется серый или чёрный порошкообразный налёт (споры гриба)",
+        "Сильно заражённые листья засыхают и опадают, нарушая накопление сахара в плодах и подготовку лозы к зиме"
+      ],
+      actions: [
+        "После уборки урожая собрать и удалить (или сжечь) все опавшие листья, так как гриб зимует именно на них",
+        "Обеспечить хорошую освещённость и воздухообмен куста посредством регулярной обрезки",
+        "Применять медьсодержащие препараты (например, Bordeaux mixture) или системные фунгициды; обработка особенно важна во второй половине вегетации при влажной погоде",
+        "Избегать избытка азота, который приводит к чрезмерному росту листвы и создаёт благоприятные условия для болезни",
+        "Рекомендуемые фунгициды: Bordeaux mixture или Topaz"
+      ]
+    }
+  },
+
+  "Grape___healthy": {
+    name: "Grape___healthy",
+    hy: {
+      arm: "Խաղող (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն բնական կանաչ գույն, հարթ մակերես՝ առանց նախշերի կամ դարչնագույն բծերի",
+        "Հատապտուղները լիարժեք են, առանց սև կետիկների կամ չորացած (կարծրացած) պտուղների",
+        "Կանաչ շիվերը մաքուր են, առանց սև խոցերի կամ բնափայտի քայքայման նշանների"
+      ],
+      actions: [
+        "Շարունակել կանոնավոր էտը՝ թփի ներսում լույսի թափանցումն ու օդափոխությունն ապահովելու համար",
+        "Կիրառել հավասարակշռված պարարտացում (միկրոտարրերով հարուստ), որպեսզի բարձրանա բույսի դիմադրողականությունը սնկային հիվանդությունների նկատմամբ",
+        "Շաբաթական առնվազն մեկ անգամ ստուգել տերևների ստորին մակերեսը և ողկույզների ներսի մասը՝ հնարավոր վարակները վաղ փուլում հայտնաբերելու համար",
+        "Խորհուրդ է տրվում օգտագործել ֆոսֆոր-կալիումական պարարտացում"
+      ]
+    },
+    en: {
+      arm: "Grape (Healthy)",
+      symptoms: [
+        "Leaves have natural green color, smooth surface — no patterns or brown spots",
+        "Berries are plump, without black dots or dried (hardened) fruits",
+        "Green shoots are clean, without black lesions or signs of wood decay"
+      ],
+      actions: [
+        "Continue regular pruning to ensure light penetration and ventilation inside the canopy",
+        "Apply balanced fertilization (rich in microelements) to increase the plant's resistance to fungal diseases",
+        "At least once a week, check the underside of leaves and inside of clusters for early detection of possible infections",
+        "Recommended: phosphorus-potassium fertilization"
+      ]
+    },
+    ru: {
+      arm: "Виноград (Здоровый)",
+      symptoms: [
+        "Листья имеют естественный зелёный цвет, гладкую поверхность — без узоров или коричневых пятен",
+        "Ягоды полные, без чёрных точек или засохших (затвердевших) плодов",
+        "Зелёные побеги чистые, без чёрных язв или признаков разрушения древесины"
+      ],
+      actions: [
+        "Продолжать регулярную обрезку для обеспечения проникновения света и вентиляции внутри куста",
+        "Применять сбалансированные удобрения (богатые микроэлементами) для повышения устойчивости растения к грибковым заболеваниям",
+        "Не реже одного раза в неделю проверять нижнюю поверхность листьев и внутреннюю часть гроздей для раннего обнаружения возможных инфекций",
+        "Рекомендуется: фосфорно-калийное удобрение"
+      ]
+    }
+  },
+
+  "Orange___Haunglongbing_(Citrus_greening)": {
+    name: "Orange___Haunglongbing_(Citrus_greening)",
+    hy: {
+      arm: "Նարնջի հիվանդություն՝ Հուանգլոնբինգ (Citrus Greening / HLB)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են բծավոր դեղին հատվածներ, որոնք ճյուղի մի կողմում նույնը չեն, ինչ մյուս կողմում (ի տարբերություն սննդանյութերի պակասի, որը սիմետրիկ է)",
+        "Պտուղները մնում են փոքր, ձևախեղված և ներքևի մասում պահպանում են կանաչ գույնը. հյութը դառն է և անպիտան ուտելու համար",
+        "Պտուղը սկսում է դեղնել վերևի մասից (կոթից), այլ ոչ թե ներքևից, ինչը բնորոշ չէ առողջ նարնջին"
+      ],
+      actions: [
+        "Քանի որ հիվանդությունն անբուժելի է, վարակված ծառերը պետք է անհապաղ արմատախիլ արվեն և ոչնչացվեն, որպեսզի չդառնան վարակի օջախ հարևան ծառերի համար",
+        "Պայքարել ցիտրուսային լվիճների (Psyllids) դեմ՝ օգտագործելով միջատասպաններ, քանի որ հենց այս միջատներն են բակտերիան տեղափոխում ծառից ծառ",
+        "Տնկել միայն սերտիֆիկացված, հիվանդություններից զերծ տնկիներ, որոնք աճեցվել են պաշտպանիչ ցանցերի տակ",
+        "Թեև սա չի բուժում հիվանդությունը, բայց միկրոտարրերով հարուստ սնուցումը կարող է ժամանակավորապես երկարացնել վարակված ծառի կյանքը և բերքատվությունը",
+        "Խորհուրդ է տրվում օգտագործել Imidacloprid (միջատասպան)"
+      ]
+    },
+    en: {
+      arm: "Citrus Greening (Huanglongbing / HLB)",
+      symptoms: [
+        "Blotchy yellow areas appear on leaves, asymmetrical on either side of the branch (unlike nutrient deficiency which is symmetrical)",
+        "Fruits remain small, deformed, and retain green color at the bottom; the juice is bitter and unfit for consumption",
+        "The fruit starts to yellow from the top (stem end) rather than the bottom, which is not characteristic of healthy oranges"
+      ],
+      actions: [
+        "Since the disease is incurable, infected trees must be immediately uprooted and destroyed to prevent them from becoming a source of infection for neighboring trees",
+        "Combat citrus psyllids using insecticides, as these insects are the ones that transmit the bacteria from tree to tree",
+        "Plant only certified, disease-free seedlings grown under protective nets",
+        "Although this does not cure the disease, nutrition rich in microelements can temporarily extend the life and productivity of an infected tree",
+        "Recommended insecticide: Imidacloprid"
+      ]
+    },
+    ru: {
+      arm: "Хуанлунбин цитрусовых (Citrus Greening / HLB)",
+      symptoms: [
+        "На листьях появляются пятнистые жёлтые участки, несимметричные с разных сторон ветки (в отличие от дефицита питательных веществ, который симметричен)",
+        "Плоды остаются мелкими, деформированными и сохраняют зелёный цвет у основания; сок горький и непригоден в пищу",
+        "Плод начинает желтеть сверху (со стороны плодоножки), а не снизу, что нехарактерно для здорового апельсина"
+      ],
+      actions: [
+        "Поскольку болезнь неизлечима, заражённые деревья необходимо немедленно выкорчевать и уничтожить, чтобы они не стали источником инфекции для соседних деревьев",
+        "Бороться с цитрусовыми листоблошками с помощью инсектицидов, так как именно эти насекомые переносят бактерию от дерева к дереву",
+        "Высаживать только сертифицированные, свободные от болезней саженцы, выращенные под защитными сетками",
+        "Хотя это не лечит болезнь, питание, богатое микроэлементами, может временно продлить жизнь и урожайность заражённого дерева",
+        "Рекомендуемый инсектицид: Imidacloprid"
+      ]
+    }
+  },
+
+  "Peach___Bacterial_spot": {
+    name: "Peach___Bacterial_spot",
+    hy: {
+      arm: "Դեղձենու բակտերիալ բծավորություն (Bacterial Spot)",
+      symptoms: [
+        "Հայտնվում են մանր, ջրալի, մուգ դարչնագույն կամ սև բծեր, որոնք հաճախ կենտրոնացած են տերևի ծայրին կամ ջղերի երկայնքով",
+        "Ժամանակի ընթացքում բծերի կենտրոնական մասը չորանում է և թափվում՝ տերևի վրա թողնելով մանր անցքեր",
+        "Պտուղների վրա առաջանում են մանր սև բծեր, որոնք վերածվում են խորը ճաքերի և խոցերի՝ դարձնելով դրանք անպիտան վաճառքի համար"
+      ],
+      actions: [
+        "Տնկել դեղձենու այնպիսի սորտեր, որոնք ունեն բնական դիմադրողականություն այս բակտերիայի նկատմամբ (սա պայքարի լավագույն միջոցն է)",
+        "Կիրառել պղինձ պարունակող միջոցներ ուշ աշնանը և վաղ գարնանը՝ բակտերիաների քանակը նվազեցնելու համար",
+        "Խուսափել ազոտական պարարտանյութերի ավելցուկից, որոնք խթանում են նոր, նուրբ տերևների աճը, որոնք ավելի խոցելի են վարակի նկատմամբ",
+        "Խուսափել անձրևացումից (վերևից ջրելուց), որը նպաստում է բակտերիաների տարածմանը կաթիլների միջոցով",
+        "Խորհուրդ է տրվում օգտագործել copper hydroxide կամ Kocide"
+      ]
+    },
+    en: {
+      arm: "Peach Bacterial Spot",
+      symptoms: [
+        "Small, water-soaked dark brown or black spots appear, often concentrated at leaf tips or along veins",
+        "Over time, the central part of the spots dries out and falls away, leaving small holes in the leaf",
+        "Small black spots develop on fruits, turning into deep cracks and lesions, making them unfit for sale"
+      ],
+      actions: [
+        "Plant peach varieties that have natural resistance to this bacterium (this is the best control measure)",
+        "Apply copper-containing agents in late autumn and early spring to reduce bacterial populations",
+        "Avoid excess nitrogen fertilizers, which promote growth of new, tender leaves that are more vulnerable to infection",
+        "Avoid overhead irrigation, which promotes spreading of bacteria through droplets",
+        "Recommended: copper hydroxide or Kocide"
+      ]
+    },
+    ru: {
+      arm: "Бактериальная пятнистость персика (Bacterial Spot)",
+      symptoms: [
+        "Появляются мелкие водянистые тёмно-коричневые или чёрные пятна, часто сосредоточенные у кончиков листьев или вдоль жилок",
+        "Со временем центральная часть пятен засыхает и выпадает, оставляя на листе мелкие отверстия",
+        "На плодах появляются мелкие чёрные пятна, превращающиеся в глубокие трещины и язвы, делающие их непригодными для продажи"
+      ],
+      actions: [
+        "Высаживать сорта персика с естественной устойчивостью к данной бактерии (это лучшая мера борьбы)",
+        "Применять медьсодержащие средства поздней осенью и ранней весной для снижения численности бактерий",
+        "Избегать избытка азотных удобрений, которые стимулируют рост новых нежных листьев, более уязвимых к заражению",
+        "Избегать дождевания (полива сверху), которое способствует распространению бактерий через капли",
+        "Рекомендуемые препараты: copper hydroxide или Kocide"
+      ]
+    }
+  },
+
+  "Peach___healthy": {
+    name: "Peach___healthy",
+    hy: {
+      arm: "Դեղձենի (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն բնական մուգ կանաչ գույն, նշտարաձև են (երկարավուն), հարթ եզրերով և առանց որևէ անցքերի կամ սև բծերի",
+        "Դեղձի մակերեսը թավշյա է կամ հարթ (նեկտարինի դեպքում), առանց ճաքերի, կոշտացած խոցերի կամ բակտերիալ արտադրության հետքերի",
+        "Ճյուղերի և բնի կեղևը միատարր է, չկան բաց վերքեր կամ սևացած հատվածներ (խոցեր)"
+      ],
+      actions: [
+        "Իրականացնել ամենամյա սանիտարական էտ՝ ապահովելով սաղարթի լավ օդափոխությունը, ինչը կանխում է խոնավության կուտակումը",
+        "Ապահովել բույսը կալիումով և միկրոտարրերով, որոնք ամրացնում են բջջապատերը և դժվարացնում բակտերիաների ու սնկերի թափանցումը",
+        "Կիրառել կաթիլային ոռոգում՝ տերևների և պտուղների վրա ջրի կաթիլների հայտնվելը բացառելու համար"
+      ]
+    },
+    en: {
+      arm: "Peach (Healthy)",
+      symptoms: [
+        "Leaves have natural dark green color, are lance-shaped (elongated), with smooth edges and without any holes or black spots",
+        "Peach surface is velvety or smooth (in nectarine's case), without cracks, hardened lesions or traces of bacterial exudate",
+        "Bark of branches and trunk is uniform, with no open wounds or blackened areas (lesions)"
+      ],
+      actions: [
+        "Perform annual sanitary pruning to ensure good canopy ventilation, which prevents moisture accumulation",
+        "Supply the plant with potassium and microelements, which strengthen cell walls and make it harder for bacteria and fungi to penetrate",
+        "Use drip irrigation to eliminate water droplets appearing on leaves and fruits"
+      ]
+    },
+    ru: {
+      arm: "Персик (Здоровый)",
+      symptoms: [
+        "Листья имеют естественный тёмно-зелёный цвет, ланцетовидные (удлинённые), с гладкими краями и без каких-либо отверстий или чёрных пятен",
+        "Поверхность персика бархатистая или гладкая (у нектарина), без трещин, затвердевших язв или следов бактериального экссудата",
+        "Кора ветвей и ствола однородная, без открытых ран или почерневших участков (язв)"
+      ],
+      actions: [
+        "Проводить ежегодную санитарную обрезку для обеспечения хорошей вентиляции кроны, что предотвращает накопление влаги",
+        "Обеспечивать растение калием и микроэлементами, укрепляющими клеточные стенки и затрудняющими проникновение бактерий и грибков",
+        "Применять капельное орошение для исключения попадания капель воды на листья и плоды"
+      ]
+    }
+  },
+
+  "Pepper,_bell___Bacterial_spot": {
+    name: "Pepper,_bell___Bacterial_spot",
+    hy: {
+      arm: "Քաղցր պղպեղի բակտերիալ բծավորություն (Bacterial Spot)",
+      symptoms: [
+        "Տերևների ստորին մակերեսին հայտնվում են փոքր, անկանոն ձևի, ջրալի բծեր, որոնք աստիճանաբար դառնում են մուգ դարչնագույն կամ սև",
+        "Պտուղների վրա առաջանում են փոքր, ուռուցիկ կոշտուկներ կամ խոցեր, որոնք հաճախ շրջապատված են լինում ջրալի եզրագծով",
+        "Ուժեղ վարակվածության դեպքում տերևները դեղնում են և թափվում, ինչի հետևանքով պտուղները մնում են անպաշտպան արևի տակ, որը բերում է պտղի կեղևի սպիտակեցման կամ չորացման"
+      ],
+      actions: [
+        "Քանի որ բակտերիան կարող է փոխանցվել սերմերի միջոցով, անհրաժեշտ է օգտագործել միայն սերտիֆիկացված և ախտահանված սերմացու կամ տնկիներ",
+        "Խուսափել պղպեղի, լոլիկի կամ սմբուկի մշակումից նույն հողակտորի վրա առնվազն 2-3 տարի անընդմեջ",
+        "Վարակի կանխարգելման կամ վաղ փուլում տարածումը կասեցնելու համար կիրառել պղնձի հիմքով ֆունգիցիդներ/բակտերիացիդներ",
+        "Ջրելիս խուսափել տերևների թրջումից. կաթիլային ոռոգումը լավագույն տարբերակն է բակտերիայի տարածումը նվազեցնելու համար",
+        "Բերքահավաքից հետո հեռացնել և ոչնչացնել բոլոր բուսական մնացորդները, քանի որ բակտերիան կարող է ձմեռել դրանց մեջ",
+        "Խորհուրդ է տրվում օգտագործել Cuprocsate կամ Fitolavin"
+      ]
+    },
+    en: {
+      arm: "Bell Pepper Bacterial Spot",
+      symptoms: [
+        "Small, irregular-shaped, water-soaked spots appear on the lower leaf surface, gradually turning dark brown or black",
+        "Small raised bumps or lesions develop on fruits, often surrounded by a water-soaked border",
+        "In severe infection, leaves yellow and drop, leaving fruits exposed to the sun, causing bleaching or scorching of fruit skin"
+      ],
+      actions: [
+        "Since bacteria can be transmitted through seeds, use only certified and disinfected seed or seedlings",
+        "Avoid growing pepper, tomato or eggplant on the same plot for at least 2-3 consecutive years",
+        "Apply copper-based fungicides/bactericides to prevent infection or stop spread in early stages",
+        "Avoid wetting leaves during irrigation; drip irrigation is the best option to reduce bacterial spread",
+        "After harvest, remove and destroy all plant residues, as bacteria can overwinter in them",
+        "Recommended: Cuprocsate or Fitolavin"
+      ]
+    },
+    ru: {
+      arm: "Бактериальная пятнистость перца (Bacterial Spot)",
+      symptoms: [
+        "На нижней поверхности листьев появляются мелкие пятна неправильной формы, водянистые, постепенно становящиеся тёмно-коричневыми или чёрными",
+        "На плодах появляются мелкие выпуклые бугорки или язвы, часто окружённые водянистым ободком",
+        "При сильном заражении листья желтеют и опадают, в результате чего плоды остаются незащищёнными от солнца, что приводит к побелению или высыханию кожицы плодов"
+      ],
+      actions: [
+        "Поскольку бактерия может передаваться через семена, необходимо использовать только сертифицированный и обеззараженный посевной материал или рассаду",
+        "Избегать выращивания перца, томата или баклажана на одном участке не менее 2-3 лет подряд",
+        "Для профилактики заражения или остановки распространения на ранних стадиях применять медьсодержащие фунгициды/бактерициды",
+        "Избегать намокания листьев при поливе; капельное орошение — лучший вариант для снижения распространения бактерий",
+        "После уборки урожая удалить и уничтожить все растительные остатки, так как бактерия может зимовать в них",
+        "Рекомендуемые препараты: Cuprocsate или Fitolavin"
+      ]
+    }
+  },
+
+  "Pepper,_bell___healthy": {
+    name: "Pepper,_bell___healthy",
+    hy: {
+      arm: "Քաղցր պղպեղ (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն միատարր մուգ կանաչ գույն, առանց դեղնածության, ջրալի բծերի կամ ոլորվածության",
+        "Պտուղները լիարժեք զարգացած են, ունեն հարթ ու փայլուն մակերես՝ առանց կոշտուկների",
+        "Բույսն ունի ամուր կառուցվածք, իսկ ցողունի վրա չկան հետքեր կամ փտած հատվածներ"
+      ],
+      actions: [
+        "Պահպանել հողի կայուն խոնավությունը՝ խուսափելով կտրուկ տատանումներից (չորացում-գերխոնավացում), ինչը կանխում է պտղի ծայրային փտումը",
+        "Կիրառել կալցիումով և մագնեզիումով հարուստ պարարտանյութեր, որոնք կարևոր են պղպեղի պտուղների որակի և բույսի դիմադրողականության համար",
+        "Հողի մակերեսը ծածկել օրինակ՝ ծղոտով, որպեսզի կանխվի հողի միջոցով տարածվող սնկերի ու բակտերիաների շփումը ստորին տերևների հետ",
+        "Պարբերաբար ստուգել լվիճների առկայությունը, քանի որ դրանք հանդիսանում են բազմաթիվ վիրուսների հիմնական տեղափոխողները"
+      ]
+    },
+    en: {
+      arm: "Bell Pepper (Healthy)",
+      symptoms: [
+        "Leaves have uniform dark green color, without yellowing, water-soaked spots or curling",
+        "Fruits are fully developed with smooth and shiny surface — no bumps",
+        "Plant has firm structure and stem shows no marks or rotting areas"
+      ],
+      actions: [
+        "Maintain stable soil moisture, avoiding sharp fluctuations (drought-overwatering), which prevents blossom end rot of fruits",
+        "Apply fertilizers rich in calcium and magnesium, which are important for the quality of pepper fruits and plant resistance",
+        "Cover soil surface with e.g. straw to prevent contact between soil-borne fungi and bacteria with lower leaves",
+        "Periodically check for the presence of aphids, as they are the main carriers of many viruses"
+      ]
+    },
+    ru: {
+      arm: "Перец сладкий (Здоровый)",
+      symptoms: [
+        "Листья имеют однородный тёмно-зелёный цвет, без пожелтения, водянистых пятен или скручивания",
+        "Плоды полностью развиты, с гладкой и блестящей поверхностью — без бугорков",
+        "Растение имеет прочную структуру, на стебле нет следов или гнилых участков"
+      ],
+      actions: [
+        "Поддерживать стабильную влажность почвы, избегая резких колебаний (засуха-переувлажнение), что предотвращает вершинную гниль плодов",
+        "Применять удобрения, богатые кальцием и магнием, которые важны для качества плодов перца и устойчивости растения",
+        "Покрыть поверхность почвы, например, соломой, чтобы предотвратить контакт почвенных грибков и бактерий с нижними листьями",
+        "Периодически проверять наличие тлей, так как они являются основными переносчиками многих вирусов"
+      ]
+    }
+  },
+
+  "Potato___Early_blight": {
+    name: "Potato___Early_blight",
+    hy: {
+      arm: "Կարտոֆիլի վաղ չորացում (Early Blight)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են մուգ դարչնագույն կամ սև բծեր, որոնք ունեն բնորոշ համակենտրոն օղակներ",
+        "Բծերի շուրջ հաճախ նկատվում է դեղնավուն հատված, որն աստիճանաբար տարածվում է ամբողջ տերևով",
+        "Հիվանդությունը սկսվում է բույսի ներքևի հին տերևներից և աստիճանաբար բարձրանում վերև",
+        "Պալարների վրա կարող են առաջանալ սեղմված բծեր, որոնց տակ պտղամիսը դառնում է դարչնագույն և փխրուն"
+      ],
+      actions: [
+        "Չցանել կարտոֆիլ նույն տեղում առնվազն 2-3 տարի, ինչպես նաև խուսափել լոլիկի կամ պղպեղի հաջորդական մշակումից (նույն ընտանիքի բույսեր են)",
+        "Ապահովել բույսի հավասարակշռված սնուցումը (հատկապես ազոտի բավարար քանակը), քանի որ թույլ և սննդանյութերի պակաս ունեցող բույսերն ավելի շուտ են վարակվում",
+        "Կիրառել կոնտակտային կամ սիստեմային ֆունգիցիդներ (օր.՝ Mancozeb, Chlorothalonil կամ Azoxystrobin)՝ առաջին նշանները հայտնվելուն պես",
+        "Բերքահավաքից հետո հեռացնել և այրել բոլոր բուսական մնացորդները, քանի որ սունկը ձմեռում է դրանց մեջ",
+        "Բերքահավաքը կատարել միայն այն ժամանակ, երբ կեղևը լիարժեք ամրացել է, որպեսզի կտրվածքների միջոցով սունկը չթափանցի պալարի մեջ",
+        "Խորհուրդ է տրվում օգտագործել Skor կամ Quadris"
+      ]
+    },
+    en: {
+      arm: "Potato Early Blight",
+      symptoms: [
+        "Dark brown or black spots with characteristic concentric rings appear on leaves",
+        "A yellowish area is often observed around spots, gradually spreading across the entire leaf",
+        "The disease starts from the lower old leaves of the plant and gradually moves upward",
+        "Sunken spots may develop on tubers, under which the flesh becomes brown and crumbly"
+      ],
+      actions: [
+        "Do not plant potatoes in the same location for at least 2-3 years, and avoid successive cultivation of tomatoes or peppers (plants of the same family)",
+        "Ensure balanced plant nutrition (especially adequate nitrogen), as weak and nutrient-deficient plants get infected sooner",
+        "Apply contact or systemic fungicides (e.g. Mancozeb, Chlorothalonil or Azoxystrobin) as soon as first signs appear",
+        "After harvest, remove and burn all plant residues, as the fungus overwinters in them",
+        "Harvest only when the skin has fully set, so that the fungus cannot penetrate the tuber through cuts",
+        "Recommended fungicides: Skor or Quadris"
+      ]
+    },
+    ru: {
+      arm: "Ранний ожог картофеля (Early Blight)",
+      symptoms: [
+        "На листьях появляются тёмно-коричневые или чёрные пятна с характерными концентрическими кольцами",
+        "Вокруг пятен часто наблюдается желтоватый участок, постепенно распространяющийся на весь лист",
+        "Болезнь начинается со старых нижних листьев растения и постепенно поднимается вверх",
+        "На клубнях могут образовываться вдавленные пятна, под которыми мякоть становится коричневой и рыхлой"
+      ],
+      actions: [
+        "Не высаживать картофель на одном месте не менее 2-3 лет, а также избегать последовательного выращивания томатов или перцев (растения одного семейства)",
+        "Обеспечить сбалансированное питание растения (особенно достаточное количество азота), так как слабые растения с дефицитом питательных веществ заражаются быстрее",
+        "Применять контактные или системные фунгициды (например, Mancozeb, Chlorothalonil или Azoxystrobin) при появлении первых признаков",
+        "После уборки урожая удалить и сжечь все растительные остатки, так как гриб зимует в них",
+        "Проводить уборку только после полного созревания кожуры, чтобы гриб не проник в клубень через порезы",
+        "Рекомендуемые фунгициды: Skor или Quadris"
+      ]
+    }
+  },
+
+  "Potato___Late_blight": {
+    name: "Potato___Late_blight",
+    hy: {
+      arm: "Կարտոֆիլի ֆիտոֆտորոզ (Late Blight)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են մուգ, ջրալի, անկանոն տեսքի բծեր, որոնք շատ արագ մեծանում են՝ ընդգրկելով ամբողջ տերևը",
+        "Խոնավ պայմաններում տերևի ստորին մակերեսին, բծերի եզրերով, առաջանում է սպիտակ փառ (սնկի սպորներ)",
+        "Վարակը տարածվում է նաև ցողունների վրա՝ առաջացնելով մուգ դարչնագույն կամ սև հատվածներ, ինչի հետևանքով բույսը կոտրվում է և մահանում",
+        "Պալարների վրա առաջանում են մուգ, սեղմված բծեր, իսկ ներսում պտղամիսը դառնում է դարչնագույն և հատիկավոր, ինչը հետագայում վերածվում է թաց, գարշահոտ փտման"
+      ],
+      actions: [
+        "Մշտապես հետևել եղանակին. եթե ջերմաստիճանը 15-25°C է և խոնավությունը բարձր է (անձրև, մառախուղ), վարակի վտանգը առավելագույնն է",
+        "Կիրառել պաշտպանիչ և բուժիչ ֆունգիցիդներ (օր.՝ Ridomil Gold, Infinito կամ Curzate)՝ նախքան հիվանդության զանգվածային տարածումը",
+        "Տնկել միայն առողջ, սերտիֆիկացված պալարներ. վարակված պալարը հիվանդության առաջնային աղբյուրն է",
+        "Եթե դաշտում հայտնաբերվում են առանձին վարակված բույսեր, դրանք պետք է անհապաղ հեռացնել և ոչնչացնել",
+        "Բերքահավաքից 2 շաբաթ առաջ հնձել և հեռացնել թփերը (վերնամասը), որպեսզի սպորները տերևներից չանցնեն հողի մեջ և չվարակեն պալարները",
+        "Խորհուրդ է տրվում օգտագործել Ridomil Gold կամ Infinito"
+      ]
+    },
+    en: {
+      arm: "Potato Late Blight",
+      symptoms: [
+        "Dark, water-soaked, irregular spots appear on leaves, expanding very rapidly to cover the entire leaf",
+        "In humid conditions, a white coating (fungal spores) forms along the edges of spots on the lower leaf surface",
+        "The infection also spreads to stems, causing dark brown or black areas, as a result the plant breaks and dies",
+        "Dark sunken spots form on tubers, and inside the flesh becomes brown and granular, which later turns into wet, foul-smelling rot"
+      ],
+      actions: [
+        "Constantly monitor weather: if temperature is 15-25°C and humidity is high (rain, fog), the risk of infection is at its maximum",
+        "Apply protective and curative fungicides (e.g. Ridomil Gold, Infinito or Curzate) before the disease spreads widely",
+        "Plant only healthy, certified tubers; an infected tuber is the primary source of the disease",
+        "If individual infected plants are found in the field, they must be immediately removed and destroyed",
+        "Two weeks before harvest, mow and remove the tops so that spores from leaves cannot pass into the soil and infect the tubers",
+        "Recommended fungicides: Ridomil Gold or Infinito"
+      ]
+    },
+    ru: {
+      arm: "Фитофтороз картофеля (Late Blight)",
+      symptoms: [
+        "На листьях появляются тёмные водянистые пятна неправильной формы, очень быстро разрастающиеся и охватывающие весь лист",
+        "Во влажных условиях по краям пятен на нижней поверхности листа образуется белый налёт (споры гриба)",
+        "Инфекция распространяется также на стебли, вызывая тёмно-коричневые или чёрные участки, вследствие чего растение ломается и погибает",
+        "На клубнях появляются тёмные вдавленные пятна, а внутри мякоть становится коричневой и зернистой, что впоследствии превращается во влажную гнилостную гниль"
+      ],
+      actions: [
+        "Постоянно следить за погодой: если температура 15-25°C и влажность высокая (дождь, туман), риск заражения максимален",
+        "Применять защитные и лечебные фунгициды (например, Ridomil Gold, Infinito или Curzate) до массового распространения болезни",
+        "Высаживать только здоровые сертифицированные клубни; заражённый клубень является первичным источником болезни",
+        "При обнаружении отдельных заражённых растений на поле их необходимо немедленно удалить и уничтожить",
+        "За 2 недели до уборки скосить и убрать ботву, чтобы споры с листьев не попали в почву и не заразили клубни",
+        "Рекомендуемые фунгициды: Ridomil Gold или Infinito"
+      ]
+    }
+  },
+
+  "Potato___healthy": {
+    name: "Potato___healthy",
+    hy: {
+      arm: "Կարտոֆիլ (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն հավասարաչափ մուգ կանաչ գույն, առանց թիրախաձև օղակների (Early blight) կամ ջրալի սևացող բծերի (Late blight)",
+        "Տերևի հակառակ կողմում չկա սպիտակ բորբոսանման փառ կամ սնկային սպորների հետքեր",
+        "Կարտոֆիլի պալարները պինդ են, ունեն հարթ կեղև՝ առանց սեղմված բծերի կամ ներքին դարչնագույն փտման",
+        "Ցողունները կանաչ են, ամուր և չունեն սևացած հատվածներ կամ կոտրվածքներ"
+      ],
+      actions: [
+        "Կանոնավոր կերպով հող լցնել թփերի հիմքին. սա պաշտպանում է ձևավորվող պալարները արևի լույսից (կանաչումից) և ստեղծում է արգելք, որպեսզի տերևներից թափվող սնկի սպորները չհասնեն պալարներին",
+        "Ջրելիս խուսափել տերևների թրջումից (նախապատվությունը տալ կաթիլային ոռոգմանը), որպեսզի չստեղծվի բարենպաստ միջավայր սնկային հիվանդությունների համար",
+        "Կիրառել ֆոսֆորական և կալիումական պարարտանյութեր, որոնք նպաստում են պալարների լցմանը և ամրացնում բույսի ընդհանուր դիմադրողականությունը",
+        "Դաշտը պահել մաքուր, քանի որ շատ մոլախոտեր կարող են հանդիսանալ հիվանդությունների և վնասատուների (օր.՝ կոլորադյան բզեզ) միջանկյալ տերեր"
+      ]
+    },
+    en: {
+      arm: "Potato (Healthy)",
+      symptoms: [
+        "Leaves have evenly dark green color, without target-like rings (Early blight) or water-soaked blackening spots (Late blight)",
+        "No white mold-like coating or traces of fungal spores on the underside of leaves",
+        "Potato tubers are firm, with smooth skin — no sunken spots or internal brown rot",
+        "Stems are green, firm and have no blackened areas or breaks"
+      ],
+      actions: [
+        "Regularly hill up soil around the base of plants; this protects forming tubers from sunlight (greening) and creates a barrier so fungal spores falling from leaves cannot reach the tubers",
+        "Avoid wetting leaves during irrigation (prefer drip irrigation) to avoid creating a favorable environment for fungal diseases",
+        "Apply phosphorus and potassium fertilizers, which promote tuber filling and strengthen the plant's overall resistance",
+        "Keep the field clean, as many weeds can serve as intermediate hosts for diseases and pests (e.g. Colorado beetle)"
+      ]
+    },
+    ru: {
+      arm: "Картофель (Здоровый)",
+      symptoms: [
+        "Листья имеют равномерный тёмно-зелёный цвет, без мишеневидных колец (Early blight) или водянистых чернеющих пятен (Late blight)",
+        "На нижней стороне листьев нет белого плесневого налёта или следов грибковых спор",
+        "Клубни картофеля твёрдые, с гладкой кожурой — без вдавленных пятен или внутренней коричневой гнили",
+        "Стебли зелёные, крепкие и не имеют почерневших участков или переломов"
+      ],
+      actions: [
+        "Регулярно окучивать кусты; это защищает формирующиеся клубни от солнечного света (позеленения) и создаёт барьер, чтобы споры гриба, падающие с листьев, не достигали клубней",
+        "Избегать намокания листьев при поливе (предпочтительно капельное орошение), чтобы не создавать благоприятную среду для грибковых заболеваний",
+        "Применять фосфорные и калийные удобрения, способствующие наполнению клубней и укрепляющие общую устойчивость растения",
+        "Поддерживать чистоту поля, так как многие сорняки могут служить промежуточными хозяевами болезней и вредителей (например, колорадского жука)"
+      ]
+    }
+  },
+
+  "Raspberry___healthy": {
+    name: "Raspberry___healthy",
+    hy: {
+      arm: "Ազնվամորի (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն առողջ գույն, բնորոշ ատամնավոր եզրեր և կնճռոտ մակերես՝ առանց դեղին բծերի կամ մոխրագույն փառի",
+        "Հատապտուղները համաչափ գունավորված են, հյութալի և ամուր կպած են կոթին՝ առանց բորբոսի կամ չորացած հատվածների"
+      ],
+      actions: [
+        "Յուրաքանչյուր տարի հեռացնել բերքատվությունն ավարտած երկամյա ճյուղերը, որպեսզի տեղ ազատվի նոր, առողջ ընձյուղների համար և լավանա օդափոխությունը",
+        "Թփերի շուրջ հողը ծածկել օրգանական նյութերով (ծղոտ, տորֆ), որպեսզի պահպանվի խոնավությունը և կանխվի մոլախոտերի աճը, որոնք հիվանդությունների աղբյուր են",
+        "Ջրել թփերի հիմքի մասում՝ խուսափելով տերևների և պտուղների թրջումից, ինչը նվազեցնում է գորշ փտման առաջացման ռիսկը",
+        "Օգտագործել հենակներ ճյուղերը բարձր պահելու համար, որպեսզի բերքը չդիպչի հողին և չվարակվի հողային սնկերով"
+      ]
+    },
+    en: {
+      arm: "Raspberry (Healthy)",
+      symptoms: [
+        "Leaves have healthy color, characteristic serrated edges and wrinkled surface — no yellow spots or gray coating",
+        "Berries are uniformly colored, juicy and firmly attached to the stem — no mold or dried areas"
+      ],
+      actions: [
+        "Every year remove two-year-old canes that have finished bearing fruit, to make room for new healthy shoots and improve ventilation",
+        "Cover soil around the shrubs with organic materials (straw, peat) to retain moisture and prevent weed growth, which is a source of diseases",
+        "Water at the base of the shrubs, avoiding wetting leaves and fruits, which reduces the risk of gray mold",
+        "Use supports to keep canes elevated so that the harvest does not touch the ground and get infected with soil-borne fungi"
+      ]
+    },
+    ru: {
+      arm: "Малина (Здоровая)",
+      symptoms: [
+        "Листья имеют здоровый цвет, характерные зубчатые края и морщинистую поверхность — без жёлтых пятен или серого налёта",
+        "Ягоды равномерно окрашены, сочные и крепко держатся на плодоножке — без плесени или засохших участков"
+      ],
+      actions: [
+        "Ежегодно удалять отплодоносившие двухлетние побеги, чтобы освободить место для новых здоровых побегов и улучшить вентиляцию",
+        "Покрывать почву вокруг кустов органическими материалами (солома, торф) для сохранения влаги и предотвращения роста сорняков, которые являются источником болезней",
+        "Поливать у основания кустов, избегая намокания листьев и плодов, что снижает риск возникновения серой гнили",
+        "Использовать опоры для поддержания побегов в приподнятом положении, чтобы урожай не касался земли и не заражался почвенными грибками"
+      ]
+    }
+  },
+
+  "Soybean___healthy": {
+    name: "Soybean___healthy",
+    hy: {
+      arm: "Սոյա (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն միատարր մուգ կանաչ գույն, առանց դեղին բծերի (քլորոզ), դարչնագույն այրվածքների կամ մանր սև կետիկների",
+        "Տերևի թե՛ վերին, թե՛ ստորին մակերեսները մաքուր են, չկա սպիտակ բորբոսանման կամ ժանգագույն փոշենման փառ",
+        "Պատիճները լիարժեք են, կանաչ կամ բնական դեղնավուն (հասունացման փուլում), առանց սևացած հատվածների կամ սնկային բծերի",
+        "Բույսն ունի ուղղաձիգ աճ, իսկ ցողունի վրա չկան խոցեր կամ փտած մասեր"
+      ],
+      actions: [
+        "Սոյան լոբազգի է, ուստի կարևոր է ապահովել հողում համապատասխան բակտերիաների (Rhizobium) առկայությունը, որոնք օգնում են բույսին յուրացնել մթնոլորտային ազոտը",
+        "Ցանքը կատարել օպտիմալ հեռավորությամբ, որպեսզի թփերի միջև լինի բավարար օդափոխություն, ինչը կանխում է խոնավության կուտակումը և սնկերի զարգացումը",
+        "Պահպանել դաշտի մաքրությունը, քանի որ մոլախոտերը կարող են խլել սննդանյութերը և հանդիսանալ վնասատուների (օր.՝ տիզերի) ապաստարան",
+        "Ապահովել բույսի սնուցումը բորով և մոլիբդենով, որոնք հանդիսանում են ծաղկման ու պատիճների կազմավորման հիմնական խթանիչները"
+      ]
+    },
+    en: {
+      arm: "Soybean (Healthy)",
+      symptoms: [
+        "Leaves have uniform dark green color, without yellow spots (chlorosis), brown burns or small black dots",
+        "Both upper and lower leaf surfaces are clean — no white mold-like or rust-colored powdery coating",
+        "Pods are plump, green or naturally yellowish (at maturity stage), without blackened areas or fungal spots",
+        "Plant has upright growth and the stem has no lesions or rotting parts"
+      ],
+      actions: [
+        "Soybean is a legume, so it is important to ensure the presence of appropriate bacteria (Rhizobium) in the soil, which help the plant fix atmospheric nitrogen",
+        "Sow at optimal spacing so that there is adequate ventilation between plants, which prevents moisture accumulation and fungal development",
+        "Maintain field cleanliness, as weeds can steal nutrients and serve as a refuge for pests (e.g. mites)",
+        "Ensure the plant is supplied with boron and molybdenum, which are the main stimulants for flowering and pod formation"
+      ]
+    },
+    ru: {
+      arm: "Соя (Здоровая)",
+      symptoms: [
+        "Листья имеют однородный тёмно-зелёный цвет, без жёлтых пятен (хлороз), коричневых ожогов или мелких чёрных точек",
+        "Обе поверхности листа (верхняя и нижняя) чистые — нет белого плесневого или ржавого порошкообразного налёта",
+        "Стручки полные, зелёные или естественно желтоватые (в стадии созревания), без почерневших участков или грибковых пятен",
+        "Растение имеет прямостоячий рост, а на стебле нет язв или гнилых частей"
+      ],
+      actions: [
+        "Соя является бобовым растением, поэтому важно обеспечить наличие в почве соответствующих бактерий (Rhizobium), помогающих растению усваивать атмосферный азот",
+        "Проводить посев с оптимальным расстоянием, чтобы между кустами была достаточная вентиляция, что предотвращает накопление влаги и развитие грибков",
+        "Поддерживать чистоту поля, так как сорняки могут отнимать питательные вещества и служить укрытием для вредителей (например, клещей)",
+        "Обеспечивать растение бором и молибденом, которые являются главными стимуляторами цветения и формирования стручков"
+      ]
+    }
+  },
+
+  "Squash___Powdery_mildew": {
+    name: "Squash___Powdery_mildew",
+    hy: {
+      arm: "Դդմազգիների ալրացող (Powdery Mildew)",
+      symptoms: [
+        "Տերևների թե՛ վերին, թե՛ ստորին մակերեսներին հայտնվում են կլորավուն, սպիտակ բծեր",
+        "Հիվանդության զարգացմանը զուգընթաց սպիտակ փառը ծածկում է ամբողջ տերևը, իսկ երբեմն նաև ցողունները",
+        "Վարակված տերևները դեղնում են, դառնում են փխրուն, չորանում են և վաղաժամ թափվում",
+        "Թեև սունկը հազվադեպ է ուղղակիորեն վնասում պտուղը, տերևների կորուստը թուլացնում է բույսը, ինչի հետևանքով պտուղները մնում են փոքր և անհամ"
+      ],
+      actions: [
+        "Տնկել բույսերը բավարար հեռավորության վրա և ապահովել արևի ուղիղ ճառագայթների թափանցումը, քանի որ ստվերն ու լճացած օդը նպաստում են սնկի աճին",
+        "Օգտագործել սերմերի այնպիսի տեսակներ, որոնք ունեն գենետիկական դիմադրողականություն ալրացողի նկատմամբ",
+        "Կիրառել ծծումբ պարունակող պատրաստուկներ կամ սիստեմային ֆունգիցիդներ (օր.՝ Topaz, Quadris) առաջին իսկ սպիտակ հետքերը նկատելիս",
+        "Վաղ փուլերում կարելի է օգտագործել սոդայի թույլ լուծույթ կամ կաթնաշիճուկ, որոնք փոխում են տերևի մակերեսի pH-ը և կանխում սնկի զարգացումը",
+        "Խուսափել տերևների թրջումից. ի տարբերություն այլ սնկերի, ալրացողը կարող է զարգանալ նաև համեմատաբար չոր պայմաններում, եթե օդի խոնավությունը բարձր է",
+        "Խորհուրդ է տրվում օգտագործել Topaz կամ բնական միջոցներից՝ սոդայի լուծույթ"
+      ]
+    },
+    en: {
+      arm: "Squash Powdery Mildew",
+      symptoms: [
+        "Circular white spots appear on both upper and lower leaf surfaces",
+        "As the disease develops, the white coating covers the entire leaf and sometimes the stems too",
+        "Infected leaves yellow, become brittle, dry out and drop prematurely",
+        "Although the fungus rarely damages the fruit directly, the loss of leaves weakens the plant, causing fruits to remain small and tasteless"
+      ],
+      actions: [
+        "Plant at adequate spacing and ensure direct sunlight penetration, as shade and stagnant air promote fungal growth",
+        "Use seed varieties that have genetic resistance to powdery mildew",
+        "Apply sulfur-containing preparations or systemic fungicides (e.g. Topaz, Quadris) at the first signs of white marks",
+        "In early stages, a weak baking soda solution or whey can be used, which changes the pH of the leaf surface and prevents fungal development",
+        "Avoid wetting leaves; unlike other fungi, powdery mildew can develop even in relatively dry conditions if air humidity is high",
+        "Recommended fungicides: Topaz or baking soda solution (natural remedy)"
+      ]
+    },
+    ru: {
+      arm: "Мучнистая роса тыквенных (Powdery Mildew)",
+      symptoms: [
+        "На обеих поверхностях листьев (верхней и нижней) появляются округлые белые пятна",
+        "По мере развития болезни белый налёт покрывает весь лист, а иногда и стебли",
+        "Заражённые листья желтеют, становятся хрупкими, засыхают и преждевременно опадают",
+        "Хотя гриб редко повреждает плоды напрямую, потеря листьев ослабляет растение, вследствие чего плоды остаются мелкими и безвкусными"
+      ],
+      actions: [
+        "Высаживать на достаточном расстоянии и обеспечивать проникновение прямых солнечных лучей, так как тень и застойный воздух способствуют росту гриба",
+        "Использовать сорта семян с генетической устойчивостью к мучнистой росе",
+        "Применять препараты на основе серы или системные фунгициды (например, Topaz, Quadris) при первых признаках белого налёта",
+        "На ранних стадиях можно использовать слабый раствор соды или сыворотку, которые изменяют pH поверхности листа и предотвращают развитие гриба",
+        "Избегать намокания листьев; в отличие от других грибков, мучнистая роса может развиваться даже в относительно сухих условиях при высокой влажности воздуха",
+        "Рекомендуемые фунгициды: Topaz или раствор соды (натуральное средство)"
+      ]
+    }
+  },
+
+  "Strawberry___Leaf_scorch": {
+    name: "Strawberry___Leaf_scorch",
+    hy: {
+      arm: "Ելակի տերևների այրվածք (Leaf Scorch)",
+      symptoms: [
+        "Տերևների վերին մակերեսին հայտնվում են բազմաթիվ մանր, մանուշակագույն կամ մուգ կարմիր բծեր. ի տարբերություն այլ հիվանդությունների, այս բծերի կենտրոնը սպիտակ կամ բաց գույնի չի դառնում",
+        "Բծերը մեծանում և միաձուլվում են՝ ստեղծելով մեծ դարչնագույն հատվածներ. տերևի եզրերը սկսում են ոլորվել դեպի վեր և չորանալ՝ տալով կրակից այրվածի տպավորություն",
+        "Վարակը կարող է անցնել նաև ծաղիկների կոթերին, ինչի հետևանքով ծաղիկները չորանում են, իսկ պտուղները՝ չեն ձևավորվում կամ մնում են շատ փոքր"
+      ],
+      actions: [
+        "Տնկել այնպիսի սորտեր, որոնք ունեն բնական կայունություն Diplocarpon earlianum սնկի նկատմամբ",
+        "Բերքահավաքից հետո կամ վաղ գարնանը հեռացնել բոլոր հին ու վնասված տերևները, քանի որ սունկը ձմեռում է հենց դրանց վրա",
+        "Ապահովել բույսերի միջև բավարար տարածություն, որպեսզի տերևները արագ չորանան անձրևից կամ ջրելուց հետո",
+        "Օգտագործել պղինձ պարունակող միջոցներ կամ սիստեմային ֆունգիցիդներ (օր.՝ Captan, Thiram) վեգետացիայի վաղ փուլում՝ նախքան ծաղկումը և բերքահավաքից հետո",
+        "Ջրել միայն արմատային գոտին. խուսափել վերևից անձրևացումից, քանի որ ջրի կաթիլները նպաստում են սպորների տարածմանը",
+        "Խորհուրդ է տրվում օգտագործել Topsin կամ Falcon"
+      ]
+    },
+    en: {
+      arm: "Strawberry Leaf Scorch",
+      symptoms: [
+        "Numerous small purple or dark red spots appear on the upper leaf surface; unlike other diseases, the center of these spots does not turn white or pale",
+        "Spots enlarge and merge, creating large brown areas; leaf edges start to curl upward and dry out, giving the impression of fire burn damage",
+        "The infection can also spread to flower stalks, causing flowers to dry out, and fruits either fail to form or remain very small"
+      ],
+      actions: [
+        "Plant varieties that have natural resistance to the Diplocarpon earlianum fungus",
+        "After harvest or in early spring, remove all old and damaged leaves, as the fungus overwinters on them",
+        "Ensure adequate spacing between plants so that leaves dry quickly after rain or irrigation",
+        "Apply copper-containing agents or systemic fungicides (e.g. Captan, Thiram) in the early growing season — before flowering and after harvest",
+        "Water only at the root zone; avoid overhead irrigation as water droplets promote spore spread",
+        "Recommended fungicides: Topsin or Falcon"
+      ]
+    },
+    ru: {
+      arm: "Ожог листьев земляники (Leaf Scorch)",
+      symptoms: [
+        "На верхней поверхности листьев появляются многочисленные мелкие фиолетовые или тёмно-красные пятна; в отличие от других болезней, центр этих пятен не становится белым или светлым",
+        "Пятна увеличиваются и сливаются, образуя большие коричневые участки; края листьев начинают скручиваться вверх и засыхать, создавая впечатление ожога от огня",
+        "Инфекция может распространяться и на цветоносы, вызывая засыхание цветков, а плоды либо не завязываются, либо остаются очень мелкими"
+      ],
+      actions: [
+        "Высаживать сорта с естественной устойчивостью к грибку Diplocarpon earlianum",
+        "После уборки урожая или ранней весной удалить все старые и повреждённые листья, так как гриб зимует именно на них",
+        "Обеспечить достаточное расстояние между растениями, чтобы листья быстро высыхали после дождя или полива",
+        "Применять медьсодержащие средства или системные фунгициды (например, Captan, Thiram) в начале вегетационного периода — до цветения и после уборки урожая",
+        "Поливать только в прикорневой зоне; избегать дождевания, так как капли воды способствуют распространению спор",
+        "Рекомендуемые фунгициды: Topsin или Falcon"
+      ]
+    }
+  },
+
+  "Strawberry___healthy": {
+    name: "Strawberry___healthy",
+    hy: {
+      arm: "Ելակ (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն միատարր կանաչ գույն, ամուր են, առանց մանուշակագույն կետիկների կամ չորացած (ոլորված) եզրերի",
+        "Հատապտուղները վառ կարմիր են, փայլուն, առանց սպիտակ կամ մոխրագույն բորբոսի հետքերի և ունեն թարմ կանաչ բաժակաթերթիկներ",
+        "Բույսի հիմքը կանաչ է և ամուր, չկան փտման կամ սևացման նշաններ"
+      ],
+      actions: [
+        "Թփերի շուրջը հողը ծածկել ծղոտով կամ հատուկ թաղանթով. սա թույլ չի տալիս, որ պտուղները դիպչեն հողին, ինչը կտրուկ նվազեցնում է փտման ռիսկը և պահում բերքը մաքուր",
+        "Ծաղկման և պտղակալման փուլում ապահովել կալիումական և ֆոսֆորական պարարտանյութերով, ինչպես նաև հետևել կալցիումի մակարդակին՝ պտուղների պնդության համար",
+        "Պարբերաբար հեռացնել ստորին դեղնած կամ չորացած տերևները՝ թփի կենտրոնում օդափոխությունը լավացնելու համար",
+        "Օգտագործել կաթիլային համակարգ. ելակը սիրում է խոնավություն, բայց չի հանդուրժում ջրի կուտակում արմատների մոտ կամ մշտապես թաց տերևներ"
+      ]
+    },
+    en: {
+      arm: "Strawberry (Healthy)",
+      symptoms: [
+        "Leaves have uniform green color, are firm, without purple dots or dried (curled) edges",
+        "Berries are bright red, shiny, without traces of white or gray mold and have fresh green sepals",
+        "Plant crown is green and firm, with no signs of rot or blackening"
+      ],
+      actions: [
+        "Cover soil around the plants with straw or special film; this prevents fruits from touching the ground, which sharply reduces rot risk and keeps the harvest clean",
+        "During flowering and fruit set, supply with potassium and phosphorus fertilizers, and also monitor calcium levels for fruit firmness",
+        "Regularly remove lower yellowed or dried leaves to improve ventilation in the center of the plant",
+        "Use drip irrigation; strawberries like moisture but cannot tolerate water accumulation near roots or permanently wet leaves"
+      ]
+    },
+    ru: {
+      arm: "Земляника (Здоровая)",
+      symptoms: [
+        "Листья имеют однородный зелёный цвет, крепкие, без фиолетовых точек или засохших (скрученных) краёв",
+        "Ягоды ярко-красные, блестящие, без следов белой или серой плесени и имеют свежие зелёные чашелистики",
+        "Основание растения зелёное и крепкое, без признаков гнили или почернения"
+      ],
+      actions: [
+        "Покрыть почву вокруг растений соломой или специальной плёнкой; это не позволяет плодам касаться земли, что резко снижает риск гнили и сохраняет урожай чистым",
+        "В период цветения и завязывания плодов обеспечивать калийными и фосфорными удобрениями, а также следить за уровнем кальция для твёрдости плодов",
+        "Регулярно удалять нижние пожелтевшие или засохшие листья для улучшения вентиляции в центре куста",
+        "Использовать капельный полив; земляника любит влагу, но не переносит скопления воды у корней или постоянно влажных листьев"
+      ]
+    }
+  },
+
+  "Tomato___Bacterial_spot": {
+    name: "Tomato___Bacterial_spot",
+    hy: {
+      arm: "Լոլիկի բակտերիալ բծավորություն (Bacterial Spot)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են բազմաթիվ մանր (մինչև 3 մմ), անկանոն տեսքի, սկզբում ջրալի, հետո մուգ դարչնագույն կամ սև բծեր",
+        "Բծերի շուրջ հաճախ նկատվում է դեղնավուն հատված (քլորոզ). ուժեղ վարակվածության դեպքում բծերը միաձուլվում են, և տերևը չորանում է",
+        "Պտուղների վրա առաջանում են փոքր, կոշտուկանման սև բծեր, որոնք հաճախ ունենում են «թեփոտված» կամ կոպիտ մակերես",
+        "Վարակված տերևները վաղաժամ թափվում են, ինչը հանգեցնում է բույսի թուլացման և պտուղների կեղևի սպիտակեցման կամ չորացման"
+      ],
+      actions: [
+        "Օգտագործել միայն սերտիֆիկացված և ախտահանված սերմեր, քանի որ բակտերիան հիմնականում տարածվում է սերմերի և վարակված տնկիների միջոցով",
+        "Լոլիկը չմշակել նույն տեղում կամ այլ մորմազգիների (պղպեղ, կարտոֆիլ) հաջորդականությամբ առնվազն 2-3 տարի",
+        "Վեգետացիայի ընթացքում պարբերաբար մշակել պղնձի հիմքով ֆունգիցիդներով/բակտերիացիդներով (օր.՝ Kocide, Bordeaux mixture)",
+        "Խուսափել անձրևացումից (վերևից ջրելուց). օգտագործել կաթիլային ոռոգում, որպեսզի տերևները մնան չոր, քանի որ բակտերիան տարածվում է ջրի կաթիլների միջոցով",
+        "Խնամքի աշխատանքների ժամանակ պարբերաբար ախտահանել գործիքները և ձեռքերը, որպեսզի վարակը չփոխանցվի առողջ բույսերին",
+        "Խորհուրդ է տրվում օգտագործել Kocide 2000 կամ copper chloroxide"
+      ]
+    },
+    en: {
+      arm: "Tomato Bacterial Spot",
+      symptoms: [
+        "Numerous small (up to 3 mm) irregular-shaped spots appear on leaves — initially water-soaked, then dark brown or black",
+        "A yellowish area (chlorosis) is often observed around spots; in severe infection spots merge and the leaf dries out",
+        "Small, bump-like black spots develop on fruits, often with a 'scabby' or rough surface",
+        "Infected leaves drop prematurely, leading to plant weakening and bleaching or scorching of fruit skin"
+      ],
+      actions: [
+        "Use only certified and disinfected seeds, as bacteria are mainly spread through seeds and infected seedlings",
+        "Do not grow tomatoes in the same location or in succession with other solanaceous crops (pepper, potato) for at least 2-3 years",
+        "During the growing season, regularly treat with copper-based fungicides/bactericides (e.g. Kocide, Bordeaux mixture)",
+        "Avoid overhead irrigation; use drip irrigation to keep leaves dry, as bacteria spread through water droplets",
+        "Regularly disinfect tools and hands during maintenance work to prevent spreading infection to healthy plants",
+        "Recommended: Kocide 2000 or copper chloroxide"
+      ]
+    },
+    ru: {
+      arm: "Бактериальная пятнистость томата (Bacterial Spot)",
+      symptoms: [
+        "На листьях появляются многочисленные мелкие (до 3 мм) пятна неправильной формы — сначала водянистые, затем тёмно-коричневые или чёрные",
+        "Вокруг пятен часто наблюдается желтоватый участок (хлороз); при сильном заражении пятна сливаются и лист засыхает",
+        "На плодах появляются мелкие бугорчатые чёрные пятна, часто с «шелушащейся» или шероховатой поверхностью",
+        "Заражённые листья преждевременно опадают, что приводит к ослаблению растения и побелению или высыханию кожицы плодов"
+      ],
+      actions: [
+        "Использовать только сертифицированные и обеззараженные семена, так как бактерии в основном распространяются через семена и заражённую рассаду",
+        "Не выращивать томаты на одном месте или в чередовании с другими паслёновыми (перец, картофель) не менее 2-3 лет",
+        "В период вегетации регулярно обрабатывать медьсодержащими фунгицидами/бактерицидами (например, Kocide, Bordeaux mixture)",
+        "Избегать дождевания; использовать капельное орошение для поддержания листьев сухими, так как бактерии распространяются через капли воды",
+        "При уходных работах регулярно дезинфицировать инструменты и руки, чтобы не допустить передачи инфекции здоровым растениям",
+        "Рекомендуемые препараты: Kocide 2000 или медный хлороксид"
+      ]
+    }
+  },
+
+  "Tomato___Early_blight": {
+    name: "Tomato___Early_blight",
+    hy: {
+      arm: "Լոլիկի վաղ չորացում (Early Blight)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են մուգ դարչնագույն կամ սև բծեր, որոնք ունեն բնորոշ համակենտրոն օղակ",
+        "Բծերի շուրջ հյուսվածքները դեղնում են, և եթե վարակը տարածվում է, ամբողջ տերևը կարող է չորանալ ու թափվել",
+        "Հիվանդությունը սովորաբար սկսվում է բույսի ներքևի՝ ավելի հին տերևներից և աստիճանաբար բարձրանում է վերև",
+        "Պտղակոթի մոտ առաջանում են սև, սեղմված բծեր, որոնք կարող են ունենալ օղակաձև նախշեր"
+      ],
+      actions: [
+        "Պարբերաբար հեռացնել բույսի ստորին տերևները (հողից մոտ 20-30 սմ բարձրությամբ), որպեսզի կանխվի հողի հետ շփումը և լավանա օդափոխությունը",
+        "Հողը ծածկել ծղոտով կամ թաղանթով, որպեսզի անձրևի կամ ջրելու ժամանակ հողի մեջ եղած սնկի սպորները չցայտեն տերևների վրա",
+        "Կիրառել պղնձի հիմքով պատրաստուկներ կամ սիստեմային ֆունգիցիդներ (օր.՝ Skor, Ridomil Gold, Quadris) առաջին նշանները տեսնելուն պես",
+        "Չտնկել լոլիկ նույն տեղում, որտեղ նախորդ տարի աճել է լոլիկ, կարտոֆիլ կամ պղպեղ",
+        "Ջրել միայն արմատային գոտին. թաց տերևները լավագույն միջավայրն են սնկի զարգացման համար",
+        "Խորհուրդ է տրվում օգտագործել Ditan M-45 կամ Antracol"
+      ]
+    },
+    en: {
+      arm: "Tomato Early Blight",
+      symptoms: [
+        "Dark brown or black spots with characteristic concentric rings appear on leaves",
+        "Tissues around spots yellow, and if the infection spreads, the entire leaf can dry out and drop",
+        "The disease usually starts from the lower, older leaves and gradually moves upward",
+        "Black sunken spots with ring-like patterns develop near the fruit stem"
+      ],
+      actions: [
+        "Regularly remove the lower leaves of the plant (about 20-30 cm above the ground) to prevent contact with soil and improve ventilation",
+        "Cover soil with straw or film so that fungal spores in the soil do not splash onto leaves during rain or irrigation",
+        "Apply copper-based preparations or systemic fungicides (e.g. Skor, Ridomil Gold, Quadris) as soon as first signs appear",
+        "Do not plant tomatoes in the same location where tomatoes, potatoes or peppers grew the previous year",
+        "Water only at the root zone; wet leaves are the best environment for fungal development",
+        "Recommended fungicides: Ditan M-45 or Antracol"
+      ]
+    },
+    ru: {
+      arm: "Ранний ожог томата (Early Blight)",
+      symptoms: [
+        "На листьях появляются тёмно-коричневые или чёрные пятна с характерными концентрическими кольцами",
+        "Ткани вокруг пятен желтеют, и если инфекция распространяется, весь лист может засохнуть и опасть",
+        "Болезнь обычно начинается с нижних, более старых листьев и постепенно поднимается вверх",
+        "Вблизи плодоножки появляются чёрные вдавленные пятна с кольцеобразным рисунком"
+      ],
+      actions: [
+        "Регулярно удалять нижние листья растения (примерно на высоте 20-30 см от земли), чтобы предотвратить контакт с почвой и улучшить вентиляцию",
+        "Покрывать почву соломой или плёнкой, чтобы во время дождя или полива споры гриба из почвы не попадали на листья",
+        "Применять медьсодержащие препараты или системные фунгициды (например, Skor, Ridomil Gold, Quadris) при появлении первых признаков",
+        "Не высаживать томаты там, где в прошлом году росли томаты, картофель или перец",
+        "Поливать только в прикорневой зоне; влажные листья — лучшая среда для развития гриба",
+        "Рекомендуемые фунгициды: Ditan M-45 или Antracol"
+      ]
+    }
+  },
+
+  "Tomato___Late_blight": {
+    name: "Tomato___Late_blight",
+    hy: {
+      arm: "Լոլիկի ֆիտոֆտորոզ (Late Blight)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են մուգ, ջրալի, անկանոն տեսքի բծեր, որոնք շատ արագ (2-3 օրում) տարածվում են ամբողջ սաղարթի վրա",
+        "Խոնավ պայմաններում տերևի ստորին մակերեսին, բծերի եզրերով, առաջանում է սպիտակ փառ (սպորներ)",
+        "Ցողունների և կոթերի վրա հայտնվում են մուգ դարչնագույն կամ սև հատվածներ, ինչի հետևանքով բույսը «հալվում» է և թեքվում դեպի հողը",
+        "Կանաչ կամ հասուն պտուղների վրա առաջանում են մեծ, կոշտ, դարչնագույն բծեր, որոնք ունեն մարմարյա նախշեր. պտուղը դառնում է ուտելու համար անպիտան"
+      ],
+      actions: [
+        "Հիվանդությունը պայթյունավտանգ է դառնում զով (15-22°C) և շատ խոնավ (անձրև, մառախուղ, առատ ցող) եղանակին. նման օրերին պաշտպանական միջոցառումները պարտադիր են",
+        "Կիրառել ուժեղ սիստեմային և կոնտակտային ֆունգիցիդներ (օր.՝ Ridomil Gold, Infinito, Revus, Curzate)",
+        "Եթե տեսնում եք ուժեղ վարակված թուփ, այն պետք է արմատախիլ անել, զգուշությամբ դնել պարկի մեջ և հեռացնել տարածքից (չթողնել դաշտի եզրին)",
+        "Ջերմոցներում ապահովել մշտական օդափոխություն, որպեսզի տերևների վրա խոնավություն չկուտակվի",
+        "Տնկել ֆիտոֆտորակայուն հիբրիդներ, որոնք ունեն գենետիկական դիմադրողականություն այս հիվանդության նկատմամբ",
+        "Խորհուրդ է տրվում օգտագործել Revus կամ Ridomil Gold"
+      ]
+    },
+    en: {
+      arm: "Tomato Late Blight",
+      symptoms: [
+        "Dark, water-soaked, irregular spots appear on leaves, spreading very rapidly (within 2-3 days) across the entire foliage",
+        "In humid conditions, a white coating (spores) forms along the edges of spots on the lower leaf surface",
+        "Dark brown or black areas appear on stems and petioles, causing the plant to 'melt' and bend toward the ground",
+        "Large, hard, brown spots with marble-like patterns develop on green or ripe fruits; the fruit becomes unfit for consumption"
+      ],
+      actions: [
+        "The disease becomes explosive in cool (15-22°C) and very humid (rain, fog, heavy dew) weather; protective measures are mandatory on such days",
+        "Apply strong systemic and contact fungicides (e.g. Ridomil Gold, Infinito, Revus, Curzate)",
+        "If you see a heavily infected plant, it must be uprooted, carefully placed in a bag and removed from the area (do not leave it at the field edge)",
+        "In greenhouses, ensure constant ventilation so that moisture does not accumulate on leaves",
+        "Plant late-blight resistant hybrids that have genetic resistance to this disease",
+        "Recommended fungicides: Revus or Ridomil Gold"
+      ]
+    },
+    ru: {
+      arm: "Фитофтороз томата (Late Blight)",
+      symptoms: [
+        "На листьях появляются тёмные водянистые пятна неправильной формы, очень быстро (за 2-3 дня) распространяющиеся по всей листве",
+        "Во влажных условиях по краям пятен на нижней поверхности листа образуется белый налёт (споры)",
+        "На стеблях и черешках появляются тёмно-коричневые или чёрные участки, вследствие чего растение «тает» и наклоняется к земле",
+        "На зелёных или спелых плодах образуются крупные твёрдые коричневые пятна с мраморным рисунком; плод становится непригодным в пищу"
+      ],
+      actions: [
+        "Болезнь становится взрывоопасной в прохладную (15-22°C) и очень влажную (дождь, туман, обильная роса) погоду; в такие дни защитные меры обязательны",
+        "Применять сильные системные и контактные фунгициды (например, Ridomil Gold, Infinito, Revus, Curzate)",
+        "При обнаружении сильно заражённого куста его необходимо выкорчевать, осторожно поместить в пакет и вынести с участка (не оставлять на краю поля)",
+        "В теплицах обеспечивать постоянную вентиляцию, чтобы влага не скапливалась на листьях",
+        "Высаживать устойчивые к фитофторозу гибриды с генетической устойчивостью к данному заболеванию",
+        "Рекомендуемые фунгициды: Revus или Ridomil Gold"
+      ]
+    }
+  },
+
+  "Tomato___Leaf_Mold": {
+    name: "Tomato___Leaf_Mold",
+    hy: {
+      arm: "Լոլիկի տերևների բորբոս (Leaf Mold)",
+      symptoms: [
+        "Տերևների վերին մակերեսին հայտնվում են բաց դեղնավուն, անորոշ եզրերով բծեր",
+        "Տերևի ստորին մակերեսին, դեղին բծերի հակառակ կողմում, առաջանում է ձիթապտղագույն-գորշ կամ մանուշակագույն թավշյա փառ (սնկի սպորներ)",
+        "Վարակված տերևները սկսում են դեղնել, ոլորվել և չորանալ, սակայն, ի տարբերություն ֆիտոֆտորոզի, բույսի ցողունն ու պտուղները սովորաբար մնում են առողջ",
+        "Հիվանդությունը սկսվում է ստորին տերևներից և արագ բարձրանում վերև՝ զրկելով բույսին տերևային զանգվածից"
+      ],
+      actions: [
+        "Ջերմոցներում պետք է ապահովել մշտական օդափոխություն, որպեսզի օդի խոնավությունը չանցնի 85%-ից",
+        "Հեռացնել բոլոր վարակված և ստորին հին տերևները՝ թփի ներսում օդի շրջանառությունը լավացնելու համար",
+        "Խուսափել ջերմաստիճանի կտրուկ տատանումներից, որոնք նպաստում են տերևների վրա խոնավության առաջացմանը",
+        "Կիրառել պղինձ պարունակող միջոցներ կամ սիստեմային ֆունգիցիդներ (օր.՝ Topaz, Quadris, Chorus) առաջին նշանների դեպքում",
+        "Ջերմոցային մշակության համար նախապատվությունը տալ այն հիբրիդներին, որոնք ունեն գենետիկական դիմադրողականություն Passalora fulva սնկի նկատմամբ",
+        "Խորհուրդ է տրվում օգտագործել Bravo կամ Chorus"
+      ]
+    },
+    en: {
+      arm: "Tomato Leaf Mold",
+      symptoms: [
+        "Pale yellowish spots with indefinite edges appear on the upper leaf surface",
+        "On the lower leaf surface, opposite the yellow spots, an olive-gray or purple velvety coating forms (fungal spores)",
+        "Infected leaves begin to yellow, curl and dry out, however, unlike late blight, the plant's stems and fruits usually remain healthy",
+        "The disease starts from the lower leaves and quickly moves upward, stripping the plant of its leaf mass"
+      ],
+      actions: [
+        "In greenhouses, ensure constant ventilation so that air humidity does not exceed 85%",
+        "Remove all infected and lower old leaves to improve air circulation inside the canopy",
+        "Avoid sharp temperature fluctuations, which promote moisture condensation on leaves",
+        "Apply copper-containing agents or systemic fungicides (e.g. Topaz, Quadris, Chorus) at the first signs",
+        "For greenhouse cultivation, prefer hybrids that have genetic resistance to the Passalora fulva fungus",
+        "Recommended fungicides: Bravo or Chorus"
+      ]
+    },
+    ru: {
+      arm: "Листовая плесень томата (Leaf Mold)",
+      symptoms: [
+        "На верхней поверхности листьев появляются бледно-желтоватые пятна с неопределёнными краями",
+        "На нижней поверхности листа, напротив жёлтых пятен, образуется оливково-серый или фиолетовый бархатистый налёт (споры гриба)",
+        "Заражённые листья начинают желтеть, скручиваться и засыхать, однако, в отличие от фитофтороза, стебли и плоды растения обычно остаются здоровыми",
+        "Болезнь начинается с нижних листьев и быстро поднимается вверх, лишая растение листовой массы"
+      ],
+      actions: [
+        "В теплицах необходимо обеспечить постоянную вентиляцию, чтобы влажность воздуха не превышала 85%",
+        "Удалять все заражённые и нижние старые листья для улучшения циркуляции воздуха внутри куста",
+        "Избегать резких перепадов температуры, способствующих конденсации влаги на листьях",
+        "При первых признаках применять медьсодержащие средства или системные фунгициды (например, Topaz, Quadris, Chorus)",
+        "Для тепличного выращивания предпочтительны гибриды с генетической устойчивостью к грибку Passalora fulva",
+        "Рекомендуемые фунгициды: Bravo или Chorus"
+      ]
+    }
+  },
+
+  "Tomato___Septoria_leaf_spot": {
+    name: "Tomato___Septoria_leaf_spot",
+    hy: {
+      arm: "Լոլիկի սեպտորիոզ (Septoria Leaf Spot)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են բազմաթիվ շրջանաձև, մանր (1.5–3 մմ) բծեր. դրանք ունեն մոխրագույն կամ սպիտակավուն կենտրոն և մուգ դարչնագույն կամ սև եզրագծեր",
+        "Բծերի կենտրոնում խոշորացույցով կարելի է տեսնել մանր սև կետիկներ, որոնք սնկի սպորակիրներն են",
+        "Վարակը սկսվում է ստորին տերևներից. ուժեղ վնասված տերևները դեղնում են, չորանում և թափվում, ինչը բույսի «մերկացման» պատճառ է դառնում",
+        "Տերևային զանգվածի կորստի հետևանքով պտուղները մնում են անպաշտպան և ստանում են արևային այրվածքներ"
+      ],
+      actions: [
+        "Քանի որ սունկը կարող է լինել սերմերի վրա, պետք է օգտագործել միայն վստահելի և մշակված սերմացու",
+        "Բերքահավաքից հետո մանրակրկիտ մաքրել դաշտը բուսական մնացորդներից, քանի որ սունկը ձմեռում է դրանց մեջ",
+        "Հողը ծածկել ծղոտով կամ թաղանթով՝ կանխելու համար հողում եղած սպորների ցայտումը տերևների վրա անձրևի կամ ջրելու ժամանակ",
+        "Ապահովել թփերի միջև բավարար տարածություն և հեռացնել ստորին վարակված տերևները",
+        "Կիրառել պղնձի հիմքով պատրաստուկներ կամ սիստեմային ֆունգիցիդներ (օր.՝ Mancozeb, Chlorothalonil, Quadris)՝ առաջին նշանները նկատելուն պես",
+        "Խորհուրդ է տրվում օգտագործել Mancozeb կամ Chlorothalonil"
+      ]
+    },
+    en: {
+      arm: "Tomato Septoria Leaf Spot",
+      symptoms: [
+        "Numerous circular, small (1.5–3 mm) spots appear on leaves; they have a gray or whitish center and dark brown or black borders",
+        "Under magnification, small black dots (fungal pycnidia, spore-bearing bodies) can be seen in the center of spots",
+        "Infection starts from the lower leaves; heavily damaged leaves yellow, dry out and drop, causing the plant to become 'bare'",
+        "Due to the loss of leaf mass, fruits remain unprotected and develop sunscald"
+      ],
+      actions: [
+        "Since the fungus can be present on seeds, use only reliable and treated seed",
+        "After harvest, thoroughly clean the field of plant residues, as the fungus overwinters in them",
+        "Cover soil with straw or film to prevent spores in the soil from splashing onto leaves during rain or irrigation",
+        "Ensure adequate spacing between plants and remove lower infected leaves",
+        "Apply copper-based preparations or systemic fungicides (e.g. Mancozeb, Chlorothalonil, Quadris) as soon as first signs are noticed",
+        "Recommended fungicides: Mancozeb or Chlorothalonil"
+      ]
+    },
+    ru: {
+      arm: "Септориоз томата (Septoria Leaf Spot)",
+      symptoms: [
+        "На листьях появляются многочисленные округлые мелкие (1.5–3 мм) пятна; они имеют серый или беловатый центр и тёмно-коричневые или чёрные края",
+        "Под увеличением в центре пятен можно увидеть мелкие чёрные точки — пикниды гриба (споровместилища)",
+        "Инфекция начинается с нижних листьев; сильно поражённые листья желтеют, засыхают и опадают, вызывая «оголение» растения",
+        "Из-за потери листовой массы плоды остаются незащищёнными и получают солнечные ожоги"
+      ],
+      actions: [
+        "Поскольку гриб может присутствовать на семенах, использовать только надёжный и обработанный посевной материал",
+        "После уборки урожая тщательно очистить поле от растительных остатков, так как гриб зимует в них",
+        "Покрыть почву соломой или плёнкой, чтобы предотвратить попадание спор из почвы на листья во время дождя или полива",
+        "Обеспечить достаточное расстояние между кустами и удалить нижние заражённые листья",
+        "При первых признаках применять медьсодержащие препараты или системные фунгициды (например, Mancozeb, Chlorothalonil, Quadris)",
+        "Рекомендуемые фунгициды: Mancozeb или Chlorothalonil"
+      ]
+    }
+  },
+
+  "Tomato___Spider_mites Two-spotted_spider_mite": {
+    name: "Tomato___Spider_mites Two-spotted_spider_mite",
+    hy: {
+      arm: "Լոլիկի սարդոստայնատիզ (Two-Spotted Spider Mite)",
+      symptoms: [
+        "Տերևների վերին մակերեսին հայտնվում են բազմաթիվ մանր, սպիտակավուն կամ դեղնավուն կետիկներ (ծակոցների հետքեր)",
+        "Ուժեղ վարակվածության դեպքում տերևների ստորին մակերեսին, իսկ հետո նաև ամբողջ թփի վրա հայտնվում է սարդոստայն",
+        "Տերևները դառնում են մոխրագույն կամ բրոնզագույն, չորանում են և վաղաժամ թափվում",
+        "Բույսը թուլանում է, ինչի հետևանքով պտուղները մնում են փոքր, իսկ բերքատվությունը կտրուկ նվազում է"
+      ],
+      actions: [
+        "Տիզը սիրում է չոր օդ. ջերմոցներում օդի խոնավության պահպանումը և տերևների պարբերաբար ցողումը ջրով դժվարացնում են նրա բազմացումը",
+        "Օգտագործել հատուկ տիզասպան միջոցներ (ակարիցիդներ), օրինակ՝ Omite, Vertimec, Nisoran կամ Apollo. կարևոր է մշակել տերևների ստորին մակերեսը",
+        "Օգտագործել գիշատիչ տիզեր (օր.՝ Phytoseiulus persimilis), որոնք սնվում են սարդոստայնատիզով և բնական ճանապարհով կարգավորում են դրանց քանակը",
+        "Մաքրել դաշտը և ջերմոցի շրջակայքը մոլախոտերից, քանի որ տիզերը հաճախ ձմեռում և բազմանում են հենց դրանց վրա",
+        "Բերքահավաքից հետո անմիջապես հեռացնել և այրել բոլոր բույսերը՝ վնասատուների հետագա տարածումը կանխելու համար",
+        "Խորհուրդ է տրվում օգտագործել Vertimec կամ Apollo"
+      ]
+    },
+    en: {
+      arm: "Tomato Two-Spotted Spider Mite",
+      symptoms: [
+        "Numerous small whitish or yellowish dots (puncture marks) appear on the upper leaf surface",
+        "In severe infestation, webbing appears on the lower leaf surface and then on the entire plant",
+        "Leaves turn gray or bronze, dry out and drop prematurely",
+        "The plant weakens, causing fruits to remain small and yield to drop sharply"
+      ],
+      actions: [
+        "Mites prefer dry air; maintaining air humidity in greenhouses and periodically misting leaves with water makes their reproduction more difficult",
+        "Use specific acaricides, e.g. Omite, Vertimec, Nisoran or Apollo; it is important to treat the underside of leaves",
+        "Use predatory mites (e.g. Phytoseiulus persimilis) that feed on spider mites and naturally regulate their numbers",
+        "Clean the field and greenhouse surroundings of weeds, as mites often overwinter and reproduce on them",
+        "Immediately after harvest, remove and burn all plants to prevent further spread of the pest",
+        "Recommended acaricides: Vertimec or Apollo"
+      ]
+    },
+    ru: {
+      arm: "Паутинный клещ томата (Two-Spotted Spider Mite)",
+      symptoms: [
+        "На верхней поверхности листьев появляются многочисленные мелкие беловатые или желтоватые точки (следы проколов)",
+        "При сильном заражении на нижней поверхности листьев, а затем и на всём кусте появляется паутина",
+        "Листья становятся серыми или бронзовыми, засыхают и преждевременно опадают",
+        "Растение слабеет, вследствие чего плоды остаются мелкими, а урожайность резко снижается"
+      ],
+      actions: [
+        "Клещ предпочитает сухой воздух; поддержание влажности воздуха в теплицах и периодическое опрыскивание листьев водой затрудняет его размножение",
+        "Использовать специальные акарициды, например, Omite, Vertimec, Nisoran или Apollo; важно обрабатывать нижнюю поверхность листьев",
+        "Использовать хищных клещей (например, Phytoseiulus persimilis), питающихся паутинным клещом и естественным образом регулирующих их численность",
+        "Очищать поле и окрестности теплицы от сорняков, так как клещи часто зимуют и размножаются именно на них",
+        "Сразу после уборки урожая удалить и сжечь все растения для предотвращения дальнейшего распространения вредителя",
+        "Рекомендуемые акарициды: Vertimec или Apollo"
+      ]
+    }
+  },
+
+  "Tomato___Target_Spot": {
+    name: "Tomato___Target_Spot",
+    hy: {
+      arm: "Լոլիկի թիրախաձև բծավորություն (Target Spot)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են փոքր, ջրալի բծեր, որոնք մեծանալով դառնում են կլորավուն և դարչնագույն. բնորոշ հատկանիշը համակենտրոն օղակներն են, որոնք տերևին տալիս են «թիրախի» տեսք",
+        "Բծերի շուրջ հաճախ առաջանում է վառ դեղնավուն պսակ. ուժեղ վարակվածության դեպքում բծերը միաձուլվում են՝ առաջացնելով մեծ մեռուկացած տարածքներ",
+        "Պտուղների վրա առաջանում են փոքր, սեղմված դարչնագույն բծեր. հիվանդության զարգացման հետ մեկտեղ պտղի մակերեսը կարող է ճաքել բծերի հատվածում",
+        "Վարակը կարող է անցնել նաև ցողուններին՝ առաջացնելով երկարավուն հետքեր"
+      ],
+      actions: [
+        "Ապահովել թփերի միջև բավարար տարածություն և կատարել ճիշտ էտ, որպեսզի սաղարթի ներսում խոնավությունը չլճանա",
+        "Քանի որ սունկը հաճախ սկսում է զարգանալ հողին մոտ գտնվող տերևներից, դրանց հեռացումը զգալիորեն նվազեցնում է վարակի տարածումը",
+        "Կիրառել սիստեմային ֆունգիցիդներ (օր.՝ Quadris, Skor, Revus) կամ պղնձի հիմքով պատրաստուկներ. կարևոր է փոխարինել տարբեր ազդող նյութերով ֆունգիցիդները, որպեսզի սունկը չդառնա կայուն դրանց նկատմամբ",
+        "Խուսափել անձրևացումից. ջուրը պետք է մատակարարվի միայն արմատներին (կաթիլային ոռոգում), որպեսզի տերևները մնան չոր",
+        "Խուսափել լոլիկի տնկումից այնտեղ, որտեղ նախորդ տարի եղել են վարակված բույսեր (լոլիկ, վարունգ, պղպեղ)",
+        "Խորհուրդ է տրվում օգտագործել Cabrio Top"
+      ]
+    },
+    en: {
+      arm: "Tomato Target Spot",
+      symptoms: [
+        "Small, water-soaked spots appear on leaves, which as they enlarge become circular and brown; the characteristic feature is concentric rings that give the leaf a 'target' appearance",
+        "A bright yellowish halo often forms around spots; in severe infection spots merge, creating large necrotic areas",
+        "Small, sunken brown spots develop on fruits; as the disease progresses, the fruit surface may crack at the spots",
+        "The infection can also spread to stems, creating elongated marks"
+      ],
+      actions: [
+        "Ensure adequate spacing between plants and perform proper pruning so that moisture does not stagnate inside the foliage",
+        "Since the fungus often starts developing from leaves near the ground, removing them significantly reduces the spread of infection",
+        "Apply systemic fungicides (e.g. Quadris, Skor, Revus) or copper-based preparations; it is important to rotate fungicides with different active ingredients so the fungus does not develop resistance",
+        "Avoid overhead irrigation; water should be supplied only to the roots (drip irrigation) to keep leaves dry",
+        "Avoid planting tomatoes where infected plants (tomatoes, cucumbers, peppers) were present the previous year",
+        "Recommended fungicide: Cabrio Top"
+      ]
+    },
+    ru: {
+      arm: "Мишеневидная пятнистость томата (Target Spot)",
+      symptoms: [
+        "На листьях появляются мелкие водянистые пятна, которые по мере увеличения становятся округлыми и коричневыми; характерная черта — концентрические кольца, придающие листу вид «мишени»",
+        "Вокруг пятен часто образуется ярко-жёлтый ореол; при сильном заражении пятна сливаются, образуя крупные некротические участки",
+        "На плодах появляются мелкие вдавленные коричневые пятна; по мере развития болезни поверхность плода может трескаться в местах пятен",
+        "Инфекция может распространяться и на стебли, образуя продолговатые следы"
+      ],
+      actions: [
+        "Обеспечить достаточное расстояние между кустами и провести правильную обрезку, чтобы влага не застаивалась внутри листвы",
+        "Поскольку гриб часто начинает развиваться с листьев, близких к земле, их удаление значительно снижает распространение инфекции",
+        "Применять системные фунгициды (например, Quadris, Skor, Revus) или медьсодержащие препараты; важно чередовать фунгициды с разными действующими веществами, чтобы гриб не выработал устойчивость",
+        "Избегать дождевания; вода должна подаваться только к корням (капельное орошение), чтобы листья оставались сухими",
+        "Избегать посадки томатов там, где в прошлом году были заражённые растения (томаты, огурцы, перцы)",
+        "Рекомендуемый фунгицид: Cabrio Top"
+      ]
+    }
+  },
+
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+    name: "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+    hy: {
+      arm: "Լոլիկի տերևների դեղին գանգրոտություն (TYLCV)",
+      symptoms: [
+        "Երիտասարդ տերևները սկսում են ոլորվել դեպի վեր և ներս՝ ստանալով «գավաթի» տեսք",
+        "Տերևների եզրերը և ճյուղամիջյան հատվածները դառնում են վառ դեղին, մինչդեռ ճյուղերը կարող են մնալ կանաչ",
+        "Բույսը դադարում է աճել, դառնում է թփանման. միջհանգույցները կարճանում են, ինչի հետևանքով բույսը ստանում է խիտ, «կծկված» տեսք",
+        "Վարակված բույսերը սովորաբար թափում են ծաղիկները. եթե պտուղներ, այնուամենայնիվ, ձևավորվում են, դրանք լինում են մանր և անորակ"
+      ],
+      actions: [
+        "Օգտագործել դեղին կպչուն թակարդներ միջատների առկայությունը հսկելու համար և կիրառել ինսեկտիցիդներ (օր.՝ Confidor, Actara, Movento)",
+        "Ջերմոցներում օգտագործել շատ մանր անցքերով միջատապաշտպան ցանցեր, որպեսզի սպիտակաթևիկը չկարողանա ներս թափանցել",
+        "Տնկել TYLCV-ի նկատմամբ գենետիկական դիմադրողականություն ունեցող սորտեր. սա ամենաարդյունավետ մեթոդն է բաց դաշտում մշակության համար",
+        "Ոչնչացնել ջերմոցի շրջակայքի մոլախոտերը, քանի որ դրանք հանդիսանում են թե՛ վիրուսի, թե՛ սպիտակաթևիկի «ապաստարաններ»",
+        "Վարակված առաջին իսկ թփերը պետք է անմիջապես արմատախիլ անել և այրել, որպեսզի դրանք չդառնան վարակի աղբյուր մնացած դաշտի համար",
+        "Խորհուրդ է տրվում օգտագործել Actara կամ Confidor (միջատասպաններ)"
+      ]
+    },
+    en: {
+      arm: "Tomato Yellow Leaf Curl Virus (TYLCV)",
+      symptoms: [
+        "Young leaves begin to curl upward and inward, taking on a 'cup' shape",
+        "Leaf edges and interveinal areas turn bright yellow, while the veins may remain green",
+        "The plant stops growing and becomes bushy; internodes shorten, giving the plant a dense, 'stunted' appearance",
+        "Infected plants usually drop their flowers; if fruits do form, they are small and poor quality"
+      ],
+      actions: [
+        "Use yellow sticky traps to monitor insect presence and apply insecticides (e.g. Confidor, Actara, Movento)",
+        "In greenhouses, use insect-proof nets with very fine mesh so that whiteflies cannot penetrate",
+        "Plant varieties with genetic resistance to TYLCV; this is the most effective method for open-field cultivation",
+        "Destroy weeds around the greenhouse, as they serve as 'refuges' for both the virus and the whitefly",
+        "The first infected plants must be immediately uprooted and burned so that they do not become a source of infection for the rest of the field",
+        "Recommended insecticides: Actara or Confidor"
+      ]
+    },
+    ru: {
+      arm: "Вирус жёлтой курчавости листьев томата (TYLCV)",
+      symptoms: [
+        "Молодые листья начинают скручиваться вверх и внутрь, принимая форму «чаши»",
+        "Края листьев и межжилковые участки становятся ярко-жёлтыми, тогда как жилки могут оставаться зелёными",
+        "Растение прекращает рост и становится кустистым; междоузлия укорачиваются, придавая растению плотный, «скрюченный» вид",
+        "Заражённые растения обычно сбрасывают цветки; если плоды всё же завязываются, они мелкие и низкого качества"
+      ],
+      actions: [
+        "Использовать жёлтые клейкие ловушки для контроля присутствия насекомых и применять инсектициды (например, Confidor, Actara, Movento)",
+        "В теплицах использовать защитные сетки с очень мелкими ячейками, чтобы белокрылка не могла проникнуть внутрь",
+        "Высаживать сорта с генетической устойчивостью к TYLCV; это наиболее эффективный метод для выращивания в открытом грунте",
+        "Уничтожать сорняки вблизи теплицы, так как они служат «укрытием» как для вируса, так и для белокрылки",
+        "Первые заражённые кусты необходимо немедленно выкорчевать и сжечь, чтобы они не стали источником инфекции для остального поля",
+        "Рекомендуемые инсектициды: Actara или Confidor"
+      ]
+    }
+  },
+
+  "Tomato___Tomato_mosaic_virus": {
+    name: "Tomato___Tomato_mosaic_virus",
+    hy: {
+      arm: "Լոլիկի մոզաիկայի վիրուս (ToMV)",
+      symptoms: [
+        "Տերևների վրա հայտնվում են բնորոշ բաց և մուգ կանաչ կամ դեղնավուն խայտաբղետ բծեր, որոնք նման են մոզաիկայի",
+        "Տերևները կարող են դառնալ նեղ, երկարավուն («թելանման») կամ ունենալ անհարթ, կնճռոտ մակերես",
+        "Բույսը սովորաբար ավելի թույլ է զարգանում, քան առողջ թփերը, իսկ միջհանգույցները կարող են կարճանալ",
+        "Թեև պտուղները արտաքնապես կարող են նորմալ թվալ, ներսից դրանք հաճախ ունենում են դարչնագույն, մեռուկացած հատվածներ, ինչը դարձնում է դրանք անուտելի"
+      ],
+      actions: [
+        "Խնամքի աշխատանքներից առաջ և հետո լվանալ ձեռքերը օճառով. գործիքները պարբերաբար ախտահանել սպիրտով կամ քլորի թույլ լուծույթով",
+        "Թույլ չտալ ծխել ջերմոցում կամ բույսերի մոտ. ծխող անձինք պետք է մանրակրկիտ լվանան ձեռքերը նախքան բույսերին դիպչելը",
+        "Օգտագործել միայն վստահելի մատակարարների սերմեր, որոնք անցել են ջերմային կամ քիմիական մշակում (օր.՝ sodium hypochlorite-ով)",
+        "Ընտրել այնպիսի հիբրիդներ, որոնք ունեն «Tm» գենը (դիմադրողականություն ToMV-ի նկատմամբ)",
+        "Հիվանդ բույսերը պետք է անհապաղ արմատախիլ անել և այրել. դրանք չպետք է գցել օրգանական թափոնների կույտի մեջ, քանի որ վիրուսը չի ոչնչանում դրանց մշակման ժամանակ"
+      ]
+    },
+    en: {
+      arm: "Tomato Mosaic Virus (ToMV)",
+      symptoms: [
+        "Characteristic light and dark green or yellowish mottled spots appear on leaves, resembling a mosaic",
+        "Leaves may become narrow, elongated ('string-like') or have an uneven, wrinkled surface",
+        "The plant usually develops more weakly than healthy ones, and internodes may shorten",
+        "Although fruits may look normal from the outside, inside they often have brown, necrotic areas, making them inedible"
+      ],
+      actions: [
+        "Wash hands with soap before and after maintenance work; regularly disinfect tools with alcohol or dilute chlorine solution",
+        "Do not allow smoking in the greenhouse or near plants; smokers must thoroughly wash their hands before touching plants",
+        "Use only seeds from reliable suppliers that have undergone heat or chemical treatment (e.g. with sodium hypochlorite)",
+        "Select hybrids that carry the 'Tm' gene (resistance to ToMV)",
+        "Diseased plants must be immediately uprooted and burned; they must not be thrown into organic waste piles, as the virus is not destroyed during their decomposition"
+      ]
+    },
+    ru: {
+      arm: "Вирус мозаики томата (ToMV)",
+      symptoms: [
+        "На листьях появляются характерные светло- и тёмно-зелёные или желтоватые мозаичные пятна, напоминающие мозаику",
+        "Листья могут становиться узкими, удлинёнными («нитевидными») или иметь неровную, морщинистую поверхность",
+        "Растение обычно развивается слабее, чем здоровые, а междоузлия могут укорачиваться",
+        "Хотя плоды снаружи могут выглядеть нормально, внутри они часто имеют коричневые некротические участки, делающие их несъедобными"
+      ],
+      actions: [
+        "Мыть руки с мылом до и после ухода за растениями; регулярно дезинфицировать инструменты спиртом или слабым раствором хлора",
+        "Не допускать курения в теплице или вблизи растений; курильщики должны тщательно мыть руки перед прикосновением к растениям",
+        "Использовать только семена от надёжных поставщиков, прошедшие тепловую или химическую обработку (например, sodium hypochlorite)",
+        "Выбирать гибриды, несущие ген «Tm» (устойчивость к ToMV)",
+        "Больные растения необходимо немедленно выкорчевать и сжечь; их нельзя выбрасывать в кучу органических отходов, так как вирус не уничтожается при их переработке"
+      ]
+    }
+  },
+
+  "Tomato___healthy": {
+    name: "Tomato___healthy",
+    hy: {
+      arm: "Լոլիկ (Առողջ)",
+      symptoms: [
+        "Տերևներն ունեն առողջ մուգ կանաչ գույն, առանց դեղին եզրերի, մոզաիկ նախշերի կամ թիրախաձև բծերի. տերևի մակերեսը մաքուր է՝ առանց փառի կամ սարդոստայնի",
+        "Ցողունը ուղղաձիգ է, ամուր և չունի մութ խոցեր կամ ներս ընկած հատվածներ",
+        "Պտուղներն ունեն հավասարաչափ գունավորում (ըստ սորտի), հարթ մակերես՝ առանց ճաքերի, սև կոշտուկների կամ ներքին փտման նշանների",
+        "Բույսը շարունակում է ձևավորել առողջ ծաղկաբույլեր, որոնք չեն թափվում և վերածվում են առողջ մատղաշ պտուղների"
+      ],
+      actions: [
+        "Պարբերաբար պետք է հեռացնել ստորին հին տերևները. սա ապահովում է լավ օդափոխություն և լույսի թափանցում թփի կենտրոն, ինչը լավագույն կանխարգելումն է սնկային հիվանդությունների դեմ",
+        "Պտղակալման փուլում շեշտը դնել կալիումի և կալցիումի վրա. կալցիումի բավարար քանակը կանխում է պտուղների գագաթնային փտումը (Blossom End Rot)",
+        "Հողը ծածկել ծղոտով կամ թաղանթով. սա պահպանում է խոնավությունը, կայունացնում հողի ջերմաստիճանը և թույլ չի տալիս հողային պաթոգեններին անձրևի ժամանակ անցնել տերևներին",
+        "Նույնիսկ առողջ բույսերի դեպքում, խոնավ կամ մառախլապատ եղանակին խորհուրդ է տրվում կատարել թեթև մշակում կենսաբանական պատրաստուկներով (օր.՝ Fitosporin) կամ պղնձի թույլ լուծույթով"
+      ]
+    },
+    en: {
+      arm: "Tomato (Healthy)",
+      symptoms: [
+        "Leaves have healthy dark green color, without yellow edges, mosaic patterns or target-like spots; leaf surface is clean — no coating or webbing",
+        "Stem is upright, firm and has no dark lesions or sunken areas",
+        "Fruits have uniform coloring (according to variety), smooth surface — no cracks, black bumps or signs of internal rot",
+        "The plant continues to form healthy flower clusters that do not drop and develop into healthy young fruits"
+      ],
+      actions: [
+        "Regularly remove the lower old leaves; this ensures good ventilation and light penetration to the center of the plant, which is the best prevention against fungal diseases",
+        "During fruit set, focus on potassium and calcium; adequate calcium prevents blossom end rot (Blossom End Rot)",
+        "Cover soil with straw or film; this retains moisture, stabilizes soil temperature and prevents soil-borne pathogens from reaching leaves during rain",
+        "Even with healthy plants, in humid or foggy weather it is recommended to apply a light treatment with biological preparations (e.g. Fitosporin) or a weak copper solution"
+      ]
+    },
+    ru: {
+      arm: "Томат (Здоровый)",
+      symptoms: [
+        "Листья имеют здоровый тёмно-зелёный цвет, без жёлтых краёв, мозаичных узоров или мишеневидных пятен; поверхность листа чистая — без налёта или паутины",
+        "Стебель прямостоячий, крепкий и не имеет тёмных язв или вдавленных участков",
+        "Плоды имеют равномерную окраску (в соответствии с сортом), гладкую поверхность — без трещин, чёрных бугорков или признаков внутренней гнили",
+        "Растение продолжает формировать здоровые соцветия, которые не осыпаются и превращаются в здоровые молодые плоды"
+      ],
+      actions: [
+        "Регулярно удалять нижние старые листья; это обеспечивает хорошую вентиляцию и проникновение света к центру куста, что является лучшей профилактикой грибковых болезней",
+        "В период завязывания плодов делать упор на калий и кальций; достаточное количество кальция предотвращает вершинную гниль плодов (Blossom End Rot)",
+        "Покрывать почву соломой или плёнкой; это сохраняет влагу, стабилизирует температуру почвы и не позволяет почвенным патогенам проникать на листья во время дождя",
+        "Даже при здоровых растениях во влажную или туманную погоду рекомендуется провести лёгкую обработку биологическими препаратами (например, Fitosporin) или слабым раствором меди"
+      ]
+    }
+  }
+
 };
 
 let diagHistory = JSON.parse(localStorage.getItem('diagHistory') || '[]');
 let currentFile = null;
+let lastPredictData = null;
 
 // ===== NAVIGATION =====
 function showPage(name) {
@@ -1935,19 +3875,47 @@ function showResult(data) {
   const langData = entry0 ? (entry0[currentLang] || entry0.hy) : null;
   const info = langData || { arm: data.class, symptoms: [], actions: [] };
   const conf = parseFloat(data.confidence);
+
   document.getElementById('resultClass').textContent = info.arm;
   document.getElementById('confPct').textContent = conf + '%';
   document.getElementById('confFill').style.width = conf + '%';
+
   const previewSrc = document.getElementById('previewImg').src;
   document.getElementById('resultImg').src = previewSrc;
+
   const sl = document.getElementById('symptomsList');
   sl.innerHTML = '';
-  (info.symptoms || []).forEach(s => { const li = document.createElement('li'); li.textContent = s; sl.appendChild(li); });
+  (info.symptoms || []).forEach(s => {
+    const li = document.createElement('li');
+    li.textContent = s;
+    sl.appendChild(li);
+  });
+
   const al = document.getElementById('actionsList');
   al.innerHTML = '';
-  (info.actions || []).forEach(a => { const li = document.createElement('li'); li.textContent = a; al.appendChild(li); });
+  (info.actions || []).forEach(a => {
+    const li = document.createElement('li');
+    li.textContent = a;
+    al.appendChild(li);
+  });
+
   document.getElementById('resultContent').classList.add('show');
   document.getElementById('predictBtn').disabled = false;
+  lastPredictData = data;
+
+  // heatmap / overlay / damage
+  if (data.damage !== undefined) {
+    document.getElementById('damageValue').textContent = data.damage + '%';
+  }
+  if (data.heatmap) {
+    document.getElementById('heatmapImg').src = 'data:image/png;base64,' + data.heatmap;
+  }
+  if (data.overlay) {
+    document.getElementById('overlayImg').src = 'data:image/png;base64,' + data.overlay;
+  }
+  document.getElementById('extraResults').style.display = 'block';
+
+  // save to history
   const hyData = entry0 ? (entry0.hy || langData) : langData;
   const entry = {
     id: Date.now(), classKey: data.class,
@@ -1961,6 +3929,7 @@ function showResult(data) {
   localStorage.setItem('diagHistory', JSON.stringify(diagHistory));
   showToast(t('toast_saved'));
 }
+
 
 // ===== HISTORY =====
 function renderHistory(filter = '') {
@@ -2097,7 +4066,7 @@ function doLogin() {
   } else {
     showAuthMsg('loginMsg', '✅ ' + user + '!');
     isLoggedIn = true;
-    setTimeout(() => {
+     setTimeout(() => {
       if (pendingRedirectToPredict) { showPage('predict'); pendingRedirectToPredict = false; }
       else { showPage('desc'); }
     }, 800);
@@ -2119,9 +4088,9 @@ function doRegister() {
   showAuthMsg('registerMsg', '✅ ' + name + '!');
   isLoggedIn = true;
   setTimeout(() => {
-    if (pendingRedirectToPredict) { showPage('predict'); pendingRedirectToPredict = false; }
-    else { showPage('desc'); }
-  }, 1000);
+      if (pendingRedirectToPredict) { showPage('predict'); pendingRedirectToPredict = false; }
+      else { showPage('desc'); }
+    }, 1000);
 }
 
 function showAuthMsg(id, text) {
@@ -2141,6 +4110,7 @@ function showToast(msg) {
   toastEl.classList.add('show');
   setTimeout(() => toastEl.classList.remove('show'), 2800);
 }
+
 
 // Init
 applyTranslations();
